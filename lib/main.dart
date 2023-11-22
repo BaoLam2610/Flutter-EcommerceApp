@@ -1,4 +1,4 @@
-import 'package:ecommerce_app/features/auth/presentation/pages/splash/splash_page.dart';
+import 'package:ecommerce_app/features/auth/presentation/pages/intro/intro_page.dart';
 import 'package:flutter/material.dart';
 import 'configs/themes/app_themes.dart';
 import 'injection_container.dart';
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: theme(),
-      home: const SplashPage(),
+      home: const IntroPage(),
     );
   }
 }

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'color_themes.dart';
+import 'text_themes.dart';
 
 ThemeData theme() {
   return ThemeData(
     scaffoldBackgroundColor: Colors.white,
-    fontFamily: 'Muli',
+    fontFamily: fontFamilyDefault,
     textTheme: textTheme(),
+    colorScheme: colorScheme(),
     appBarTheme: appBarTheme(),
   );
 }
@@ -22,37 +25,3 @@ AppBarTheme appBarTheme() {
     ),
   );
 }
-
-TextTheme textTheme() {
-  return const TextTheme(
-    titleLarge: TextStyle(
-      height: textHeight,
-      fontSize: 20,
-      fontWeight: FontWeight.bold,
-    ),
-    titleMedium: TextStyle(
-      height: textHeight,
-      fontSize: 18,
-      fontWeight: FontWeight.bold,
-    ),
-    titleSmall: TextStyle(
-      height: textHeight,
-      fontSize: 16,
-      fontWeight: FontWeight.bold,
-    ),
-    bodyLarge: TextStyle(
-      height: textHeight,
-      fontSize: 18,
-    ),
-    bodyMedium: TextStyle(
-      height: textHeight,
-      fontSize: 16,
-    ),
-    bodySmall: TextStyle(
-      height: textHeight,
-      fontSize: 14,
-    ),
-  );
-}
-
-const double textHeight = 1.2;
