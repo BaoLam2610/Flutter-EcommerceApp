@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/configs/themes/widget_themes.dart';
 import 'package:flutter/material.dart';
 import 'color_themes.dart';
 import 'text_themes.dart';
@@ -7,7 +8,9 @@ ThemeData theme() {
     scaffoldBackgroundColor: Colors.white,
     fontFamily: fontFamilyDefault,
     textTheme: textTheme(),
+    inputDecorationTheme: inputDecorationTheme(),
     colorScheme: colorScheme(),
+    checkboxTheme: checkboxTheme(),
     appBarTheme: appBarTheme(),
   );
 }
