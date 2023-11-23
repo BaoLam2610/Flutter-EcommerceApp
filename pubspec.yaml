@@ -26,6 +26,9 @@ dependencies:
   # Date format
   intl: ^0.18.1
 
+  # String format
+  sprintf: ^7.0.0
+
   # REST api
   retrofit: ^4.0.3
 
@@ -40,6 +43,9 @@ dependencies:
 
   # SVG
   flutter_svg: ^2.0.9
+
+  # Bloc
+  bloc: ^8.1.2
 
 dev_dependencies:
   flutter_test:

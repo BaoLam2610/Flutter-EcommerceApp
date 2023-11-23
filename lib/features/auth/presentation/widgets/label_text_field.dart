@@ -3,11 +3,22 @@ import 'package:flutter/material.dart';
 import "../../../../core/extensions/widget_extensions.dart";
 
 class LabelTextField extends StatelessWidget {
+  final TextEditingController? controller;
   final String? label;
   final String? hint;
   final Icon? suffixIcon;
+  final TextInputType? inputType;
+  final bool? isPassword;
 
-  const LabelTextField({super.key, this.label, this.hint, this.suffixIcon});
+  const LabelTextField({
+    super.key,
+    this.label,
+    this.hint,
+    this.suffixIcon,
+    this.inputType,
+    this.isPassword,
+    this.controller,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +28,10 @@ class LabelTextField extends StatelessWidget {
         border.copyWith(borderSide: BorderSide(color: context.primary));
 
     return TextField(
+      controller: controller,
+      maxLines: 1,
+      obscureText: isPassword == true,
+      keyboardType: inputType,
       decoration: InputDecoration(
         contentPadding:
             const EdgeInsets.symmetric(horizontal: 32, vertical: 18),

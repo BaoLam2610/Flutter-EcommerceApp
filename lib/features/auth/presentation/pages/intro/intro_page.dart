@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../configs/routes/routes.dart';
 import '../../../../../configs/themes/button_themes.dart';
 import '../../../../../configs/themes/dimens.dart';
 import '../../../../../core/constants/images.dart';
 import '../../../../../core/constants/strings.dart';
 import '../../../../../core/extensions/widget_extensions.dart';
+import '../login/login_page.dart';
 
 class IntroPage extends StatefulWidget {
   const IntroPage({super.key});
@@ -91,6 +93,7 @@ class _IntroPageState extends State<IntroPage> {
   _buildPageItem(Map<String, dynamic> intro) => Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          const Spacer(flex: 1),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text(
@@ -106,6 +109,7 @@ class _IntroPageState extends State<IntroPage> {
               aspectRatio: 1,
               child: Image.asset(
                 intro['image'].toString(),
+                fit: BoxFit.fill,
               ),
             ),
           ),
@@ -128,7 +132,7 @@ class _IntroPageState extends State<IntroPage> {
           height: buttonHeightLarge,
           width: double.infinity,
           child: ElevatedButton(
-              onPressed: () {},
+              onPressed: _onButtonPressed,
               style: primarySmallRoundedButtonTheme,
               child: Text(
                 text_continue,
@@ -136,4 +140,10 @@ class _IntroPageState extends State<IntroPage> {
               )),
         ),
       );
+
+  void _onButtonPressed() {
+    context.navigator.pushReplacement(
+      AppRoutes.materialRoute(const LoginPage()),
+    );
+  }
 }

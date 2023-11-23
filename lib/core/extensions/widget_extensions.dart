@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/configs/themes/text_themes.dart';
 import 'package:flutter/material.dart';
 
 extension BuildContextExtensions<T> on BuildContext {
@@ -93,4 +94,48 @@ extension BuildContextExtensions<T> on BuildContext {
       ),
     );
   }
+
+  Future<T?> showAlertDialog({
+    String? title,
+    String? content,
+    String textAccept = 'OK',
+    String textCancel = 'Cancel',
+    VoidCallback? onAccept,
+    VoidCallback? onCancel,
+  }) =>
+      showDialog(
+        context: this,
+        builder: (context) => AlertDialog(
+          title: Text(
+            title ?? '',
+            style: this.titleSmall,
+          ),
+          content: Text(
+            content ?? '',
+            style: this.bodyMedium,
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                if (onCancel != null) onCancel();
+                navigator.pop();
+              },
+              child: Text(
+                textCancel,
+                style: bodyMedium?.copyWith(color: textColorGrey),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                if (onAccept != null) onAccept();
+                navigator.pop();
+              },
+              child: Text(
+                textAccept,
+                style: bodyMedium?.copyWith(color: primary),
+              ),
+            )
+          ],
+        ),
+      );
 }
