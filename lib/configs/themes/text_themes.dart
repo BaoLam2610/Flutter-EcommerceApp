@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 const String fontFamilyDefault = 'Muli';
 const Color textColorDefault = Colors.black87;
 const Color textColorGrey = Color.fromARGB(255, 116, 116, 116);
+const Color textColorLightGrey = Color.fromARGB(255, 136, 136, 136);
 const double textHeight = 1.2;
 
 const TextStyle textStyleRegularDefault = TextStyle(
@@ -46,4 +47,5 @@ InputDecorationTheme inputDecorationTheme() => const InputDecorationTheme(
         fontSize: 16,
         fontWeight: FontWeight.normal,
       ),
+      // suffixIconColor: textColorLightGrey,
     );

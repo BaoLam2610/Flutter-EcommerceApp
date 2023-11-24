@@ -6,7 +6,6 @@ import '../../../../../configs/themes/dimens.dart';
 import '../../../../../core/constants/images.dart';
 import '../../../../../core/constants/strings.dart';
 import '../../../../../core/extensions/widget_extensions.dart';
-import '../login/login_page.dart';
 
 class IntroPage extends StatefulWidget {
   const IntroPage({super.key});
@@ -142,8 +141,6 @@ class _IntroPageState extends State<IntroPage> {
       );
 
   void _onButtonPressed() {
-    context.navigator.pushReplacement(
-      AppRoutes.materialRoute(const LoginPage()),
-    );
+    context.navigator.pushReplacementNamed(AppRoutes.loginPage);
   }
 }

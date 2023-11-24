@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import "../../../../core/extensions/widget_extensions.dart";
 
@@ -7,6 +8,7 @@ class LabelTextField extends StatelessWidget {
   final String? label;
   final String? hint;
   final Icon? suffixIcon;
+  final SvgPicture? suffixVectorIcon;
   final TextInputType? inputType;
   final bool? isPassword;
 
@@ -18,6 +20,7 @@ class LabelTextField extends StatelessWidget {
     this.inputType,
     this.isPassword,
     this.controller,
+    this.suffixVectorIcon,
   });
 
   @override
@@ -40,7 +43,7 @@ class LabelTextField extends StatelessWidget {
         hintText: hint,
         suffixIcon: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: suffixIcon,
+          child: suffixIcon ?? suffixVectorIcon,
         ),
         focusedBorder: focusBorder,
         border: border,

@@ -1,5 +1,6 @@
-import 'package:ecommerce_app/configs/themes/text_themes.dart';
 import 'package:flutter/material.dart';
+
+import '../../configs/themes/text_themes.dart';
 
 extension BuildContextExtensions<T> on BuildContext {
   ThemeData get theme => Theme.of(this);

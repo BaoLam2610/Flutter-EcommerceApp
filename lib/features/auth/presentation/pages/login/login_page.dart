@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
+import '../../../../../configs/routes/routes.dart';
 import "../../../../../configs/themes/button_themes.dart";
 import '../../../../../configs/themes/dimens.dart';
 import '../../../../../configs/themes/text_themes.dart';
@@ -9,7 +10,7 @@ import '../../../../../core/bloc/bloc_state.dart';
 import '../../../../../core/constants/icons.dart';
 import '../../../../../core/constants/strings.dart';
 import '../../../../../core/extensions/widget_extensions.dart';
-import '../../../domain/models/user_login.dart';
+import '../../../domain/models/login/user_login.dart';
 import '../../widgets/label_text_field.dart';
 import '../../widgets/social_card.dart';
 import 'bloc/login_bloc.dart';
@@ -38,11 +39,11 @@ class _LoginPageState extends State<LoginPage> {
   _buildAppBar() => AppBar(
         title: Text(
           text_sign_in,
-          style: context.labelLarge?.copyWith(color: context.primary),
+          style: context.labelLarge,
         ),
       );
 
-  _buildBody() => BlocConsumer<LoginBloc, BlocState>(
+  _buildBody() => BlocListener<LoginBloc, BlocState>(
         listener: (context, state) {
           if (state is Error) {
             context.showAlertDialog(
@@ -51,31 +52,29 @@ class _LoginPageState extends State<LoginPage> {
             );
           }
         },
-        builder: (context, state) {
-          return SizedBox(
-            height: double.infinity,
-            width: double.infinity,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 18),
-              child: Column(
-                children: [
-                  Expanded(
-                    flex: 1,
-                    child: _buildTitle(),
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: _buildLoginInputArea(),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: _buildFooterArea(),
-                  ),
-                ],
-              ),
+        child: SizedBox(
+          height: double.infinity,
+          width: double.infinity,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 18),
+            child: Column(
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: _buildTitle(),
+                ),
+                Expanded(
+                  flex: 2,
+                  child: _buildLoginInputArea(),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: _buildFooterArea(),
+                ),
+              ],
             ),
-          );
-        },
+          ),
+        ),
       );
 
   _buildTitle() => Column(
@@ -83,7 +82,7 @@ class _LoginPageState extends State<LoginPage> {
         children: [
           Text(
             text_welcome_back,
-            style: context.headlineLarge,
+            style: context.headlineLarge?.copyWith(color: context.primary),
           ),
           const SizedBox(height: 12),
           Text(
@@ -117,21 +116,23 @@ class _LoginPageState extends State<LoginPage> {
           const SizedBox(height: 12),
           _buildRememberMeArea(),
           const SizedBox(height: 32),
-          SizedBox(
-            height: buttonHeightLarge,
-            width: double.infinity,
-            child: ElevatedButton(
-              onPressed: () {
-                _onButtonLoginTapped();
-              },
-              style: primaryDefaultRoundedButtonTheme,
-              child: Text(
-                text_login,
-                style: context.buttonTextTheme,
-              ),
-            ),
-          ),
+          _buildLoginButton()
         ],
+      );
+
+  _buildLoginButton() => SizedBox(
+        height: buttonHeightLarge,
+        width: double.infinity,
+        child: ElevatedButton(
+          onPressed: () {
+            _onLoginButtonPressed();
+          },
+          style: primaryDefaultRoundedButtonTheme,
+          child: Text(
+            text_login,
+            style: context.buttonTextTheme,
+          ),
+        ),
       );
 
   _buildRememberMeArea() => Row(
@@ -149,22 +150,26 @@ class _LoginPageState extends State<LoginPage> {
             style: context.bodyMedium?.copyWith(color: textColorGrey),
           ),
           const Spacer(),
-          Text(
-            text_forgot_password,
-            style: context.bodyMedium?.copyWith(
-              decoration: TextDecoration.underline,
-              color: textColorGrey,
+          GestureDetector(
+            onTap: _onForgotPasswordTextPressed,
+            child: Text(
+              text_forgot_password,
+              style: context.bodyMedium?.copyWith(
+                decoration: TextDecoration.underline,
+                color: textColorGrey,
+              ),
             ),
           ),
         ],
       );
 
   _buildFooterArea() => Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
           _buildLoginWithSocial(),
           const SizedBox(height: 20),
           _buildSignUpText(),
+          const SizedBox(height: 30),
         ],
       );
 
@@ -179,22 +184,25 @@ class _LoginPageState extends State<LoginPage> {
         ],
       );
 
-  _buildSignUpText() => Text.rich(
-        TextSpan(
-          children: [
-            TextSpan(
-              text: text_dont_have_an_account,
-              style: context.bodyMedium?.copyWith(color: textColorGrey),
-            ),
-            TextSpan(
-              text: text_sign_up,
-              style: context.bodyMedium?.copyWith(color: context.primary),
-            ),
-          ],
+  _buildSignUpText() => GestureDetector(
+        onTap: _onRegisterTextPressed,
+        child: Text.rich(
+          TextSpan(
+            children: [
+              TextSpan(
+                text: text_dont_have_an_account,
+                style: context.bodyMedium?.copyWith(color: textColorGrey),
+              ),
+              TextSpan(
+                text: text_sign_up,
+                style: context.bodyMedium?.copyWith(color: context.primary),
+              ),
+            ],
+          ),
         ),
       );
 
-  void _onButtonLoginTapped() {
+  void _onLoginButtonPressed() {
     context.read<LoginBloc>().add(
           ValidateLogin(
             UserLogin(
@@ -203,5 +211,13 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
         );
+  }
+
+  void _onForgotPasswordTextPressed() {
+    context.navigator.pushNamed(AppRoutes.forgotPasswordPage);
+  }
+
+  void _onRegisterTextPressed() {
+    context.navigator.pushNamed(AppRoutes.registerPage);
   }
 }

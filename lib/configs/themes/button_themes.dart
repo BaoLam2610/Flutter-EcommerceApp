@@ -1,5 +1,6 @@
-import 'package:ecommerce_app/configs/themes/shapes.dart';
 import 'package:flutter/material.dart';
+
+import 'shapes.dart';
 
 final primarySmallRoundedButtonTheme = ElevatedButton.styleFrom(
   shape: buttonBorderShapeSmall,

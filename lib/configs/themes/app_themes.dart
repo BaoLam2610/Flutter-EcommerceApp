@@ -1,7 +1,8 @@
-import 'package:ecommerce_app/configs/themes/widget_themes.dart';
 import 'package:flutter/material.dart';
+
 import 'color_themes.dart';
 import 'text_themes.dart';
+import 'widget_themes.dart';
 
 ThemeData theme() {
   return ThemeData(

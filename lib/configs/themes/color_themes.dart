@@ -5,8 +5,9 @@ ColorScheme colorScheme() {
     seedColor: Colors.deepOrangeAccent,
     primary: Colors.deepOrangeAccent,
     secondary: Colors.orange,
-    surface: const Color(0xFFD8D8D8),
+    surface: colorSurface,
   );
 }
 
 const colorLightGrey = Color(0xFFF5F6F9);
+const colorSurface = Color(0xFFD8D8D8);
