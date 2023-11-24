@@ -44,9 +44,6 @@ class _RegisterPageState extends State<RegisterPage> {
       );
 
   _buildBody() => BlocListener<RegisterBloc, BlocState>(
-        listenWhen: (previous, current) {
-          return true;
-        },
         listener: (context, state) {
           if (state is Error) {
             context.showAlertDialog(

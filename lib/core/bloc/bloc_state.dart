@@ -1,12 +1,10 @@
-import 'package:equatable/equatable.dart';
-
 sealed class BlocState {}
 
 class Initialize extends BlocState {}
 
 class Loading extends BlocState {}
 
-class Success<T> extends BlocState with EquatableMixin {
+class Success<T> extends BlocState {
   final T? data;
   final String? message;
 
@@ -14,9 +12,6 @@ class Success<T> extends BlocState with EquatableMixin {
     this.data,
     this.message,
   });
-
-  @override
-  List<Object?> get props => [data, message];
 }
 
 class Error extends BlocState {
