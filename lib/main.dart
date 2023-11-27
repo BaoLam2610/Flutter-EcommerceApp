@@ -8,6 +8,7 @@ import 'features/auth/presentation/pages/forgot_password/bloc/forgot_password_bl
 import 'features/auth/presentation/pages/intro/intro_page.dart';
 import 'features/auth/presentation/pages/login/bloc/login_bloc.dart';
 import 'features/auth/presentation/pages/register/bloc/register_bloc.dart';
+import 'features/home/presentation/pages/home_page.dart';
 import 'injection_container.dart';
 
 Future<void> main() async {
@@ -30,8 +31,8 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: theme(),
-        onGenerateRoute: AppRoutes.onGenerateRoutes,
-        home: const IntroPage(),
+        // onGenerateRoute: AppRoutes.onGenerateRoutes,
+        home: const HomePage(),
       ),
     );
   }

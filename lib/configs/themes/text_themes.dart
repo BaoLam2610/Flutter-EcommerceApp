@@ -49,3 +49,9 @@ InputDecorationTheme inputDecorationTheme() => const InputDecorationTheme(
       ),
       // suffixIconColor: textColorLightGrey,
     );
+
+TextSelectionThemeData textSelectionTheme() => const TextSelectionThemeData(
+      // cursorColor: textColorGrey,
+      // selectionColor: textColorLightGrey,
+      // selectionHandleColor: textColorLightGrey,
+    );

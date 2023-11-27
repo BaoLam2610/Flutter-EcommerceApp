@@ -9,6 +9,7 @@ ThemeData theme() {
     scaffoldBackgroundColor: Colors.white,
     fontFamily: fontFamilyDefault,
     textTheme: textTheme(),
+    textSelectionTheme: textSelectionTheme(),
     inputDecorationTheme: inputDecorationTheme(),
     colorScheme: colorScheme(),
     checkboxTheme: checkboxTheme(),
