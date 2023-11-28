@@ -8,7 +8,7 @@ import '../../../../../configs/themes/text_themes.dart';
 import '../../../../../core/bloc/bloc_state.dart';
 import '../../../../../core/constants/strings.dart';
 import '../../../../../core/extensions/widget_extensions.dart';
-import '../../../../../core/widgets/scroll_column_expandable.dart';
+import '../../../../../core/widgets/ui/scroll_column_expandable.dart';
 import '../../../domain/models/profile/user_profile.dart';
 import '../../../domain/models/register/user_register.dart';
 import '../../widgets/label_text_field.dart';

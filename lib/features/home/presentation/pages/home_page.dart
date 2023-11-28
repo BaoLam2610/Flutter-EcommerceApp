@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../configs/themes/text_themes.dart';
+import '../../../../core/bloc/bloc_state.dart';
 import '../../../../core/constants/icons.dart';
-import '../../../../core/constants/images.dart';
 import '../../../../core/extensions/widget_extensions.dart';
 import '../../domain/models/category.dart';
+import '../../domain/models/discount.dart';
+import '../../domain/models/home_data.dart';
 import '../../domain/models/popular_product.dart';
 import '../../domain/models/special_offer.dart';
-import '../widgets/aspect_ratio_image.dart';
 import '../widgets/card_badge.dart';
 import '../widgets/search_text_field.dart';
+import 'bloc/home_bloc.dart';
 import 'components/category_tile.dart';
 import 'components/popular_product_tile.dart';
 import 'components/special_offer_tile.dart';
@@ -23,29 +26,53 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   @override
+  void initState() {
+    super.initState();
+    context.read<HomeBloc>().add(const GetHomeData());
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(child: _buildBody()),
     );
   }
 
-  _buildBody() => SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const SizedBox(height: 10),
-            _buildSearchActionBar(),
-            const SizedBox(height: 18),
-            _buildDiscountSection(),
-            const SizedBox(height: 18),
-            _buildCategoriesSection(),
-            const SizedBox(height: 18),
-            _buildSpecialForYouSection(),
-            const SizedBox(height: 18),
-            _buildPopularProductSection(),
-            _buildProductList()
-          ],
-        ),
+  _buildBody() => BlocBuilder<HomeBloc, BlocState>(
+        builder: (context, state) {
+          if (state is Loading) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+
+          if (state is Error) {
+            return Center(
+              child: Text(state.message),
+            );
+          }
+
+          if (state is Success<HomeData>) {
+            return SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const SizedBox(height: 10),
+                  _buildSearchActionBar(),
+                  const SizedBox(height: 18),
+                  _buildDiscountSection(state.data!.discount),
+                  const SizedBox(height: 18),
+                  _buildCategoriesSection(state.data!.categories),
+                  const SizedBox(height: 18),
+                  _buildSpecialForYouSection(state.data!.specialOffers),
+                  const SizedBox(height: 18),
+                  _buildPopularProductSection(state.data!.popularProducts),
+                ],
+              ),
+            );
+          }
+          return const SizedBox();
+        },
       );
 
   _buildSearchActionBar() => const Padding(
@@ -68,7 +95,7 @@ class _HomePageState extends State<HomePage> {
         ),
       );
 
-  _buildDiscountSection() => Container(
+  _buildDiscountSection(Discount? discount) => Container(
         margin: const EdgeInsets.symmetric(horizontal: 18),
         padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 20),
         width: double.infinity,
@@ -78,44 +105,37 @@ class _HomePageState extends State<HomePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'A Summer Surpise',
+              discount?.title ?? '',
               style: context.bodySmall?.copyWith(color: Colors.white),
             ),
             const SizedBox(height: 10),
             Text(
-              'Cashback 20%',
+              discount?.description ?? '',
               style: context.displayLarge?.copyWith(color: Colors.white),
             )
           ],
         ),
       );
 
-  _buildCategoriesSection() => const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 18),
+  _buildCategoriesSection(List<Category> categories) => Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 18),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CategoryTile(
-              category: Category(icon: ic_flash, title: 'Flash Deal'),
-            ),
-            CategoryTile(
-              category: Category(icon: ic_bill, title: 'Bill'),
-            ),
-            CategoryTile(
-              category: Category(icon: ic_game, title: 'Game'),
-            ),
-            CategoryTile(
-              category: Category(icon: ic_gift, title: 'Daily Gift'),
-            ),
-            CategoryTile(
-              category: Category(icon: ic_discover, title: 'More'),
-            ),
+            for (var i = 0; i < categories.length; i++) ...[
+              CategoryTile(
+                data: Category(
+                  icon: categories[i].icon,
+                  title: categories[i].title,
+                ),
+              ),
+            ],
           ],
         ),
       );
 
-  _buildSpecialForYouSection() => Column(
+  _buildSpecialForYouSection(List<SpecialOffer> specialOffers) => Column(
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 18),
@@ -141,17 +161,11 @@ class _HomePageState extends State<HomePage> {
             child: ListView.builder(
               padding: const EdgeInsets.symmetric(horizontal: 14),
               scrollDirection: Axis.horizontal,
-              itemCount: 4,
+              itemCount: specialOffers.length,
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 4),
-                  child: SpecialOfferTile(
-                    offer: SpecialOffer(
-                      image: image_banner_2,
-                      title: 'Smartphone',
-                      totalBrands: 18,
-                    ),
-                  ),
+                  child: SpecialOfferTile(data: specialOffers[index]),
                 );
               },
             ),
@@ -159,7 +173,7 @@ class _HomePageState extends State<HomePage> {
         ],
       );
 
-  _buildPopularProductSection() => Column(
+  _buildPopularProductSection(List<PopularProduct> popularProducts) => Column(
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 18),
@@ -180,40 +194,23 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           const SizedBox(height: 18),
-          // SizedBox(width: 200, child: AspectRatioImage(image: image_popular_product_1),),
-
-          // SizedBox(
-          //   width: double.infinity,
-          //   child: ListView.builder(
-          //     scrollDirection: Axis.horizontal,
-          //     itemCount: 3,
-          //     itemBuilder: (context, index) {
-          //       return PopularProductTile(
-          //         product: PopularProduct(
-          //           image: image_popular_product_1,
-          //           name: 'Product 1',
-          //           price: 20,
-          //         ),
-          //       );
-          //     },
-          //   ),
-          // )
+          LimitedBox(
+            maxHeight: 315,
+            child: ListView.builder(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                scrollDirection: Axis.horizontal,
+                itemCount: popularProducts.length,
+                itemBuilder: (context, index) {
+                  return PopularProductTile(
+                    position: index,
+                    data: popularProducts[index],
+                    onFavoritePressed: (indexPressed) {
+                      popularProducts[indexPressed].isFavorite =
+                          !popularProducts[indexPressed].isFavorite;
+                    },
+                  );
+                }),
+          ),
         ],
       );
-
-  _buildProductList() => LimitedBox(
-    maxHeight: 500,
-    child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: 4,
-        itemBuilder: (context, index) {
-          return PopularProductTile(
-            product: PopularProduct(
-              image: image_popular_product_1,
-              name: 'Product 1',
-              price: 20,
-            ),
-          );
-        }),
-  );
 }

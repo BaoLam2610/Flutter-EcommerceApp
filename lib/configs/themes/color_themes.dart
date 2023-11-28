@@ -11,5 +11,5 @@ ColorScheme colorScheme() {
 
 const colorLightGrey = Color(0xFFF5F6F9);
 const colorSurface = Color(0xFFD8D8D8);
-
 const colorLightOrange = Color(0xFFFFECDF);
+Color colorLightRed = Colors.redAccent.withOpacity(.3);

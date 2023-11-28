@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../../configs/themes/color_themes.dart';
-import '../../../../configs/themes/dimens.dart';
+import '../../../../core/widgets/ui/circle_card.dart';
 
 class SocialCard extends StatelessWidget {
   final String icon;
@@ -14,14 +12,7 @@ class SocialCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onPress as void Function()?,
-      child: Container(
-        padding: const EdgeInsets.all(12),
-        height: iconSizeLarge,
-        width: iconSizeLarge,
-        decoration:
-            const BoxDecoration(color: colorLightGrey, shape: BoxShape.circle),
-        child: SvgPicture.asset(icon),
-      ),
+      child: CircleCard(icon: icon),
     );
   }
 }

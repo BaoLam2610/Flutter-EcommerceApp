@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../../../../../configs/themes/dimens.dart';
 import '../../../../../core/extensions/widget_extensions.dart';
+import '../../../../../core/widgets/base/base_tile.dart';
 import '../../../domain/models/category.dart';
 import '../../widgets/category_card.dart';
 
-class CategoryTile extends StatelessWidget {
-  final Category category;
-
-  const CategoryTile({super.key, required this.category});
+class CategoryTile extends TileStatelessWidget<Category> {
+  const CategoryTile({super.key, required super.data, super.position});
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +15,10 @@ class CategoryTile extends StatelessWidget {
       width: iconSizeLarge,
       child: Column(
         children: [
-          CategoryCard(icon: category.icon),
+          CategoryCard(icon: data.icon),
+          const SizedBox(height: 2),
           Text(
-            category.title,
+            data.title,
             style: context.bodySmall,
             textAlign: TextAlign.center,
           )

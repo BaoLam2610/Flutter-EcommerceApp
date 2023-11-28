@@ -14,3 +14,5 @@ const String ic_bill = '$iconPath/Bill Icon.svg';
 const String ic_game = '$iconPath/Game Icon.svg';
 const String ic_gift = '$iconPath/Gift Icon.svg';
 const String ic_discover = '$iconPath/Discover.svg';
+const String ic_favorite = '$iconPath/Heart Icon.svg';
+const String ic_favorite_2 = '$iconPath/Heart Icon_2.svg';

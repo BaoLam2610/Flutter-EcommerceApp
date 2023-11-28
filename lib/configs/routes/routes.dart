@@ -6,6 +6,7 @@ import '../../features/auth/presentation/pages/forgot_password/forgot_password_p
 import '../../features/auth/presentation/pages/intro/intro_page.dart';
 import '../../features/auth/presentation/pages/login/login_page.dart';
 import '../../features/auth/presentation/pages/register/register_page.dart';
+import '../../features/home/presentation/pages/home_page.dart';
 
 class AppRoutes {
   static const String defaultPage = '';
@@ -14,6 +15,7 @@ class AppRoutes {
   static const String registerPage = '/register';
   static const String completeProfilePage = '/completeProfile';
   static const String forgotPasswordPage = '/forgotPassword';
+  static const String homePage = '/home';
 
   static Route onGenerateRoutes(RouteSettings settings) {
     switch (settings.name) {
@@ -31,6 +33,8 @@ class AppRoutes {
         );
       case forgotPasswordPage:
         return materialRoute(const ForgotPasswordPage());
+      case homePage:
+        return materialRoute(const HomePage());
       default:
         return materialRoute(const IntroPage());
     }

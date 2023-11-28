@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../../configs/themes/color_themes.dart';
-import '../../../../configs/themes/dimens.dart';
 import '../../../../core/extensions/string_extensions.dart';
+import '../../../../core/widgets/ui/circle_card.dart';
 
 class CardBadge extends StatelessWidget {
   final String? badge;
@@ -25,16 +23,10 @@ class CardBadge extends StatelessWidget {
         child: Stack(
           clipBehavior: Clip.none,
           children: [
-          Container(
-            padding: const EdgeInsets.all(12),
-             height: iconSizeLarge,
-            width: iconSizeLarge,
-            decoration: const BoxDecoration(
-                color: colorLightGrey, shape: BoxShape.circle),
-            child: SvgPicture.asset(icon),
-          ),
-          !badge.isNullOrEmpty() ? _buildBadge() : const SizedBox(),
-        ]),
+            CircleCard(icon: icon),
+            !badge.isNullOrEmpty() ? _buildBadge() : const SizedBox(),
+          ],
+        ),
       ),
     );
   }
