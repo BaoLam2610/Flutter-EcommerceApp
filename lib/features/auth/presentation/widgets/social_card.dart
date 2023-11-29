@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/widgets/ui/circle_card.dart';
+import '../../../../core/widgets/ui/rounded_icon_card.dart';
 
 class SocialCard extends StatelessWidget {
   final String icon;
@@ -12,7 +12,7 @@ class SocialCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onPress as void Function()?,
-      child: CircleCard(icon: icon),
+      child: RoundedIconCard(icon: icon),
     );
   }
 }

@@ -17,6 +17,8 @@ class HomeBloc extends Bloc<HomeEvent, BlocState> {
 
   void _onGetHomeData(GetHomeData event, Emitter<BlocState> emit) async {
     try {
+      emit(Loading());
+      await Future.delayed(const Duration(seconds: 5));
       final homeData = await _getHomeDataUseCase.call();
       emit(Success(data: homeData));
     } on Exception catch (e) {

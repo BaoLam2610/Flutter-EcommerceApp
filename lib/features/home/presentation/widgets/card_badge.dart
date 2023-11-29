@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/extensions/string_extensions.dart';
-import '../../../../core/widgets/ui/circle_card.dart';
+import '../../../../core/widgets/ui/rounded_icon_card.dart';
 
 class CardBadge extends StatelessWidget {
   final String? badge;
@@ -23,7 +23,7 @@ class CardBadge extends StatelessWidget {
         child: Stack(
           clipBehavior: Clip.none,
           children: [
-            CircleCard(icon: icon),
+            RoundedIconCard(icon: icon),
             !badge.isNullOrEmpty() ? _buildBadge() : const SizedBox(),
           ],
         ),

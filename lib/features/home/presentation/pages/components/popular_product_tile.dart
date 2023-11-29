@@ -5,7 +5,7 @@ import '../../../../../configs/themes/dimens.dart';
 import '../../../../../core/constants/icons.dart';
 import '../../../../../core/extensions/widget_extensions.dart';
 import '../../../../../core/widgets/base/base_tile.dart';
-import '../../../../../core/widgets/ui/circle_card.dart';
+import '../../../../../core/widgets/ui/rounded_icon_card.dart';
 import '../../../domain/models/popular_product.dart';
 import '../../widgets/aspect_ratio_image.dart';
 
@@ -75,7 +75,7 @@ class _PopularProductTileState extends TileState<PopularProductTile> {
             ),
             GestureDetector(
               onTap: _onFavoritePressed,
-              child: CircleCard(
+              child: RoundedIconCard(
                 icon: ic_favorite_2,
                 cardSize: iconSizeMedium,
                 backgroundColor: widget.data.isFavorite ? colorLightRed : null,

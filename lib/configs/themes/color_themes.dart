@@ -6,6 +6,7 @@ ColorScheme colorScheme() {
     primary: Colors.deepOrangeAccent,
     secondary: Colors.orange,
     surface: colorSurface,
+    background: colorLightGrey,
   );
 }
 

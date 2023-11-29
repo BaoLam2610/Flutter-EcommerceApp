@@ -4,15 +4,16 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../configs/themes/color_themes.dart';
 import '../../../configs/themes/dimens.dart';
 
-class CircleCard extends StatelessWidget {
+class RoundedIconCard extends StatelessWidget {
   final double cardSize;
   final Color? backgroundColor;
   final Color? iconColor;
   final String icon;
   final EdgeInsets padding;
   final double? iconSize;
+  final BoxShape? boxShape;
 
-  const CircleCard({
+  const RoundedIconCard({
     super.key,
     this.cardSize = iconSizeLarge,
     this.backgroundColor,
@@ -20,6 +21,7 @@ class CircleCard extends StatelessWidget {
     this.padding = const EdgeInsets.all(12),
     this.iconSize,
     this.iconColor,
+    this.boxShape,
   });
 
   @override
@@ -35,7 +37,7 @@ class CircleCard extends StatelessWidget {
       width: cardSize,
       decoration: BoxDecoration(
         color: backgroundColor ?? colorLightGrey,
-        shape: BoxShape.circle,
+        shape: boxShape ?? BoxShape.circle,
       ),
       child: SvgPicture.asset(
         icon,
