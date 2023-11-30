@@ -1,6 +1,8 @@
+import 'product_image.dart';
+
 class Product {
   final String name;
-  final List<String> image;
+  final List<ProductImage> image;
   final double rating;
   final String description;
   final bool isFavorite;
