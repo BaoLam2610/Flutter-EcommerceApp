@@ -45,6 +45,12 @@ class _LoginPageState extends State<LoginPage> {
 
   _buildBody() => BlocListener<LoginBloc, BlocState>(
         listener: (context, state) {
+          if(state is Success) {
+            context.showAlertDialog(
+              title: 'Login successfully',
+              content: state.data,
+            );
+          }
           if (state is Error) {
             context.showAlertDialog(
               title: text_error,

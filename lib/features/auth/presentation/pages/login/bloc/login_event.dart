@@ -10,6 +10,6 @@ class ValidateLogin extends LoginEvent {
   const ValidateLogin(UserLogin userLogin) : super(userLogin);
 }
 
-class CallLogin extends LoginEvent {
-  const CallLogin(UserLogin userLogin) : super(userLogin);
+class DoLogin extends LoginEvent {
+  const DoLogin(UserLogin userLogin) : super(userLogin);
 }
