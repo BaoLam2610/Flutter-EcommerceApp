@@ -1,4 +1,4 @@
-import '../../../../core/resources/api_response.dart';
+import '../../../../core/resources/api/data_response.dart';
 import '../../domain/repository/auth_repository.dart';
 import '../dto/login_dto.dart';
 import '../remote/api_service.dart';

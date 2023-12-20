@@ -1,4 +1,4 @@
-import '../../../../core/resources/api_response.dart';
+import '../../../../core/resources/api/data_response.dart';
 import '../../data/dto/login_dto.dart';
 
 abstract class AuthRepository {

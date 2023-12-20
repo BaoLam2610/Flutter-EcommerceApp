@@ -13,7 +13,7 @@ class LoginDto extends Equatable {
 
   factory LoginDto.fromJson(Map<String, dynamic> map) {
     return LoginDto(
-      userDto: map['userDto'] as UserDto,
+      userDto: UserDto.fromJson(map['user']),
       accessToken: map['accessToken'] as String,
     );
   }

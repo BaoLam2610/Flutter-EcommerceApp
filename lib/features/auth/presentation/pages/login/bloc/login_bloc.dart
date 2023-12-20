@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 
 import '../../../../../../core/bloc/bloc_event.dart';
 import '../../../../../../core/bloc/bloc_state.dart';
+import '../../../../../../core/resources/api/data_response.dart';
 import '../../../../domain/models/login/user_login.dart';
 import '../../../../domain/usecases/login_usecase.dart';
 import '../../../../domain/usecases/validate_login.dart';
@@ -45,7 +46,22 @@ class LoginBloc extends Bloc<LoginEvent, BlocState> {
           Error(message: validateResult),
         );
       }
-    } on Exception catch(e) {
+    } on DioException catch(e) {
+      if(e.response?.data != null) {
+        final json = e.response?.data as Map<String, dynamic>;
+
+        final response = BaseResponse.fromJson(json);
+        dynamic messageError;
+        if(response.error is String) {
+          messageError = response.error;
+        }
+        if(response.error is List<dynamic>) {
+          messageError = response.error.map((e) => e.toString()).toList();
+        }
+        emit(Error(message: messageError.toString()));
+      }
+    }
+    on Exception catch(e) {
       print('lamnb: $e');
       emit(Error(message: e.toString()));
     }

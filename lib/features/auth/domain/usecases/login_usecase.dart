@@ -1,4 +1,4 @@
-import '../../../../core/resources/api_response.dart';
+import '../../../../core/resources/api/data_response.dart';
 import '../../../../core/usecases/use_case.dart';
 import '../../data/dto/login_dto.dart';
 import '../repository/auth_repository.dart';

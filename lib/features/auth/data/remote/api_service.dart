@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
 
-import '../../../../core/resources/api_response.dart';
+import '../../../../core/resources/api/data_response.dart';
 import '../../../../utils/api_list.dart';
 import '../dto/login_dto.dart';
 
