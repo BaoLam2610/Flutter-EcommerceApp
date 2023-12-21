@@ -16,11 +16,24 @@ import 'features/home/data/repository/home_repository_impl.dart';
 import 'features/home/domain/repository/home_repository.dart';
 import 'features/home/domain/usecases/get_home_data.dart';
 import 'features/home/presentation/pages/bloc/home_bloc.dart';
+import 'utils/api_list.dart';
+import 'utils/logger.dart';
 
 final sl = GetIt.instance;
 
 Future<void> initializeDependencies() async {
-  sl.registerSingleton<Dio>(Dio());
+  sl.registerSingleton<Dio>(
+    Dio(
+      BaseOptions(
+        baseUrl: baseUrl,
+        connectTimeout: const Duration(seconds: 50),
+        receiveTimeout: const Duration(seconds: 30),
+        responseType: ResponseType.json,
+      ),
+    )..interceptors.addAll([
+        LoggerInterceptor(),
+      ]),
+  );
 
   sl.registerSingleton(AuthService(sl()));
   // repository
