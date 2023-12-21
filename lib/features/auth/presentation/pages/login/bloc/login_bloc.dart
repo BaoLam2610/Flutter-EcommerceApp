@@ -32,10 +32,7 @@ class LoginBloc extends Bloc<LoginEvent, BlocState> {
       if (validateResult.isEmpty) {
         emit(Loading());
         final userLogin = event.userLogin!;
-        final response = await _loginUseCase.call(params: {
-          'email': userLogin.email,
-          'password': userLogin.password,
-        });
+        final response = await _loginUseCase.call(params: userLogin);
         if (response.isSuccess) {
           emit(Success(data: response.data));
         } else {
@@ -47,6 +44,10 @@ class LoginBloc extends Bloc<LoginEvent, BlocState> {
         );
       }
     } on DioException catch(e) {
+      if(e.type == DioExceptionType.connectionTimeout) {
+        emit(Error(message: 'Connection timeout! Retry again!'));
+        return;
+      }
       if(e.response?.data != null) {
         final json = e.response?.data as Map<String, dynamic>;
 
@@ -63,26 +64,6 @@ class LoginBloc extends Bloc<LoginEvent, BlocState> {
     }
     on Exception catch(e) {
       print('lamnb: $e');
-      emit(Error(message: e.toString()));
-    }
-  }
-
-  void doLogin(
-    UserLogin userLogin,
-    Emitter<BlocState> emit,
-  ) async {
-    try {
-      final response = await _loginUseCase.call(params: {
-        'email': userLogin.email,
-        'password': userLogin.password,
-      });
-      if(response.isSuccess) {
-        emit(Success(data: response.data));
-      } else {
-        emit(Error(message: response.error??''));
-      }
-
-    } on Exception catch (e) {
       emit(Error(message: e.toString()));
     }
   }
