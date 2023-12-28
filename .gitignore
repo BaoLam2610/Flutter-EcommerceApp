@@ -9,7 +9,6 @@
 .buildlog/
 .history
 .svn/
-pubspec.lock
 *.gen.dart
 *.g.dart
 *.freezed.dart

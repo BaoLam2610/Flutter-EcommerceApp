@@ -1,4 +1,5 @@
 import 'package:bot_toast/bot_toast.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,11 +12,21 @@ import 'features/auth/presentation/pages/login/bloc/login_bloc.dart';
 import 'features/auth/presentation/pages/login/login_page.dart';
 import 'features/auth/presentation/pages/register/bloc/register_bloc.dart';
 import 'features/home/presentation/pages/bloc/home_bloc.dart';
+import 'gen/codegen_loader.g.dart';
 import 'injection_container.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
   await initializeDependencies();
-  runApp(const MyApp());
+  runApp(
+    EasyLocalization(
+      supportedLocales: const [Locale('en', 'US'), Locale('vi', 'VN')],
+      path: 'assets/strings',
+      assetLoader: const CodegenLoader(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
