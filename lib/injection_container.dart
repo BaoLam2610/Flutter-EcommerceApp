@@ -12,6 +12,7 @@ import 'features/auth/presentation/pages/complete_profile/bloc/complete_profile_
 import 'features/auth/presentation/pages/forgot_password/bloc/forgot_password_bloc.dart';
 import 'features/auth/presentation/pages/login/bloc/login_bloc.dart';
 import 'features/auth/presentation/pages/register/bloc/register_bloc.dart';
+import 'features/auth/presentation/widgets/common/email_input/bloc/email_input_bloc.dart';
 import 'features/home/data/repository/home_repository_impl.dart';
 import 'features/home/domain/repository/home_repository.dart';
 import 'features/home/domain/usecases/get_home_data.dart';
@@ -49,6 +50,7 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton(LoginUseCase(sl()));
 
   // bloc
+  sl.registerFactory<EmailInputBloc>(() => EmailInputBloc(sl()));
   sl.registerFactory<LoginBloc>(() => LoginBloc(sl(), sl()));
   sl.registerFactory<ForgotPasswordBloc>(() => ForgotPasswordBloc(sl()));
   sl.registerFactory<RegisterBloc>(() => RegisterBloc(sl()));

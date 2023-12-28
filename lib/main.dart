@@ -24,7 +24,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => sl<LoginBloc>()),
         BlocProvider(create: (context) => sl<ForgotPasswordBloc>()),
         BlocProvider(create: (context) => sl<RegisterBloc>()),
         BlocProvider(create: (context) => sl<CompleteProfileBloc>()),
@@ -36,7 +35,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: theme(),
         onGenerateRoute: AppRoutes.onGenerateRoutes,
-        home: const LoginPage(),
+        home: const LoginProvider(),
       ),
     );
   }

@@ -11,10 +11,26 @@ import '../../../../../core/bloc/bloc_state.dart';
 import '../../../../../core/constants/icons.dart';
 import '../../../../../core/constants/strings.dart';
 import '../../../../../core/extensions/widget_extensions.dart';
+import '../../../../../core/widgets/ui/scroll_column_expandable.dart';
+import '../../../../../injection_container.dart';
 import '../../../domain/models/login/user_login.dart';
+import '../../widgets/common/email_input/bloc/email_input_bloc.dart';
+import '../../widgets/common/email_input/email_input_field.dart';
 import '../../widgets/label_text_field.dart';
 import '../../widgets/social_card.dart';
 import 'bloc/login_bloc.dart';
+
+class LoginProvider extends StatelessWidget {
+  const LoginProvider({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiBlocProvider(providers: [
+      BlocProvider(create: (context) => sl<LoginBloc>()),
+      BlocProvider(create: (context) => sl<EmailInputBloc>()),
+    ], child: const LoginPage());
+  }
+}
 
 class LoginPage extends StatefulHookWidget {
   const LoginPage({super.key});
@@ -31,7 +47,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       appBar: _buildAppBar(),
       body: _buildBody(),
     );
@@ -74,7 +90,7 @@ class _LoginPageState extends State<LoginPage> {
           width: double.infinity,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 18),
-            child: Column(
+            child: ScrollColumnExpandable(
               children: [
                 Expanded(
                   flex: 1,
@@ -130,6 +146,8 @@ class _LoginPageState extends State<LoginPage> {
             suffixIcon: const Icon(Icons.lock_outline),
             isPassword: true,
           ),
+          const SizedBox(height: 20),
+          const EmailInputField(),
           const SizedBox(height: 12),
           _buildRememberMeArea(),
           const SizedBox(height: 32),
@@ -220,14 +238,14 @@ class _LoginPageState extends State<LoginPage> {
       );
 
   void _onLoginButtonPressed() {
-    context.read<LoginBloc>().add(
-          ValidateLogin(
-            UserLogin(
-              email: _emailTextController.text,
-              password: _passwordTextController.text,
-            ),
-          ),
-        );
+    // context.read<LoginBloc>().add(
+    //       ValidateLogin(
+    //         UserLogin(
+    //           email: _emailTextController.text,
+    //           password: _passwordTextController.text,
+    //         ),
+    //       ),
+    //     );
   }
 
   void _onForgotPasswordTextPressed() {
