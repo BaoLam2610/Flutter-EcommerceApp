@@ -10,7 +10,6 @@ import 'features/auth/domain/usecases/validate_login.dart';
 import 'features/auth/domain/usecases/validate_register.dart';
 import 'features/auth/presentation/pages/complete_profile/bloc/complete_profile_bloc.dart';
 import 'features/auth/presentation/pages/forgot_password/bloc/forgot_password_bloc.dart';
-import 'features/auth/presentation/pages/login/bloc/cubit/login_cubit.dart';
 import 'features/auth/presentation/pages/login/bloc/login_bloc.dart';
 import 'features/auth/presentation/pages/register/bloc/register_bloc.dart';
 import 'features/home/data/repository/home_repository_impl.dart';
@@ -55,6 +54,4 @@ Future<void> initializeDependencies() async {
   sl.registerFactory<RegisterBloc>(() => RegisterBloc(sl()));
   sl.registerFactory<CompleteProfileBloc>(() => CompleteProfileBloc(sl()));
   sl.registerFactory<HomeBloc>(() => HomeBloc(sl()));
-
-  sl.registerFactory(() => LoginCubit(sl(), sl()));
 }

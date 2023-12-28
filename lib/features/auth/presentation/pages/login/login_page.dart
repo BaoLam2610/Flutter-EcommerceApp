@@ -14,8 +14,6 @@ import '../../../../../core/extensions/widget_extensions.dart';
 import '../../../domain/models/login/user_login.dart';
 import '../../widgets/label_text_field.dart';
 import '../../widgets/social_card.dart';
-import 'bloc/cubit/login_cubit.dart';
-import 'bloc/cubit/login_state.dart';
 import 'bloc/login_bloc.dart';
 
 class LoginPage extends StatefulHookWidget {
@@ -46,10 +44,10 @@ class _LoginPageState extends State<LoginPage> {
         ),
       );
 
-  _buildBody() => BlocListener<LoginCubit, StatusState>(
+  _buildBody() => BlocListener<LoginBloc, BlocState>(
         listener: (context, state) {
           BotToast.closeAllLoading();
-          if (state.status == Status.loading) {
+          if (state is Loading) {
             BotToast.showCustomLoading(
               toastBuilder: (cancelFunc) {
                 return const Center(
@@ -58,13 +56,13 @@ class _LoginPageState extends State<LoginPage> {
               },
             );
           }
-          if (state.status == Status.success) {
+          if (state is Success) {
             context.showAlertDialog(
               title: 'Login successfully',
               content: state.data.toString(),
             );
           }
-          if (state.status == Status.error) {
+          if (state is Error) {
             context.showAlertDialog(
               title: text_error,
               content: state.message,
