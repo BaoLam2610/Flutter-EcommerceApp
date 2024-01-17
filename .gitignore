@@ -9,6 +9,7 @@
 .buildlog/
 .history
 .svn/
+*.gen.dart
 *.g.dart
 *.freezed.dart
 
