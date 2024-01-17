@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../features/auth/domain/models/register/user_register.dart';
-import '../../features/auth/presentation/pages/complete_profile/complete_profile_page.dart';
 import '../../features/auth/presentation/pages/forgot_password/forgot_password_page.dart';
 import '../../features/auth/presentation/pages/intro/intro_page.dart';
 import '../../features/auth/presentation/pages/login/login_page.dart';
-import '../../features/auth/presentation/pages/register/register_page.dart';
-import '../../features/home/presentation/pages/home_page.dart';
 
 class AppRoutes {
   static const String defaultPage = '';
@@ -24,17 +20,17 @@ class AppRoutes {
       case loginPage:
         return materialRoute(const LoginPage());
       case registerPage:
-        return materialRoute(const RegisterPage());
-      case completeProfilePage:
-        return materialRoute(
-          CompleteProfilePage(
-            args: settings.arguments as UserRegister,
-          ),
-        );
+      //   return materialRoute(const RegisterPage());
+      // case completeProfilePage:
+      //   return materialRoute(
+      //     CompleteProfilePage(
+      //       args: settings.arguments as UserRegister,
+      //     ),
+      //   );
       case forgotPasswordPage:
         return materialRoute(const ForgotPasswordPage());
-      case homePage:
-        return materialRoute(const HomePage());
+      // case homePage:
+      //   return materialRoute(const HomePage());
       default:
         return materialRoute(const IntroPage());
     }

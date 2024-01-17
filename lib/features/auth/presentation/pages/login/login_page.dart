@@ -13,7 +13,6 @@ import '../../../../../core/constants/strings.dart';
 import '../../../../../core/extensions/widget_extensions.dart';
 import '../../../../../core/widgets/ui/scroll_column_expandable.dart';
 import '../../../../../injection_container.dart';
-import '../../../domain/models/login/user_login.dart';
 import '../../widgets/common/email_input/bloc/email_input_bloc.dart';
 import '../../widgets/common/email_input/email_input_field.dart';
 import '../../widgets/label_text_field.dart';

@@ -1,8 +1,4 @@
-import 'package:json_annotation/json_annotation.dart';
-
 import 'status_code.dart';
-
-part 'data_response.g.dart';
 
 class BaseResponse {
   final dynamic error;
@@ -24,7 +20,6 @@ class BaseResponse {
   }
 }
 
-@JsonSerializable(genericArgumentFactories: true)
 class DataResponse<T> extends BaseResponse {
   final T? data;
 

@@ -4,12 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'configs/routes/routes.dart';
 import 'configs/themes/app_themes.dart';
-import 'features/auth/presentation/pages/complete_profile/bloc/complete_profile_bloc.dart';
 import 'features/auth/presentation/pages/forgot_password/bloc/forgot_password_bloc.dart';
-import 'features/auth/presentation/pages/login/bloc/login_bloc.dart';
 import 'features/auth/presentation/pages/login/login_page.dart';
-import 'features/auth/presentation/pages/register/bloc/register_bloc.dart';
-import 'features/home/presentation/pages/bloc/home_bloc.dart';
 import 'injection_container.dart';
 
 Future<void> main() async {
@@ -25,9 +21,9 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => sl<ForgotPasswordBloc>()),
-        BlocProvider(create: (context) => sl<RegisterBloc>()),
-        BlocProvider(create: (context) => sl<CompleteProfileBloc>()),
-        BlocProvider(create: (context) => sl<HomeBloc>()),
+        // BlocProvider(create: (context) => sl<RegisterBloc>()),
+        // BlocProvider(create: (context) => sl<CompleteProfileBloc>()),
+        // BlocProvider(create: (context) => sl<HomeBloc>()),
       ],
       child: MaterialApp(
         builder: BotToastInit(),
