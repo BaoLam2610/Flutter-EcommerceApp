@@ -11,14 +11,16 @@ import '../../../../../core/extensions/widget_extensions.dart';
 import '../../widgets/label_text_field.dart';
 import 'bloc/forgot_password_bloc.dart';
 
-class ForgotPasswordPage extends StatefulHookWidget {
-  const ForgotPasswordPage({super.key});
+class ForgotPasswordScreen extends StatefulHookWidget {
+  static const String route = '/forgot_password_screen';
+
+  const ForgotPasswordScreen({super.key});
 
   @override
-  State<ForgotPasswordPage> createState() => _ForgotPasswordPageState();
+  State<ForgotPasswordScreen> createState() => _ForgotPasswordPageState();
 }
 
-class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
+class _ForgotPasswordPageState extends State<ForgotPasswordScreen> {
   final _emailTextController = TextEditingController();
 
   @override

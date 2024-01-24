@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../configs/routes/routes.dart';
 import '../../../../../configs/themes/button_themes.dart';
 import '../../../../../configs/themes/dimens.dart';
 import '../../../../../core/constants/images.dart';
 import '../../../../../core/constants/strings.dart';
 import '../../../../../core/extensions/widget_extensions.dart';
+import '../login/login_screen.dart';
 
-class IntroPage extends StatefulWidget {
-  const IntroPage({super.key});
+class IntroScreen extends StatefulWidget {
+  static const String route = '/intro_screen';
+
+  const IntroScreen({super.key});
 
   @override
-  State<IntroPage> createState() => _IntroPageState();
+  State<IntroScreen> createState() => _IntroScreenState();
 }
 
-class _IntroPageState extends State<IntroPage> {
+class _IntroScreenState extends State<IntroScreen> {
   int currentIndex = 0;
   final introList = [
     {
@@ -141,6 +143,6 @@ class _IntroPageState extends State<IntroPage> {
       );
 
   void _onButtonPressed() {
-    context.navigator.pushReplacementNamed(AppRoutes.loginPage);
+    context.navigator.pushReplacementNamed(LoginScreen.route);
   }
 }

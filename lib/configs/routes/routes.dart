@@ -1,38 +1,23 @@
 import 'package:flutter/material.dart';
 
-import '../../features/auth/presentation/pages/forgot_password/forgot_password_page.dart';
-import '../../features/auth/presentation/pages/intro/intro_page.dart';
-import '../../features/auth/presentation/pages/login/login_page.dart';
+import '../../features/auth/presentation/screens/forgot_password/forgot_password_screen.dart';
+import '../../features/auth/presentation/screens/intro/intro_screen.dart';
+import '../../features/auth/presentation/screens/login/login_screen.dart';
+
 
 class AppRoutes {
   static const String defaultPage = '';
-  static const String introPage = '/intro';
-  static const String loginPage = '/login';
-  static const String registerPage = '/register';
-  static const String completeProfilePage = '/completeProfile';
-  static const String forgotPasswordPage = '/forgotPassword';
-  static const String homePage = '/home';
 
   static Route onGenerateRoutes(RouteSettings settings) {
     switch (settings.name) {
-      case introPage:
-        return materialRoute(const IntroPage());
-      case loginPage:
-        return materialRoute(const LoginPage());
-      case registerPage:
-      //   return materialRoute(const RegisterPage());
-      // case completeProfilePage:
-      //   return materialRoute(
-      //     CompleteProfilePage(
-      //       args: settings.arguments as UserRegister,
-      //     ),
-      //   );
-      case forgotPasswordPage:
-        return materialRoute(const ForgotPasswordPage());
-      // case homePage:
-      //   return materialRoute(const HomePage());
+      case IntroScreen.route:
+        return materialRoute(const IntroScreen());
+      case LoginScreen.route:
+        return materialRoute(const LoginScreen());
+      case ForgotPasswordScreen.route:
+        return materialRoute(const ForgotPasswordScreen());
       default:
-        return materialRoute(const IntroPage());
+        return materialRoute(const IntroScreen());
     }
   }
 

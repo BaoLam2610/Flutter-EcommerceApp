@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-import '../../../../../configs/routes/routes.dart';
 import "../../../../../configs/themes/button_themes.dart";
 import '../../../../../configs/themes/dimens.dart';
 import '../../../../../configs/themes/text_themes.dart';
@@ -12,33 +11,20 @@ import '../../../../../core/constants/icons.dart';
 import '../../../../../core/constants/strings.dart';
 import '../../../../../core/extensions/widget_extensions.dart';
 import '../../../../../core/widgets/ui/scroll_column_expandable.dart';
-import '../../../../../injection_container.dart';
-import '../../widgets/common/email_input/bloc/email_input_bloc.dart';
-import '../../widgets/common/email_input/email_input_field.dart';
 import '../../widgets/label_text_field.dart';
 import '../../widgets/social_card.dart';
 import 'bloc/login_bloc.dart';
 
-class LoginProvider extends StatelessWidget {
-  const LoginProvider({super.key});
+class LoginScreen extends StatefulHookWidget {
+  static const String route = '/login_screen';
+
+  const LoginScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MultiBlocProvider(providers: [
-      BlocProvider(create: (context) => sl<LoginBloc>()),
-      BlocProvider(create: (context) => sl<EmailInputBloc>()),
-    ], child: const LoginPage());
-  }
+  State<LoginScreen> createState() => _LoginPageState();
 }
 
-class LoginPage extends StatefulHookWidget {
-  const LoginPage({super.key});
-
-  @override
-  State<LoginPage> createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends State<LoginScreen> {
   final _emailTextController = TextEditingController();
   final _passwordTextController = TextEditingController();
   bool isRememberChecked = false;
@@ -90,16 +76,16 @@ class _LoginPageState extends State<LoginPage> {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 18),
             child:
-            // SingleChildScrollView(
-            //   child: Column(
-            //     children: [
-            //       _buildTitle(),
-            //       _buildLoginInputArea(),
-            //       _buildFooterArea()
-            //     ],
-            //   ),
-            // ),
-            ScrollColumnExpandable(
+                // SingleChildScrollView(
+                //   child: Column(
+                //     children: [
+                //       _buildTitle(),
+                //       _buildLoginInputArea(),
+                //       _buildFooterArea()
+                //     ],
+                //   ),
+                // ),
+                ScrollColumnExpandable(
               children: [
                 Expanded(
                   flex: 1,
@@ -258,10 +244,10 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _onForgotPasswordTextPressed() {
-    context.navigator.pushNamed(AppRoutes.forgotPasswordPage);
+    // context.navigator.pushNamed(AppRoutes.forgotPasswordPage);
   }
 
   void _onRegisterTextPressed() {
-    context.navigator.pushNamed(AppRoutes.registerPage);
+    // context.navigator.pushNamed(AppRoutes.registerPage);
   }
 }
