@@ -89,7 +89,17 @@ class _LoginPageState extends State<LoginPage> {
           width: double.infinity,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 18),
-            child: ScrollColumnExpandable(
+            child:
+            // SingleChildScrollView(
+            //   child: Column(
+            //     children: [
+            //       _buildTitle(),
+            //       _buildLoginInputArea(),
+            //       _buildFooterArea()
+            //     ],
+            //   ),
+            // ),
+            ScrollColumnExpandable(
               children: [
                 Expanded(
                   flex: 1,
@@ -145,8 +155,8 @@ class _LoginPageState extends State<LoginPage> {
             suffixIcon: const Icon(Icons.lock_outline),
             isPassword: true,
           ),
-          const SizedBox(height: 20),
-          const EmailInputField(),
+          // const SizedBox(height: 20),
+          // const EmailInputField(),
           const SizedBox(height: 12),
           _buildRememberMeArea(),
           const SizedBox(height: 32),
