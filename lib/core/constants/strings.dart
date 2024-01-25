@@ -42,3 +42,11 @@ const String text_validate_enter = 'Please enter your %s!';
 const String text_validate_valid = 'Please enter valid %s!';
 const String text_validate_length = '%s must be more than %d';
 const String text_validate_password_not_match = 'Confirm password don\'t match with password';
+final RegExp emailValidatorRegExp =
+RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+
+class AppStrings {
+  static const String currentLanguageCodeKey = 'current_language';
+  static const String currentCountryCodeKey = 'current_country';
+
+}

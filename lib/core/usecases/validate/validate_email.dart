@@ -10,9 +10,9 @@ class ValidateEmailUseCase extends UseCase<String, String> {
       return text_validate_enter.format([text_email.toLowerCase()]);
     }
 
-    if (!emailValidatorRegExp.hasMatch(params!)) {
-      return text_validate_valid.format([text_email.toLowerCase()]);
-    }
+    // if (!emailValidatorRegExp.hasMatch(params!)) {
+    //   return text_validate_valid.format([text_email.toLowerCase()]);
+    // }
 
     return "";
   }

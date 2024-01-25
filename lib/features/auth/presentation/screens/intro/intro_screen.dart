@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../configs/themes/button_themes.dart';
@@ -5,6 +6,7 @@ import '../../../../../configs/themes/dimens.dart';
 import '../../../../../core/constants/images.dart';
 import '../../../../../core/constants/strings.dart';
 import '../../../../../core/extensions/widget_extensions.dart';
+import '../../../../../gen/locale_keys.g.dart';
 import '../login/login_screen.dart';
 
 class IntroScreen extends StatefulWidget {
@@ -20,15 +22,15 @@ class _IntroScreenState extends State<IntroScreen> {
   int currentIndex = 0;
   final introList = [
     {
-      'text': text_intro_1,
+      'text': LocaleKeys.intro_1.tr(),
       'image': splash_1,
     },
     {
-      'text': text_intro_2,
+      'text': LocaleKeys.intro_2.tr(),
       'image': splash_2,
     },
     {
-      'text': text_intro_3,
+      'text': LocaleKeys.intro_3.tr(),
       'image': splash_3,
     },
   ];
