@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import "../../../../core/extensions/widget_extensions.dart";
+import '../../../../configs/themes/themes.dart';
 
 class LabelTextField extends StatelessWidget {
   final Function(String text)? onChanged;
@@ -21,15 +21,16 @@ class LabelTextField extends StatelessWidget {
     this.inputType,
     this.isPassword,
     this.controller,
-    this.suffixVectorIcon, this.onChanged,
+    this.suffixVectorIcon,
+    this.onChanged,
   });
 
   @override
   Widget build(BuildContext context) {
     final border = OutlineInputBorder(borderRadius: BorderRadius.circular(30));
 
-    final focusBorder =
-        border.copyWith(borderSide: BorderSide(color: context.primary));
+    final focusBorder = border.copyWith(
+        borderSide: BorderSide(color: AppColors.current.primary));
 
     return TextField(
       onChanged: onChanged,
@@ -49,8 +50,7 @@ class LabelTextField extends StatelessWidget {
         ),
         focusedBorder: focusBorder,
         border: border,
-        focusColor: context.primary,
-
+        focusColor: AppColors.current.primary,
       ),
     );
   }

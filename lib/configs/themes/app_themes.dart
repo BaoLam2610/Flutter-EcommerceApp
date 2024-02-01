@@ -1,36 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../gen/fonts.gen.dart';
 import 'app_colors.dart';
-import 'color_themes.dart';
-import 'text_themes.dart';
-import 'widget_themes.dart';
-
-ThemeData theme() {
-  return ThemeData(
-    scaffoldBackgroundColor: Colors.white,
-    fontFamily: fontFamilyDefault,
-    textTheme: textTheme(),
-    textSelectionTheme: textSelectionTheme(),
-    inputDecorationTheme: inputDecorationTheme(),
-    colorScheme: colorScheme(),
-    checkboxTheme: checkboxTheme(),
-    appBarTheme: appBarTheme(),
-  );
-}
-
-AppBarTheme appBarTheme() {
-  return const AppBarTheme(
-    color: Colors.white,
-    elevation: 0,
-    centerTitle: true,
-    iconTheme: IconThemeData(color: Colors.black),
-    titleTextStyle: TextStyle(
-      color: Colors.black,
-      fontSize: 18,
-      fontWeight: FontWeight.bold,
-    ),
-  );
-}
 
 enum AppThemeType { light, dark }
 
@@ -38,7 +9,7 @@ enum AppThemeType { light, dark }
 final lightTheme = ThemeData(
   brightness: Brightness.light,
   splashColor: Colors.transparent,
-  fontFamily: 'Muli',
+  fontFamily: FontFamily.muli,
   scaffoldBackgroundColor: AppColors.lightThemeColor.background,
 )..addAppColor(
     AppThemeType.light,
@@ -62,7 +33,7 @@ extension ThemeDataExtensions on ThemeData {
   }
 
   /// Get app color for current theme.
-  AppColors get appColor {
+  AppColors get appColors {
     return _appColorMap[AppThemeSetting.currentAppThemeType] ??
         AppColors.lightThemeColor;
   }

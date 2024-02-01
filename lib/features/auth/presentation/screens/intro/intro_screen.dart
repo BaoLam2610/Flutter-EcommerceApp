@@ -1,107 +1,108 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../configs/themes/app_colors.dart';
+import '../../../../../configs/themes/app_text_styles.dart';
 import '../../../../../configs/themes/button_themes.dart';
 import '../../../../../configs/themes/dimens.dart';
-import '../../../../../core/constants/images.dart';
+import '../../../../../core/constants/durations.dart';
 import '../../../../../core/constants/strings.dart';
 import '../../../../../core/extensions/widget_extensions.dart';
+import '../../../../../core/screen/base_screen.dart';
 import '../../../../../gen/locale_keys.g.dart';
 import '../login/login_screen.dart';
+import 'bloc/intro_cubit.dart';
 
-class IntroScreen extends StatefulWidget {
+class IntroScreen extends BaseScreen {
   static const String route = '/intro_screen';
 
   const IntroScreen({super.key});
 
   @override
-  State<IntroScreen> createState() => _IntroScreenState();
+  BaseScreenState<IntroScreen> createState() => _IntroScreenState();
 }
 
-class _IntroScreenState extends State<IntroScreen> {
-  int currentIndex = 0;
-  final introList = [
-    {
-      'text': LocaleKeys.intro_1.tr(),
-      'image': splash_1,
-    },
-    {
-      'text': LocaleKeys.intro_2.tr(),
-      'image': splash_2,
-    },
-    {
-      'text': LocaleKeys.intro_3.tr(),
-      'image': splash_3,
-    },
-  ];
+class _IntroScreenState extends BaseScreenState<IntroScreen> {
+  late IntroCubit _cubit;
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    _cubit = ReadContext(context).read<IntroCubit>();
+    super.initState();
+  }
+
+  @override
+  Widget buildScreen(BuildContext context) {
     return Scaffold(
-      body: _buildBody(),
+      backgroundColor: AppColors.current.background,
+      body: _buildBody,
     );
   }
 
-  _buildBody() => Column(
-        children: [
-          Expanded(
-            flex: 1,
-            child: Container(
-              alignment: Alignment.bottomCenter,
-              child: Text(
-                text_app_name,
-                style: context.headlineLarge?.copyWith(
-                  color: context.primary,
+  Widget get _buildBody => BlocBuilder<IntroCubit, IntroState>(
+        buildWhen: (previous, current) =>
+            previous.currentIndex != current.currentIndex,
+        builder: (context, state) => Column(
+          children: [
+            Expanded(
+              flex: 1,
+              child: Container(
+                alignment: Alignment.bottomCenter,
+                child: Text(
+                  LocaleKeys.app_name.tr(),
+                  style: AppTextStyles.bold32.copyWith(
+                    color: AppColors.current.primary,
+                  ),
                 ),
               ),
             ),
-          ),
-          Expanded(
-            flex: 6,
-            child: PageView.builder(
-              onPageChanged: (value) => setState(() {
-                currentIndex = value;
-              }),
-              itemCount: introList.length,
-              itemBuilder: (context, index) {
-                final intro = introList[index];
-                return _buildPageItem(intro);
-              },
-            ),
-          ),
-          Expanded(
-            flex: 4,
-            child: SizedBox(
-              height: double.infinity,
-              child: Column(
-                children: [
-                  const SizedBox(height: 16),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: List.generate(
-                      3,
-                      (index) => _buildDotIndicator(index: index),
-                    ),
-                  ),
-                  const Spacer(),
-                  _buildBottomButton(),
-                  const Spacer(),
-                ],
+            Expanded(
+              flex: 6,
+              child: PageView.builder(
+                onPageChanged: (index) => _cubit.updateCurrentPage(index),
+                itemCount: _cubit.introList.length,
+                itemBuilder: (context, index) {
+                  final intro = _cubit.introList[index];
+                  return _buildPageItem(intro);
+                },
               ),
             ),
-          )
-        ],
+            Expanded(
+              flex: 4,
+              child: SizedBox(
+                height: double.infinity,
+                child: Column(
+                  children: [
+                    SizedBox(height: 16.h),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: List.generate(
+                        _cubit.introList.length,
+                        (index) => _buildDotIndicator(index: index),
+                      ),
+                    ),
+                    const Spacer(),
+                    _buildBottomButton,
+                    const Spacer(),
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
       );
 
-  _buildPageItem(Map<String, dynamic> intro) => Column(
+  Widget _buildPageItem(Map<String, dynamic> intro) => Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Spacer(flex: 1),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: EdgeInsets.symmetric(horizontal: 16.w),
             child: Text(
-              intro['text'].toString(),
-              style: context.bodyMedium,
+              intro[AppStrings.text].toString(),
+              style: AppTextStyles.regular18,
               textAlign: TextAlign.center,
             ),
           ),
@@ -111,7 +112,7 @@ class _IntroScreenState extends State<IntroScreen> {
             child: AspectRatio(
               aspectRatio: 1,
               child: Image.asset(
-                intro['image'].toString(),
+                intro[AppStrings.image].toString(),
                 fit: BoxFit.fill,
               ),
             ),
@@ -119,28 +120,31 @@ class _IntroScreenState extends State<IntroScreen> {
         ],
       );
 
-  _buildDotIndicator({required int index}) => AnimatedContainer(
-        duration: const Duration(milliseconds: 300),
-        margin: const EdgeInsets.only(right: 5),
-        height: 6,
-        width: currentIndex == index ? 20 : 6,
+  Widget _buildDotIndicator({required int index}) => AnimatedContainer(
+        duration: AppDurations.delayPagerIndicator,
+        margin: EdgeInsets.only(right: 6.w),
+        height: 6.h,
+        width: _cubit.currentIndex == index ? 20.w : 6.w,
         decoration: BoxDecoration(
-            color: currentIndex == index ? context.primary : context.surface,
-            borderRadius: BorderRadius.circular(3)),
+            color: _cubit.currentIndex == index
+                ? AppColors.current.primary
+                : AppColors.current.primarySup,
+            borderRadius: BorderRadius.circular(4.r)),
       );
 
-  _buildBottomButton() => Padding(
-        padding: const EdgeInsets.all(16.0),
+  Widget get _buildBottomButton => Padding(
+        padding: EdgeInsets.all(16.r),
         child: SizedBox(
           height: buttonHeightLarge,
           width: double.infinity,
           child: ElevatedButton(
-              onPressed: _onButtonPressed,
-              style: primarySmallRoundedButtonTheme,
-              child: Text(
-                text_continue,
-                style: context.buttonTextTheme,
-              )),
+            onPressed: _onButtonPressed,
+            style: primarySmallRoundedButtonTheme,
+            child: Text(
+              text_continue,
+              style: AppTextStyles.regular18,
+            ),
+          ),
         ),
       );
 

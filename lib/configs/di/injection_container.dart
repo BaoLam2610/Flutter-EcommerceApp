@@ -3,6 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../features/app/bloc/global_app_cubit.dart';
+import '../../features/auth/presentation/screens/intro/bloc/intro_cubit.dart';
 import '../../utils/api_list.dart';
 import '../../utils/logger.dart';
 
@@ -23,16 +24,15 @@ Future<void> initializeDependencies() async {
       ]),
   );
 
-  provideGlobalAppCubit();
+  provideBloc();
 }
 
 Future<void> provideSharePreferences() async {
- // sl.registerLazySingleton(() async {
- //   return await SharedPreferences.getInstance();
- // });
-  sl.registerSingleton(await SharedPreferences.getInstance());
+  final sharedPreferences = await SharedPreferences.getInstance();
+ sl.registerLazySingleton(() => sharedPreferences);
 }
 
-void provideGlobalAppCubit() {
-  sl.registerFactory(() => GlobalAppCubit());
+void provideBloc() {
+  sl.registerLazySingleton(() => GlobalAppCubit());
+  sl.registerLazySingleton(() => IntroCubit());
 }

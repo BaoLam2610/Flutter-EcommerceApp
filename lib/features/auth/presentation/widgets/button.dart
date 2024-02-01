@@ -10,17 +10,18 @@ class Button extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: buttonHeightLarge,
-      width: double.infinity,
-      child: ElevatedButton(
-        onPressed: () {},
-        style: primaryDefaultRoundedButtonTheme,
-        child: Text(
-          text,
-          style: context.buttonTextTheme,
-        ),
-      ),
-    );
+    return SizedBox();
+    // return SizedBox(
+    //   height: buttonHeightLarge,
+    //   width: double.infinity,
+    //   child: ElevatedButton(
+    //     onPressed: () {},
+    //     style: primaryDefaultRoundedButtonTheme,
+    //     child: Text(
+    //       text,
+    //       style: context.buttonTextTheme,
+    //     ),
+    //   ),
+    // );
   }
 }

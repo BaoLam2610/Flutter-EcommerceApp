@@ -27,11 +27,11 @@ class _ForgotPasswordPageState extends State<ForgotPasswordScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: _buildAppBar(),
-      body: _buildBody(),
+     /* appBar: _buildAppBar(),
+      body: _buildBody(),*/
     );
   }
-
+/*
   _buildAppBar() => AppBar(
         title: Text(
           text_forgot_password,
@@ -144,5 +144,5 @@ class _ForgotPasswordPageState extends State<ForgotPasswordScreen> {
     context.read<ForgotPasswordBloc>().add(
           ValidateEmail(_emailTextController.text),
         );
-  }
+  }*/
 }

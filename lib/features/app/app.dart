@@ -11,6 +11,7 @@ import '../../configs/themes/app_themes.dart';
 import '../../core/widgets/navigator/navigator_key.dart';
 import '../../gen/codegen_loader.g.dart';
 import '../auth/presentation/screens/intro/intro_screen.dart';
+import 'app_provider.dart';
 import 'bloc/global_app_cubit.dart';
 
 class BLMarketApp extends StatefulWidget {
@@ -51,8 +52,8 @@ class _BLMarketAppState extends State<BLMarketApp> {
 
   Widget get _appContainer => BlocBuilder<GlobalAppCubit, GlobalAppState>(
         bloc: _globalAppCubit,
-        builder: (context, state) {
-          return MaterialApp(
+        builder: (context, state) => multipleBlocProvidersContainer(
+          MaterialApp(
             navigatorKey: navigatorKey,
             builder: BotToastInit(),
             navigatorObservers: [BotToastNavigatorObserver()],
@@ -65,7 +66,7 @@ class _BLMarketAppState extends State<BLMarketApp> {
             locale: context.locale,
             onGenerateRoute: AppRoutes.onGenerateRoutes,
             initialRoute: IntroScreen.route,
-          );
-        },
+          ),
+        ),
       );
 }

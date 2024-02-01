@@ -33,11 +33,11 @@ class _LoginPageState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      appBar: _buildAppBar(),
-      body: _buildBody(),
+      // appBar: _buildAppBar(),
+      // body: _buildBody(),
     );
   }
-
+/*
   _buildAppBar() => AppBar(
         title: Text(
           text_sign_in,
@@ -249,5 +249,5 @@ class _LoginPageState extends State<LoginScreen> {
 
   void _onRegisterTextPressed() {
     // context.navigator.pushNamed(AppRoutes.registerPage);
-  }
+  }*/
 }

@@ -49,4 +49,8 @@ class AppStrings {
   static const String currentLanguageCodeKey = 'current_language';
   static const String currentCountryCodeKey = 'current_country';
 
+  /* KEY */
+  static const String text = 'text';
+  static const String image = 'image';
+
 }

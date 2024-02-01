@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../../configs/themes/app_text_styles.dart';
 import '../../configs/themes/text_themes.dart';
 
 extension BuildContextExtensions<T> on BuildContext {
   ThemeData get theme => Theme.of(this);
-
-  TextTheme get textTheme => theme.textTheme;
-
-  ColorScheme get colorScheme => theme.colorScheme;
 
   DefaultTextStyle get defaultTextStyle => DefaultTextStyle.of(this);
 
@@ -41,35 +38,6 @@ extension BuildContextExtensions<T> on BuildContext {
 
   Size get size => mediaQuery.size;
 
-  // Text styles
-  TextStyle? get displayLarge => textTheme.displayLarge;
-  TextStyle? get displayMedium => textTheme.displayMedium;
-  TextStyle? get displaySmall => textTheme.displaySmall;
-  TextStyle? get titleLarge => textTheme.titleLarge;
-  TextStyle? get titleMedium => textTheme.titleMedium;
-  TextStyle? get titleSmall => textTheme.titleSmall;
-  TextStyle? get labelLarge => textTheme.labelLarge;
-  TextStyle? get labelMedium => textTheme.labelMedium;
-  TextStyle? get labelSmall => textTheme.labelSmall;
-  TextStyle? get headlineLarge => textTheme.headlineLarge;
-  TextStyle? get headlineMedium => textTheme.headlineMedium;
-  TextStyle? get headlineSmall => textTheme.headlineSmall;
-  TextStyle? get bodyLarge => textTheme.bodyLarge;
-  TextStyle? get bodyMedium => textTheme.bodyMedium;
-  TextStyle? get bodySmall => textTheme.bodySmall;
-  TextStyle? get buttonTextTheme =>
-      textTheme.bodyMedium?.copyWith(color: Colors.white);
-
-  // Color themes
-  Color get primary => colorScheme.primary;
-  Color get onPrimary => colorScheme.onPrimary;
-  Color get secondary => colorScheme.secondary;
-  Color get onSecondary => colorScheme.onSecondary;
-  Color get cardColor => Theme.of(this).cardColor;
-  Color get errorColor => colorScheme.error;
-  Color get background => colorScheme.background;
-  Color get surface => colorScheme.surface;
-
   Future<T?> showBottomSheet(
     Widget child, {
     bool isScrollControlled = true,
@@ -95,48 +63,48 @@ extension BuildContextExtensions<T> on BuildContext {
       ),
     );
   }
-
-  Future<T?> showAlertDialog({
-    String? title,
-    String? content,
-    String textAccept = 'OK',
-    String textCancel = 'Cancel',
-    VoidCallback? onAccept,
-    VoidCallback? onCancel,
-  }) =>
-      showDialog(
-        context: this,
-        builder: (context) => AlertDialog(
-          title: Text(
-            title ?? '',
-            style: this.titleSmall,
-          ),
-          content: Text(
-            content ?? '',
-            style: this.bodyMedium,
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                if (onCancel != null) onCancel();
-                navigator.pop();
-              },
-              child: Text(
-                textCancel,
-                style: bodyMedium?.copyWith(color: textColorGrey),
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                if (onAccept != null) onAccept();
-                navigator.pop();
-              },
-              child: Text(
-                textAccept,
-                style: bodyMedium?.copyWith(color: primary),
-              ),
-            )
-          ],
-        ),
-      );
+  //
+  // Future<T?> showAlertDialog({
+  //   String? title,
+  //   String? content,
+  //   String textAccept = 'OK',
+  //   String textCancel = 'Cancel',
+  //   VoidCallback? onAccept,
+  //   VoidCallback? onCancel,
+  // }) =>
+  //     showDialog(
+  //       context: this,
+  //       builder: (context) => AlertDialog(
+  //         title: Text(
+  //           title ?? '',
+  //           style: AppTextStyles.bold32,
+  //         ),
+  //         content: Text(
+  //           content ?? '',
+  //           style: this.bodyMedium,
+  //         ),
+  //         actions: [
+  //           TextButton(
+  //             onPressed: () {
+  //               if (onCancel != null) onCancel();
+  //               navigator.pop();
+  //             },
+  //             child: Text(
+  //               textCancel,
+  //               style: bodyMedium?.copyWith(color: textColorGrey),
+  //             ),
+  //           ),
+  //           TextButton(
+  //             onPressed: () {
+  //               if (onAccept != null) onAccept();
+  //               navigator.pop();
+  //             },
+  //             child: Text(
+  //               textAccept,
+  //               style: bodyMedium?.copyWith(color: primary),
+  //             ),
+  //           )
+  //         ],
+  //       ),
+  //     );
 }

@@ -1,19 +1,9 @@
 # ecommerce_app
 
-A new Flutter project.
+An E-Commerce application Flutter project.
 
 ## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-
-flutter pub run easy_localization:generate -S assets/strings -f keys -O lib/gen -o locale_keys.g.dart
-flutter pub run easy_localization:generate -S assets/strings -O lib/gen -o codegen_loader.g.dart
+Run in terminal before build on device
+1. flutter pub run build_runner build --delete-conflicting-outputs
+2. flutter pub run easy_localization:generate -S assets/strings -f keys -O lib/gen -o locale_keys.g.dart
+3. flutter pub run easy_localization:generate -S assets/strings -O lib/gen -o codegen_loader.g.dart
