@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../configs/di/injection_container.dart';
-import '../../../../../configs/themes/app_colors.dart';
-import '../../../../../configs/themes/app_text_styles.dart';
-import '../../../../../core/constants/durations.dart';
-import '../../../../../core/constants/strings.dart';
-import '../../../../../core/extensions/widget_extensions.dart';
-import '../../../../../core/screen/base_screen.dart';
-import '../../../../../core/widgets/button/app_button.dart';
-import '../../../../../gen/locale_keys.g.dart';
-import '../login/login_screen.dart';
+import '../../../../configs/di/injection_container.dart';
+import '../../../../configs/themes/app_colors.dart';
+import '../../../../configs/themes/app_text_styles.dart';
+import '../../../../core/constants/durations.dart';
+import '../../../../core/constants/strings.dart';
+import '../../../../core/extensions/widget_extensions.dart';
+import '../../../../core/screen/base_screen.dart';
+import '../../../../core/widgets/button/app_button.dart';
+import '../../../../gen/locale_keys.g.dart';
+import '../../../auth/presentation/screens/login/login_screen.dart';
 import 'bloc/intro_cubit.dart';
 
 class IntroScreen extends BaseScreen {

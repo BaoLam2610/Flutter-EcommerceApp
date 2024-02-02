@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../../../configs/themes/themes.dart';
+part of 'app_button.dart';
 
 enum ButtonType {
   solid,

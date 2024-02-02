@@ -10,7 +10,7 @@ import '../../../../../core/bloc/bloc_state.dart';
 import '../../../../../core/constants/icons.dart';
 import '../../../../../core/constants/strings.dart';
 import '../../../../../core/extensions/widget_extensions.dart';
-import '../../../../../core/widgets/ui/scroll_column_expandable.dart';
+import '../../../../../core/widgets/scroll/scroll_column_expandable.dart';
 import '../../widgets/label_text_field.dart';
 import '../../widgets/social_card.dart';
 import 'bloc/login_bloc.dart';

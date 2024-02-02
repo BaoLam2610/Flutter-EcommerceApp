@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/constants/durations.dart';
-import '../../../../core/extensions/widget_extensions.dart';
+import '../../../../core/constants/constants.dart';
+import '../../../../core/extensions/extensions.dart';
 import '../../../../gen/assets.gen.dart';
-import '../../../auth/presentation/screens/intro/intro_screen.dart';
+import '../../../intro/presentation/screens/intro_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   static const String route = '/';

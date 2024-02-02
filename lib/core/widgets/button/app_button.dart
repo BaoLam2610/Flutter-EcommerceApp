@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../configs/themes/app_colors.dart';
-import '../../../configs/themes/app_text_styles.dart';
-import '../material_effect/material_effect.dart';
-import 'button_type.dart';
+import '../../../configs/themes/themes.dart';
+import '../widgets.dart';
+
+part 'button_type.dart';
 
 class AppButton extends StatelessWidget {
   final GestureTapCallback? onTap;

@@ -6,13 +6,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../configs/di/injection_container.dart';
 import '../../configs/routes/routes.dart';
-import '../../configs/themes/app_localizations.dart';
-import '../../configs/themes/app_themes.dart';
-import '../../core/widgets/navigator/navigator_key.dart';
+import '../../configs/themes/themes.dart';
+import '../../core/constants/navigator_key.dart';
 import '../../gen/codegen_loader.g.dart';
-import '../auth/presentation/screens/intro/intro_screen.dart';
-import '../splash/presentation/screen/splash_screen.dart';
-import 'app_provider.dart';
+import '../splash/presentation/screens/splash_screen.dart';
 import 'bloc/global_app_cubit.dart';
 
 class BLMarketApp extends StatefulWidget {
