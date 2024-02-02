@@ -11,6 +11,7 @@ import '../../configs/themes/app_themes.dart';
 import '../../core/widgets/navigator/navigator_key.dart';
 import '../../gen/codegen_loader.g.dart';
 import '../auth/presentation/screens/intro/intro_screen.dart';
+import '../splash/presentation/screen/splash_screen.dart';
 import 'app_provider.dart';
 import 'bloc/global_app_cubit.dart';
 
@@ -52,21 +53,19 @@ class _BLMarketAppState extends State<BLMarketApp> {
 
   Widget get _appContainer => BlocBuilder<GlobalAppCubit, GlobalAppState>(
         bloc: _globalAppCubit,
-        builder: (context, state) => multipleBlocProvidersContainer(
-          MaterialApp(
-            navigatorKey: navigatorKey,
-            builder: BotToastInit(),
-            navigatorObservers: [BotToastNavigatorObserver()],
-            theme: lightTheme,
-            // darkTheme: darkTheme,
-            debugShowCheckedModeBanner: false,
-            themeMode: state.isDarkTheme ? ThemeMode.dark : ThemeMode.light,
-            localizationsDelegates: context.localizationDelegates,
-            supportedLocales: context.supportedLocales,
-            locale: context.locale,
-            onGenerateRoute: AppRoutes.onGenerateRoutes,
-            initialRoute: IntroScreen.route,
-          ),
+        builder: (context, state) => MaterialApp(
+          navigatorKey: navigatorKey,
+          builder: BotToastInit(),
+          navigatorObservers: [BotToastNavigatorObserver()],
+          theme: lightTheme,
+          // darkTheme: darkTheme,
+          debugShowCheckedModeBanner: false,
+          themeMode: state.isDarkTheme ? ThemeMode.dark : ThemeMode.light,
+          localizationsDelegates: context.localizationDelegates,
+          supportedLocales: context.supportedLocales,
+          locale: context.locale,
+          routes: AppRoutes.routes,
+          initialRoute: SplashScreen.route,
         ),
       );
 }

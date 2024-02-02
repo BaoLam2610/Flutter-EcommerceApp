@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../configs/di/injection_container.dart';
 import '../../../../../configs/themes/app_colors.dart';
 import '../../../../../configs/themes/app_text_styles.dart';
-import '../../../../../configs/themes/button_themes.dart';
-import '../../../../../configs/themes/dimens.dart';
 import '../../../../../core/constants/durations.dart';
 import '../../../../../core/constants/strings.dart';
 import '../../../../../core/extensions/widget_extensions.dart';
 import '../../../../../core/screen/base_screen.dart';
+import '../../../../../core/widgets/button/app_button.dart';
 import '../../../../../gen/locale_keys.g.dart';
 import '../login/login_screen.dart';
 import 'bloc/intro_cubit.dart';
@@ -29,7 +29,7 @@ class _IntroScreenState extends BaseScreenState<IntroScreen> {
 
   @override
   void initState() {
-    _cubit = ReadContext(context).read<IntroCubit>();
+    _cubit = sl.get<IntroCubit>();
     super.initState();
   }
 
@@ -37,11 +37,12 @@ class _IntroScreenState extends BaseScreenState<IntroScreen> {
   Widget buildScreen(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.current.background,
-      body: _buildBody,
+      body: SafeArea(child: _buildBody),
     );
   }
 
   Widget get _buildBody => BlocBuilder<IntroCubit, IntroState>(
+        bloc: _cubit,
         buildWhen: (previous, current) =>
             previous.currentIndex != current.currentIndex,
         builder: (context, state) => Column(
@@ -126,25 +127,18 @@ class _IntroScreenState extends BaseScreenState<IntroScreen> {
         height: 6.h,
         width: _cubit.currentIndex == index ? 20.w : 6.w,
         decoration: BoxDecoration(
-            color: _cubit.currentIndex == index
-                ? AppColors.current.primary
-                : AppColors.current.primarySup,
-            borderRadius: BorderRadius.circular(4.r)),
+          color: _cubit.currentIndex == index
+              ? AppColors.current.primary
+              : AppColors.current.primarySup,
+          borderRadius: BorderRadius.circular(4.r),
+        ),
       );
 
   Widget get _buildBottomButton => Padding(
         padding: EdgeInsets.all(16.r),
-        child: SizedBox(
-          height: buttonHeightLarge,
-          width: double.infinity,
-          child: ElevatedButton(
-            onPressed: _onButtonPressed,
-            style: primarySmallRoundedButtonTheme,
-            child: Text(
-              text_continue,
-              style: AppTextStyles.regular18,
-            ),
-          ),
+        child: AppButton.primary(
+          text: LocaleKeys.text_continue.tr(),
+          onTap: () {},
         ),
       );
 
