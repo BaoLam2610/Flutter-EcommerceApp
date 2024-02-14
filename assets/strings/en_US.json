@@ -17,7 +17,7 @@
   "confirm_password": "Confirm Password",
   "confirm_password_hint": "Re-enter your password",
   "remember_me": "Remember me",
-  "forgot_password": "Forgot password",
+  "forgot_password": "Forgot password?",
   "forgot_password_description": "Please enter your email and we will send you a link to return your account",
   "text_continue": "Continue",
   "submit": "Submit",

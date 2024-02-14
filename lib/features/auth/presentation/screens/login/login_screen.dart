@@ -1,33 +1,40 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../configs/di/injection_container.dart';
 import '../../../../../configs/themes/themes.dart';
 import '../../../../../core/constants/icons.dart';
-import '../../../../../core/constants/strings.dart';
 import '../../../../../core/extensions/extensions.dart';
+import '../../../../../core/screen/base_screen.dart';
 import '../../../../../core/widgets/widgets.dart';
 import '../../../../../gen/locale_keys.g.dart';
 import '../../widgets/label_text_field.dart';
 import '../../widgets/social_card.dart';
+import 'blocv2/login_cubit.dart';
 
-class LoginScreen extends StatefulHookWidget {
+class LoginScreen extends BaseScreen {
   static const String route = '/login_screen';
 
   const LoginScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginPageState();
+  BaseScreenState<LoginScreen> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginScreen> {
-  final _emailTextController = TextEditingController();
-  final _passwordTextController = TextEditingController();
+class _LoginPageState extends BaseScreenState<LoginScreen> {
+  late LoginCubit _loginCubit;
   bool isRememberChecked = false;
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
+    _loginCubit = sl<LoginCubit>();
+  }
+
+  @override
+  Widget buildScreen(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: _buildBody,
@@ -44,7 +51,7 @@ class _LoginPageState extends State<LoginScreen> {
               child: _buildTitle,
             ),
             Expanded(
-              flex: 2,
+              flex: 3,
               child: _buildLoginInputArea,
             ),
             Expanded(
@@ -63,7 +70,7 @@ class _LoginPageState extends State<LoginScreen> {
             SizedBox(height: 12.h),
             Text(
               LocaleKeys.login.tr(),
-              style: AppTextStyles.bold24.copyWith(
+              style: AppTextStyles.bold32.copyWith(
                 color: AppColors.current.primary,
               ),
             ),
@@ -74,48 +81,76 @@ class _LoginPageState extends State<LoginScreen> {
   Widget get _buildLoginInputArea => Padding(
         padding: EdgeInsets.symmetric(horizontal: 18.w),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            LabelTextField(
-              controller: _emailTextController,
-              label: text_email,
-              hint: text_email_hint,
-              suffixIcon: const Icon(Icons.email_outlined),
-              inputType: TextInputType.emailAddress,
-            ),
+            _emailInputField,
             SizedBox(height: 20.h),
-            LabelTextField(
-              controller: _passwordTextController,
-              label: text_password,
-              hint: text_password_hint,
-              suffixIcon: const Icon(Icons.lock_outline),
-            ),
-            SizedBox(height: 12.h),
+            _passwordInputField,
+            SizedBox(height: 20.h),
             _buildRememberMeArea,
             SizedBox(height: 32.h),
-            _buildLoginButton
+            _buildLoginButton,
           ],
         ),
       );
 
+  Widget get _emailInputField => BlocBuilder<LoginCubit, LoginState>(
+        bloc: _loginCubit,
+        buildWhen: (previous, current) =>
+            previous.emailError != current.emailError,
+        builder: (context, state) {
+          return LabelTextField(
+            controller: _loginCubit.emailController,
+            label: LocaleKeys.email.tr(),
+            hint: LocaleKeys.email_hint.tr(),
+            suffixIcon: const Icon(Icons.email_outlined),
+            inputType: TextInputType.emailAddress,
+            errors: state.emailError,
+          );
+        },
+      );
+
+  Widget get _passwordInputField => BlocBuilder<LoginCubit, LoginState>(
+        bloc: _loginCubit,
+        buildWhen: (previous, current) =>
+            previous.passwordError != current.passwordError,
+        builder: (context, state) {
+          return LabelTextField(
+            controller: _loginCubit.passwordController,
+            label: LocaleKeys.password.tr(),
+            hint: LocaleKeys.password_hint.tr(),
+            suffixIcon: const Icon(Icons.lock_outline),
+            errors: state.passwordError,
+          );
+        },
+      );
+
   Widget get _buildLoginButton => AppButton.primary(
         text: LocaleKeys.login.tr(),
+        onTap: _loginCubit.validateLogin,
       );
 
   Widget get _buildRememberMeArea => Row(
         children: [
-          Checkbox(
-            value: isRememberChecked,
-            onChanged: (isChecked) {
-              setState(() {
-                isRememberChecked = isChecked ?? false;
-              });
-            },
+          SizedBox(
+            width: 24.r,
+            height: 24.r,
+            child: Checkbox(
+              value: isRememberChecked,
+              onChanged: (isChecked) {
+                setState(() {
+                  isRememberChecked = isChecked ?? false;
+                });
+              },
+            ),
+          ),
+          SizedBox(
+            width: 4.w,
           ),
           Text(
             LocaleKeys.remember_me.tr(),
-            style: AppTextStyles.regular16.copyWith(
+            style: AppTextStyles.regular14.copyWith(
               color: AppColors.current.secondaryText,
             ),
           ),
@@ -124,7 +159,7 @@ class _LoginPageState extends State<LoginScreen> {
             onTap: _onForgotPasswordTextPressed,
             child: Text(
               LocaleKeys.forgot_password.tr(),
-              style: AppTextStyles.regular16.copyWith(
+              style: AppTextStyles.regular14.copyWith(
                 color: AppColors.current.secondaryText,
               ),
             ),
