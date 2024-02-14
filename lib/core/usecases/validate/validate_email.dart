@@ -6,7 +6,7 @@ import '../use_case.dart';
 class ValidateEmailUseCase extends UseCase<String, String> {
   @override
   Future<String> call({String? params}) async {
-    if (params.isNullOrEmpty()) {
+    if (params.isNullOrEmpty) {
       return text_validate_enter.format([text_email.toLowerCase()]);
     }
 

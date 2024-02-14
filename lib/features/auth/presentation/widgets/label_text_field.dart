@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../configs/themes/themes.dart';
+import '../../../../core/extensions/extensions.dart';
 
 class LabelTextField extends StatelessWidget {
   final Function(String text)? onChanged;
   final TextEditingController? controller;
   final String? label;
   final String? hint;
-  final Icon? suffixIcon;
-  final SvgPicture? suffixVectorIcon;
+  final Widget? suffixIcon;
   final TextInputType? inputType;
-  final bool? isPassword;
+  final String? errors;
+  final void Function(PointerDownEvent)? onTapOutSide;
 
   const LabelTextField({
     super.key,
@@ -19,39 +20,63 @@ class LabelTextField extends StatelessWidget {
     this.hint,
     this.suffixIcon,
     this.inputType,
-    this.isPassword,
     this.controller,
-    this.suffixVectorIcon,
     this.onChanged,
+    this.errors,
+    this.onTapOutSide,
   });
+
+  InputBorder get inputBorder => OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10.r),
+        borderSide: BorderSide(color: AppColors.current.secondary),
+      );
+
+  InputBorder get focusBorder => inputBorder.copyWith(
+        borderSide: BorderSide(color: AppColors.current.primary),
+      );
 
   @override
   Widget build(BuildContext context) {
-    final border = OutlineInputBorder(borderRadius: BorderRadius.circular(30));
-
-    final focusBorder = border.copyWith(
-        borderSide: BorderSide(color: AppColors.current.primary));
-
-    return TextField(
-      onChanged: onChanged,
-      controller: controller,
-      maxLines: 1,
-      obscureText: isPassword == true,
-      keyboardType: inputType,
-      decoration: InputDecoration(
-        contentPadding:
-            const EdgeInsets.symmetric(horizontal: 32, vertical: 18),
-        floatingLabelBehavior: FloatingLabelBehavior.always,
-        labelText: label,
-        hintText: hint,
-        suffixIcon: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: suffixIcon ?? suffixVectorIcon,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (!label.isNullOrEmpty) ...{
+          Text(
+            label!,
+            style: AppTextStyles.bold16,
+          ),
+          SizedBox(
+            height: 4.h,
+          )
+        },
+        TextFormField(
+          onTapOutside: onTapOutSide ?? (_) => FocusScope.of(context).unfocus(),
+          onChanged: onChanged,
+          controller: controller,
+          maxLines: 1,
+          keyboardType: inputType,
+          decoration: InputDecoration(
+            floatingLabelBehavior: FloatingLabelBehavior.never,
+            contentPadding: EdgeInsets.symmetric(
+              horizontal: 20.w,
+              vertical: 14.h,
+            ),
+            hintText: hint,
+            suffixIcon: suffixIcon,
+            focusedBorder: focusBorder,
+            border: inputBorder,
+          ),
         ),
-        focusedBorder: focusBorder,
-        border: border,
-        focusColor: AppColors.current.primary,
-      ),
+        if (!errors.isNullOrEmpty) ...{
+          SizedBox(height: 2.h),
+          Text(
+            errors!,
+            style: AppTextStyles.regular14.copyWith(
+              color: AppColors.current.critical,
+            ),
+          )
+        }
+      ],
     );
   }
 }

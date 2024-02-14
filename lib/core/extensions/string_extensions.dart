@@ -5,5 +5,5 @@ extension StringExtension on String {
 }
 
 extension NullableStringExtension on String? {
-  bool isNullOrEmpty() => this == null || this?.isEmpty == true;
+  bool get isNullOrEmpty => this == null || this?.isEmpty == true;
 }

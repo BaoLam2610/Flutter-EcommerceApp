@@ -90,7 +90,6 @@ class _LoginPageState extends State<LoginScreen> {
               label: text_password,
               hint: text_password_hint,
               suffixIcon: const Icon(Icons.lock_outline),
-              isPassword: true,
             ),
             SizedBox(height: 12.h),
             _buildRememberMeArea,

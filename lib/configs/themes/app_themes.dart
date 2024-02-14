@@ -11,6 +11,7 @@ final lightTheme = ThemeData(
   splashColor: Colors.transparent,
   fontFamily: FontFamily.muli,
   scaffoldBackgroundColor: AppColors.lightThemeColor.background,
+  primarySwatch: AppColors.primaryMaterialColor
 )..addAppColor(
     AppThemeType.light,
     AppColors.lightThemeColor,
