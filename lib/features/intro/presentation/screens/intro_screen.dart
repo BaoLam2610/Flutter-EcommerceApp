@@ -138,7 +138,7 @@ class _IntroScreenState extends BaseScreenState<IntroScreen> {
         padding: EdgeInsets.all(16.r),
         child: AppButton.primary(
           text: LocaleKeys.text_continue.tr(),
-          onTap: () {},
+          onTap: _onButtonPressed,
         ),
       );
 
