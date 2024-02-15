@@ -1,4 +1,3 @@
-
 class StatusCode {
   final int value;
   final String description;
@@ -7,8 +6,6 @@ class StatusCode {
     required this.value,
     required this.description,
   });
-
-
 
   factory StatusCode.fromJson(Map<String, dynamic> map) {
     return StatusCode(
@@ -24,22 +21,3 @@ class StatusCode {
     };
   }
 }
-
-//
-// import 'package:flutter/foundation.dart';
-// import 'package:freezed_annotation/freezed_annotation.dart';
-//
-// part 'status_code.freezed.dart';
-// part 'status_code.g.dart';
-//
-// @freezed
-// class StatusCode with _$StatusCode {
-//   const factory StatusCode({
-//     int? code,
-//     String? description,
-//   }) = _StatusCode;
-//
-//   factory StatusCode.fromJson(Map<String, dynamic> json) =>
-//       _$StatusCodeFromJson(json);
-// }
-
