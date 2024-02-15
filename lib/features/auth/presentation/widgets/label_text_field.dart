@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../configs/themes/themes.dart';
 import '../../../../core/extensions/extensions.dart';
+import '../../../../gen/assets.gen.dart';
 
 class LabelTextField extends StatelessWidget {
   final Function(String text)? onChanged;
@@ -35,6 +36,8 @@ class LabelTextField extends StatelessWidget {
         borderSide: BorderSide(color: AppColors.current.primary),
       );
 
+  double get paddingHorizontalSuffixIcon => 10.w;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -62,20 +65,45 @@ class LabelTextField extends StatelessWidget {
               vertical: 14.h,
             ),
             hintText: hint,
-            suffixIcon: suffixIcon,
+            suffixIcon: Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: paddingHorizontalSuffixIcon,
+              ),
+              child: suffixIcon,
+            ),
+            suffixIconConstraints: BoxConstraints(
+              maxWidth: 24.r + (paddingHorizontalSuffixIcon * 2),
+              maxHeight: 24.h,
+            ),
             focusedBorder: focusBorder,
             border: inputBorder,
           ),
         ),
         if (!errors.isNullOrEmpty) ...{
-          SizedBox(height: 2.h),
-          Text(
-            errors!,
-            style: AppTextStyles.regular14.copyWith(
-              color: AppColors.current.critical,
-            ),
-          )
+          SizedBox(height: 4.h),
+          _buildErrorArea,
         }
+      ],
+    );
+  }
+
+  Widget get _buildErrorArea {
+    return Row(
+      children: [
+        SizedBox(width: 2.w),
+        Assets.icons.solidCircleError.svg(
+          colorFilter: ColorFilter.mode(
+            AppColors.current.critical,
+            BlendMode.srcIn,
+          ),
+        ),
+        SizedBox(width: 2.w),
+        Text(
+          errors!,
+          style: AppTextStyles.regular14.copyWith(
+            color: AppColors.current.critical,
+          ),
+        )
       ],
     );
   }
