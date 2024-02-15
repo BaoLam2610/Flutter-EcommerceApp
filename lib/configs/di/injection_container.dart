@@ -3,9 +3,9 @@ import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../core/usecases/validate/validate_email.dart';
+import '../../core/usecases/validate/validate_password.dart';
 import '../../features/app/bloc/global_app_cubit.dart';
-import '../../features/auth/domain/usecases/validate_login.dart';
-import '../../features/auth/presentation/screens/login/blocv2/login_cubit.dart';
+import '../../features/auth/presentation/screens/login/bloc/login_cubit.dart';
 import '../../features/intro/presentation/screens/bloc/intro_cubit.dart';
 import '../../utils/api_list.dart';
 import '../../utils/logger.dart';
@@ -38,11 +38,7 @@ Future<void> provideSharePreferences() async {
 
 void provideUseCase() {
   sl.registerLazySingleton(() => ValidateEmailUseCase());
-  sl.registerLazySingleton(
-    () => ValidateLoginUseCase(
-      sl<ValidateEmailUseCase>(),
-    ),
-  );
+  sl.registerLazySingleton(() => ValidatePasswordUseCase());
 }
 
 void provideBloc() {
@@ -50,8 +46,8 @@ void provideBloc() {
   sl.registerFactory(() => IntroCubit());
   sl.registerFactory(
     () => LoginCubit(
-      sl<ValidateLoginUseCase>(),
       sl<ValidateEmailUseCase>(),
+      sl<ValidatePasswordUseCase>(),
     ),
   );
 }

@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../configs/di/injection_container.dart';
@@ -10,9 +9,10 @@ import '../../../../../core/extensions/extensions.dart';
 import '../../../../../core/screen/base_screen.dart';
 import '../../../../../core/widgets/widgets.dart';
 import '../../../../../gen/locale_keys.g.dart';
-import '../../widgets/label_text_field.dart';
 import '../../widgets/social_card.dart';
-import 'blocv2/login_cubit.dart';
+import 'bloc/login_cubit.dart';
+import 'widgets/email_input_field.dart';
+import 'widgets/password_input_field.dart';
 
 class LoginScreen extends BaseScreen {
   static const String route = '/login_screen';
@@ -84,9 +84,9 @@ class _LoginPageState extends BaseScreenState<LoginScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            _emailInputField,
+            EmailInputField(_loginCubit),
             SizedBox(height: 20.h),
-            _passwordInputField,
+            PasswordInputField(_loginCubit),
             SizedBox(height: 20.h),
             _buildRememberMeArea,
             SizedBox(height: 32.h),
@@ -95,40 +95,9 @@ class _LoginPageState extends BaseScreenState<LoginScreen> {
         ),
       );
 
-  Widget get _emailInputField => BlocBuilder<LoginCubit, LoginState>(
-        bloc: _loginCubit,
-        buildWhen: (previous, current) =>
-            previous.emailError != current.emailError,
-        builder: (context, state) {
-          return LabelTextField(
-            controller: _loginCubit.emailController,
-            label: LocaleKeys.email.tr(),
-            hint: LocaleKeys.email_hint.tr(),
-            suffixIcon: const Icon(Icons.email_outlined),
-            inputType: TextInputType.emailAddress,
-            errors: state.emailError,
-          );
-        },
-      );
-
-  Widget get _passwordInputField => BlocBuilder<LoginCubit, LoginState>(
-        bloc: _loginCubit,
-        buildWhen: (previous, current) =>
-            previous.passwordError != current.passwordError,
-        builder: (context, state) {
-          return LabelTextField(
-            controller: _loginCubit.passwordController,
-            label: LocaleKeys.password.tr(),
-            hint: LocaleKeys.password_hint.tr(),
-            suffixIcon: const Icon(Icons.lock_outline),
-            errors: state.passwordError,
-          );
-        },
-      );
-
   Widget get _buildLoginButton => AppButton.primary(
         text: LocaleKeys.login.tr(),
-        onTap: _loginCubit.validateLogin,
+        onTap: _loginCubit.doLogin,
       );
 
   Widget get _buildRememberMeArea => Row(
@@ -201,7 +170,7 @@ class _LoginPageState extends BaseScreenState<LoginScreen> {
                 style: AppTextStyles.regular16,
               ),
               TextSpan(
-                text: LocaleKeys.login.tr(),
+                text: LocaleKeys.register.tr(),
                 style: AppTextStyles.regular16.copyWith(
                   color: AppColors.current.primary,
                 ),

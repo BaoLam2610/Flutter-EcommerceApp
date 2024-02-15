@@ -13,6 +13,7 @@ class LabelTextField extends StatelessWidget {
   final Widget? suffixIcon;
   final TextInputType? inputType;
   final String? errors;
+  final bool? obscureText;
   final void Function(PointerDownEvent)? onTapOutSide;
 
   const LabelTextField({
@@ -24,6 +25,7 @@ class LabelTextField extends StatelessWidget {
     this.controller,
     this.onChanged,
     this.errors,
+    this.obscureText,
     this.onTapOutSide,
   });
 
@@ -53,6 +55,7 @@ class LabelTextField extends StatelessWidget {
           )
         },
         TextFormField(
+          obscureText: obscureText ?? false,
           onTapOutside: onTapOutSide ?? (_) => FocusScope.of(context).unfocus(),
           onChanged: onChanged,
           controller: controller,
