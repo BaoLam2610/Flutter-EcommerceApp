@@ -8,15 +8,15 @@ import '../../../../../configs/themes/themes.dart';
 import '../../../../../core/bloc/bloc_state.dart';
 import '../../../../../core/extensions/extensions.dart';
 import '../../../../../core/screen/base_screen.dart';
-import '../../../../../core/widgets/checkbox/label_checkbox.dart';
 import '../../../../../core/widgets/widgets.dart';
 import '../../../../../gen/assets.gen.dart';
 import '../../../../../gen/locale_keys.g.dart';
 import '../../../domain/entities/login_info_entity.dart';
+import '../../widgets/email_input/email_input_field.dart';
+import '../../widgets/password_input/password_input_field.dart';
 import '../../widgets/social_card.dart';
 import 'bloc/login_cubit.dart';
-import 'widgets/email_input_field.dart';
-import 'widgets/password_input_field.dart';
+import 'widgets/remember_checkbox.dart';
 
 class LoginScreen extends BaseScreen {
   static const String route = '/login_screen';
@@ -33,7 +33,7 @@ class _LoginPageState extends BaseScreenState<LoginScreen> {
   @override
   void initState() {
     super.initState();
-    _loginCubit = inject<LoginCubit>();
+    _loginCubit = inject.get<LoginCubit>();
   }
 
   @override
@@ -101,9 +101,9 @@ class _LoginPageState extends BaseScreenState<LoginScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            EmailInputField(_loginCubit),
+            EmailInputField(),
             SizedBox(height: 20.h),
-            PasswordInputField(_loginCubit),
+            PasswordInputField(),
             SizedBox(height: 20.h),
             _buildRememberMeArea,
             SizedBox(height: 32.h),
@@ -119,16 +119,7 @@ class _LoginPageState extends BaseScreenState<LoginScreen> {
 
   Widget get _buildRememberMeArea => Row(
         children: [
-          BlocBuilder<LoginCubit, LoginState>(
-            bloc: _loginCubit,
-            buildWhen: (previous, current) =>
-                previous.isRememberMe != current.isRememberMe,
-            builder: (context, state) => LabelCheckbox(
-              label: LocaleKeys.remember_me.tr(),
-              isChecked: state.isRememberMe,
-              onChanged: (isChecked) => _loginCubit.onChangeRememberMe(),
-            ),
-          ),
+          RememberCheckbox(_loginCubit),
           const Spacer(),
           GestureDetector(
             onTap: _onForgotPasswordTextPressed,
