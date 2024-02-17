@@ -1,12 +1,12 @@
-import 'dart:convert';
+import 'dart:async';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
 
-import '../../../utils/logger.dart';
 import '../../constants/constants.dart';
 import '../data_state.dart';
 import 'model/data_response.dart';
+import 'model/network_exception.dart';
 
 class RestApiClient {
   static const String formUrlEncodedContentType =
@@ -48,7 +48,7 @@ class RestApiClient {
 
   Options get _options => Options(headers: {});
 
-  Future<dynamic> post(
+  Future<DataState> post(
     String path, {
     dynamic data,
     Map<String, dynamic>? queryParameters,
@@ -61,11 +61,11 @@ class RestApiClient {
         queryParameters: queryParameters,
       );
       if (response.statusCode == HttpStatus.ok) {
-        onSuccess(response);
-        return DataSuccess(response.data);
+        return onSuccess(response);
       }
-    } on DioException catch (error) {
-      return DataError(error);
+      return systemAppError;
+    } on DioException catch (e) {
+      return onError(e);
     }
   }
 
@@ -82,159 +82,59 @@ class RestApiClient {
         queryParameters: queryParameters,
       );
       if (response.statusCode == HttpStatus.ok) {
-        onSuccess(response);
-        return DataSuccess(response.data);
+        return onSuccess(response);
       }
-      return const DataSuccess(null);
-    } on DioException catch (error) {
-      return DataError(error);
+      return systemAppError;
+    } on DioException catch (e) {
+      return onError(e);
     }
   }
 
-  dynamic onSuccess(Response<dynamic> response) async {
-    // final data = response.data;
-    // Log.info('response: $data');
-
-    // final dataResponse = DataResponse.fromJson(data as Map<String, dynamic>);
-    // Log.info('json from response : $json');
-    // Log.info('data response : $dataResponse');
+  DataSuccess onSuccess(Response<dynamic> response) {
+    final data = response.data;
+    final dataResponse = DataResponse.fromJson(data as Map<String, dynamic>);
+    return DataSuccess(dataResponse.data);
   }
 
-// dynamic onError(DioException err) {
-//   switch (err.type) {
-//     case DioExceptionType.connectionTimeout:
-//     case DioExceptionType.sendTimeout:
-//     case DioExceptionType.receiveTimeout:
-//       return DataError();
-//     case DioExceptionType.badResponse:
-//       switch (err.response?.statusCode) {
-//         case 400:
-//           throw BadRequestException(err.requestOptions);
-//         case 401:
-//           throw UnauthorizedException(err.requestOptions);
-//         case 404:
-//           throw NotFoundException(err.requestOptions);
-//         case 409:
-//           throw ConflictException(err.requestOptions);
-//         case 500:
-//           throw InternalServerErrorException(err.requestOptions);
-//       }
-//       break;
-//     case DioExceptionType.cancel:
-//       break;
-//     case DioExceptionType.connectionError:
-//       throw NoInternetConnectionException(err.requestOptions);
-//     case DioExceptionType.badCertificate:
-//     case DioExceptionType.unknown:
-//       break;
-//   }
-// }
+  DataError get systemAppError => const DataError(
+        exception: AppSystemException(),
+      );
 
-/*DataError<dynamic> onError(DioException err) {
+  DataError onError(DioException err) {
     switch (err.type) {
       case DioExceptionType.connectionTimeout:
       case DioExceptionType.sendTimeout:
       case DioExceptionType.receiveTimeout:
-        throw TimeOutException(err.requestOptions);
+        return const DataError(
+          exception: ConnectionTimeOutException(),
+        );
       case DioExceptionType.badResponse:
         switch (err.response?.statusCode) {
           case 400:
-            throw BadRequestException(err.requestOptions);
-          case 401:
-            throw UnauthorizedException(err.requestOptions);
-          case 404:
-            throw NotFoundException(err.requestOptions);
-          case 409:
-            throw ConflictException(err.requestOptions);
-          case 500:
-            throw InternalServerErrorException(err.requestOptions);
-        }
-        break;
-      case DioExceptionType.cancel:
-        break;
-      case DioExceptionType.connectionError:
-        throw NoInternetConnectionException(err.requestOptions);
-      case DioExceptionType.badCertificate:
-      case DioExceptionType.unknown:
-        break;
-    }
-  }*/
-}
-
-/*
-
-class DioErrorInterceptor extends InterceptorsWrapper {
-  @override
-  void onError(DioException err, ErrorInterceptorHandler handler) {
-    showDialogError(err);
-    switch (err.type) {
-      case DioExceptionType.connectionTimeout:
-      case DioExceptionType.sendTimeout:
-      case DioExceptionType.receiveTimeout:
-        throw TimeOutException(err.requestOptions);
-      case DioExceptionType.badResponse:
-        switch (err.response?.statusCode) {
-          case 400:
-            throw BadRequestException(err.requestOptions);
-          case 401:
-            throw UnauthorizedException(err.requestOptions);
-          case 404:
-            throw NotFoundException(err.requestOptions);
-          case 409:
-            throw ConflictException(err.requestOptions);
-          case 500:
-            throw InternalServerErrorException(err.requestOptions);
-        }
-        break;
-      case DioExceptionType.cancel:
-        break;
-      case DioExceptionType.connectionError:
-        throw NoInternetConnectionException(err.requestOptions);
-      case DioExceptionType.badCertificate:
-      case DioExceptionType.unknown:
-        break;
-    }
-    return handler.next(err);
-  }
-
-  void showDialogError(DioException err) {
-    switch (err.type) {
-      case DioExceptionType.badResponse:
-        switch (err.response?.statusCode) {
-          case 401:
-            if (UserUtil.isLogin) {
-              showDialogOut();
-            }
-            break;
-          case 500:
-            showDialogAnother(
-              LocaleKeys.server_error.tr(),
+            return DataError(
+              exception: BadRequestException(err),
             );
+          case 401:
+            return const DataError(
+              exception: UnauthorizedException(),
+            );
+          case 404:
+            return const DataError(
+              exception: NotFoundException(),
+            );
+          case 500:
+            return const DataError(
+              exception: InternalServerErrorException(),
+            );
+          default:
+            return systemAppError;
         }
-        break;
       case DioExceptionType.connectionError:
-        showDialogAnother(
-          LocaleKeys.connection_error.tr(),
+        return const DataError(
+          exception: NoInternetConnectionException(),
         );
-        break;
-      case DioExceptionType.badCertificate:
-      case DioExceptionType.unknown:
-        showDialogAnother(
-          LocaleKeys.server_error.tr(),
-        );
-
-        break;
-      case DioExceptionType.connectionTimeout:
-      case DioExceptionType.sendTimeout:
-      case DioExceptionType.receiveTimeout:
-        showDialogAnother(
-          LocaleKeys.server_error.tr(),
-        );
-
-        break;
       default:
-        break;
+        return systemAppError;
     }
   }
 }
-*/
