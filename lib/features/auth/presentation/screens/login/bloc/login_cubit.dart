@@ -91,4 +91,10 @@ class LoginCubit extends BaseCubit<LoginState> {
       },
     );
   }
+
+  void onChangeRememberMe() {
+    emit(state.copyWith(
+      isRememberMe: !state.isRememberMe,
+    ));
+  }
 }

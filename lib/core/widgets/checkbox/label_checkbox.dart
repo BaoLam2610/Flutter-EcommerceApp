@@ -22,34 +22,36 @@ class LabelCheckbox extends StatefulWidget {
 class _LabelCheckboxState extends State<LabelCheckbox> {
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        SizedBox(
-          width: 24.r,
-          height: 24.r,
-          child: Checkbox(
-            value: widget.isChecked,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(4.r),
+    return GestureDetector(
+      onTap: () => widget.onChanged?.call(!widget.isChecked),
+      child: Row(
+        children: [
+          SizedBox(
+            width: 24.r,
+            height: 24.r,
+            child: Checkbox(
+              value: widget.isChecked,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(4.r),
+              ),
+              side: BorderSide(
+                color: AppColors.current.secondaryText,
+              ),
+              onChanged: (isChecked) =>
+                  widget.onChanged?.call(!widget.isChecked),
             ),
-            side: BorderSide(
+          ),
+          SizedBox(
+            width: 4.w,
+          ),
+          Text(
+            widget.label,
+            style: AppTextStyles.regular14.copyWith(
               color: AppColors.current.secondaryText,
             ),
-            onChanged: (isChecked) {
-              widget.onChanged?.call(isChecked ?? false);
-            },
           ),
-        ),
-        SizedBox(
-          width: 4.w,
-        ),
-        Text(
-          widget.label,
-          style: AppTextStyles.regular14.copyWith(
-            color: AppColors.current.secondaryText,
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

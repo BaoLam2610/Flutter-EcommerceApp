@@ -6,10 +6,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../configs/di/injection_container.dart';
 import '../../../../../configs/themes/themes.dart';
 import '../../../../../core/bloc/bloc_state.dart';
-import '../../../../../core/constants/icons.dart';
 import '../../../../../core/extensions/extensions.dart';
 import '../../../../../core/screen/base_screen.dart';
+import '../../../../../core/widgets/checkbox/label_checkbox.dart';
 import '../../../../../core/widgets/widgets.dart';
+import '../../../../../gen/assets.gen.dart';
 import '../../../../../gen/locale_keys.g.dart';
 import '../../../domain/entities/login_info_entity.dart';
 import '../../widgets/social_card.dart';
@@ -28,7 +29,6 @@ class LoginScreen extends BaseScreen {
 
 class _LoginPageState extends BaseScreenState<LoginScreen> {
   late LoginCubit _loginCubit;
-  bool isRememberChecked = false;
 
   @override
   void initState() {
@@ -119,34 +119,34 @@ class _LoginPageState extends BaseScreenState<LoginScreen> {
 
   Widget get _buildRememberMeArea => Row(
         children: [
-          SizedBox(
-            width: 24.r,
-            height: 24.r,
-            child: Checkbox(
-              value: isRememberChecked,
-              onChanged: (isChecked) {
-                setState(() {
-                  isRememberChecked = isChecked ?? false;
-                });
-              },
-            ),
-          ),
-          SizedBox(
-            width: 4.w,
-          ),
-          Text(
-            LocaleKeys.remember_me.tr(),
-            style: AppTextStyles.regular14.copyWith(
-              color: AppColors.current.secondaryText,
+          BlocBuilder<LoginCubit, LoginState>(
+            bloc: _loginCubit,
+            buildWhen: (previous, current) =>
+                previous.isRememberMe != current.isRememberMe,
+            builder: (context, state) => LabelCheckbox(
+              label: LocaleKeys.remember_me.tr(),
+              isChecked: state.isRememberMe,
+              onChanged: (isChecked) => _loginCubit.onChangeRememberMe(),
             ),
           ),
           const Spacer(),
           GestureDetector(
             onTap: _onForgotPasswordTextPressed,
-            child: Text(
-              LocaleKeys.forgot_password.tr(),
-              style: AppTextStyles.regular14.copyWith(
-                color: AppColors.current.secondaryText,
+            child: Container(
+              padding: EdgeInsets.only(bottom: 0.h),
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(
+                    color: AppColors.current.secondaryText,
+                    width: 1.h,
+                  ),
+                ),
+              ),
+              child: Text(
+                LocaleKeys.forgot_password.tr(),
+                style: AppTextStyles.regular14.copyWith(
+                  color: AppColors.current.secondaryText,
+                ),
               ),
             ),
           ),
@@ -169,11 +169,11 @@ class _LoginPageState extends BaseScreenState<LoginScreen> {
   Widget get _buildLoginWithSocial => Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const SocialCard(icon: ic_google),
+          SocialCard(icon: Assets.icons.googleIcon.path),
           SizedBox(width: 10.w),
-          const SocialCard(icon: ic_facebook),
+          SocialCard(icon: Assets.icons.facebook2.path),
           SizedBox(width: 10.w),
-          const SocialCard(icon: ic_twitter),
+          SocialCard(icon: Assets.icons.twitter.path),
         ],
       );
 

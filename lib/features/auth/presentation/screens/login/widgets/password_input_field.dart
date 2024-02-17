@@ -35,7 +35,7 @@ class PasswordInputField extends StatelessWidget {
 
   Widget _buildSuffixIcon(bool isShowPassword) => GestureDetector(
         onTap: _loginCubit.onChangeShowPassword,
-        child: isShowPassword
+        child: !isShowPassword
             ? Assets.icons.eyeOn.svg()
             : Assets.icons.eyeOff.svg(),
       );
