@@ -1,12 +1,13 @@
 part of 'injection_container.dart';
 
 void provideBloc() {
-  sl.registerFactory(() => GlobalAppCubit());
-  sl.registerFactory(() => IntroCubit());
-  sl.registerFactory(
+  inject.registerFactory(() => GlobalAppCubit());
+  inject.registerFactory(() => IntroCubit());
+  inject.registerFactory(
     () => LoginCubit(
-      sl<ValidateEmailUseCase>(),
-      sl<ValidatePasswordUseCase>(),
+      inject<ValidateEmailUseCase>(),
+      inject<ValidatePasswordUseCase>(),
+      inject<LoginUseCase>(),
     ),
   );
 }

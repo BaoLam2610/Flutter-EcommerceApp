@@ -12,7 +12,7 @@ import '../../../utils/logger.dart';
 part 'global_app_state.dart';
 
 class GlobalAppCubit extends Cubit<GlobalAppState> {
-  final SharedPreferences _prefs = sl.get<SharedPreferences>();
+  final SharedPreferences _prefs = inject.get<SharedPreferences>();
   late Future<void> Function(Locale locale) _contextSetLocale;
 
   GlobalAppCubit() : super(const GlobalAppState());

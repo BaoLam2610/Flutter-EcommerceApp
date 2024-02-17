@@ -29,7 +29,7 @@ class _IntroScreenState extends BaseScreenState<IntroScreen> {
 
   @override
   void initState() {
-    _cubit = sl.get<IntroCubit>();
+    _cubit = inject.get<IntroCubit>();
     super.initState();
   }
 

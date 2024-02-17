@@ -13,7 +13,7 @@ class AppProvider extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<IntroCubit>(
-          create: (context) => sl.get<IntroCubit>(),
+          create: (context) => inject.get<IntroCubit>(),
         ),
       ],
       child: child,

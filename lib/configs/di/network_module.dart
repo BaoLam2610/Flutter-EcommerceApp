@@ -5,5 +5,5 @@ void provideRestApiClient() {
     baseUrl: ApiList.baseUrl,
     interceptors: [LoggerInterceptor()],
   );
-  sl.registerLazySingleton(() => apiClient);
+  inject.registerLazySingleton(() => apiClient);
 }
