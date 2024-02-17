@@ -1,9 +1,12 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
 
+import '../../../utils/logger.dart';
 import '../../constants/constants.dart';
 import '../data_state.dart';
+import 'model/data_response.dart';
 
 class RestApiClient {
   static const String formUrlEncodedContentType =
@@ -43,7 +46,7 @@ class RestApiClient {
     return Dio(options);
   }
 
-  Options get _options => Options(headers: {"application": "json"});
+  Options get _options => Options(headers: {});
 
   Future<dynamic> post(
     String path, {
@@ -58,14 +61,75 @@ class RestApiClient {
         queryParameters: queryParameters,
       );
       if (response.statusCode == HttpStatus.ok) {
+        onSuccess(response);
         return DataSuccess(response.data);
       }
-    } on DioException catch (e) {
-
+    } on DioException catch (error) {
+      return DataError(error);
     }
   }
 
-  /*DataError<dynamic> onError(DioException err) {
+  Future<dynamic> get(
+    String path, {
+    dynamic data,
+    Map<String, dynamic>? queryParameters,
+  }) async {
+    try {
+      final response = await _dio.get(
+        path,
+        options: _options,
+        data: data,
+        queryParameters: queryParameters,
+      );
+      if (response.statusCode == HttpStatus.ok) {
+        onSuccess(response);
+        return DataSuccess(response.data);
+      }
+    } on DioException catch (error) {
+      return DataError(error);
+    }
+  }
+
+  dynamic onSuccess(Response<dynamic> response) async {
+    final data = response.data;
+    Log.info('response: $data');
+
+    final dataResponse = DataResponse.fromJson(data as Map<String, dynamic>);
+    Log.info('json from response : $json');
+    Log.info('data response : $dataResponse');
+  }
+
+// dynamic onError(DioException err) {
+//   switch (err.type) {
+//     case DioExceptionType.connectionTimeout:
+//     case DioExceptionType.sendTimeout:
+//     case DioExceptionType.receiveTimeout:
+//       return DataError();
+//     case DioExceptionType.badResponse:
+//       switch (err.response?.statusCode) {
+//         case 400:
+//           throw BadRequestException(err.requestOptions);
+//         case 401:
+//           throw UnauthorizedException(err.requestOptions);
+//         case 404:
+//           throw NotFoundException(err.requestOptions);
+//         case 409:
+//           throw ConflictException(err.requestOptions);
+//         case 500:
+//           throw InternalServerErrorException(err.requestOptions);
+//       }
+//       break;
+//     case DioExceptionType.cancel:
+//       break;
+//     case DioExceptionType.connectionError:
+//       throw NoInternetConnectionException(err.requestOptions);
+//     case DioExceptionType.badCertificate:
+//     case DioExceptionType.unknown:
+//       break;
+//   }
+// }
+
+/*DataError<dynamic> onError(DioException err) {
     switch (err.type) {
       case DioExceptionType.connectionTimeout:
       case DioExceptionType.sendTimeout:
@@ -173,4 +237,3 @@ class DioErrorInterceptor extends InterceptorsWrapper {
   }
 }
 */
-

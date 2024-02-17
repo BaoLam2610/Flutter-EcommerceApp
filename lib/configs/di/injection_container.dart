@@ -2,7 +2,7 @@ import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../core/resources/api/rest_api_client.dart';
-import '../../core/resources/api_list.dart';
+import '../../core/resources/api/api_list.dart';
 import '../../core/usecases/validate/validate_email.dart';
 import '../../core/usecases/validate/validate_password.dart';
 import '../../features/app/bloc/global_app_cubit.dart';
