@@ -1,14 +1,17 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../configs/di/injection_container.dart';
 import '../../../../../configs/themes/themes.dart';
+import '../../../../../core/bloc/bloc_state.dart';
 import '../../../../../core/constants/icons.dart';
 import '../../../../../core/extensions/extensions.dart';
 import '../../../../../core/screen/base_screen.dart';
 import '../../../../../core/widgets/widgets.dart';
 import '../../../../../gen/locale_keys.g.dart';
+import '../../../domain/entities/login_info_entity.dart';
 import '../../widgets/social_card.dart';
 import 'bloc/login_cubit.dart';
 import 'widgets/email_input_field.dart';
@@ -41,24 +44,41 @@ class _LoginPageState extends BaseScreenState<LoginScreen> {
     );
   }
 
-  Widget get _buildBody => SizedBox(
-        height: context.height,
-        width: context.width,
-        child: ScrollColumnExpandable(
-          children: [
-            Expanded(
-              flex: 1,
-              child: _buildTitle,
-            ),
-            Expanded(
-              flex: 3,
-              child: _buildLoginInputArea,
-            ),
-            Expanded(
-              flex: 1,
-              child: _buildFooterArea,
-            ),
-          ],
+  Widget get _buildBody => BlocListener<LoginCubit, LoginState>(
+        bloc: _loginCubit,
+        listenWhen: (previous, current) => previous.status != current.status,
+        listener: (context, state) {
+          if (state.status is Loading) {
+
+          }
+
+          if (state.status is Success<LoginInfoEntity>) {
+            final data = state.status as Success<LoginInfoEntity>;
+          }
+
+          if (state.status is Error) {
+            final error = state.status as Error;
+          }
+        },
+        child: SizedBox(
+          height: context.height,
+          width: context.width,
+          child: ScrollColumnExpandable(
+            children: [
+              Expanded(
+                flex: 1,
+                child: _buildTitle,
+              ),
+              Expanded(
+                flex: 3,
+                child: _buildLoginInputArea,
+              ),
+              Expanded(
+                flex: 1,
+                child: _buildFooterArea,
+              ),
+            ],
+          ),
         ),
       );
 
