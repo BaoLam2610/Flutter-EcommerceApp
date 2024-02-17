@@ -20,19 +20,25 @@ class BadRequestException implements Exception {
 
   @override
   String toString() {
-    if (exception.response?.data != null) {
-      final json = exception.response?.data as Map<String, dynamic>;
-      final response = BaseResponse.fromJson(json);
-      dynamic messageError;
-      if (response.error is String) {
-        messageError = response.error;
-      }
-      if (response.error is List<dynamic>) {
-        messageError = response.error.map((e) => e.toString()).toList();
+    String messageError = LocaleKeys.error_system.tr();
+    try {
+      if (exception.response?.data != null) {
+        final json = exception.response?.data as Map<String, dynamic>;
+        final response = BaseResponse.fromJson(json);
+
+        if (response.error is String) {
+          messageError = response.error;
+        }
+        if (response.error is List<dynamic>) {
+          messageError =
+              response.error.map((e) => e.toString()).toList().join(", ");
+        }
+        return messageError;
       }
       return messageError;
+    } catch (e) {
+      return messageError;
     }
-    return LocaleKeys.error_system.tr();
   }
 }
 

@@ -8,7 +8,7 @@ import '../../../../../configs/themes/text_themes.dart';
 import '../../../../../core/bloc/bloc_state.dart';
 import '../../../../../core/constants/strings.dart';
 import '../../../../../core/extensions/widget_extensions.dart';
-import '../../widgets/label_text_field.dart';
+import '../../../../../core/widgets/text_field/label_text_field.dart';
 import 'bloc/forgot_password_bloc.dart';
 
 class ForgotPasswordScreen extends StatefulHookWidget {

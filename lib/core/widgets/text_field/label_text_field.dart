@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../configs/themes/themes.dart';
-import '../../../../core/extensions/extensions.dart';
-import '../../../../gen/assets.gen.dart';
+import '../../../configs/themes/themes.dart';
+import '../../../gen/assets.gen.dart';
+import '../../extensions/extensions.dart';
 
 class LabelTextField extends StatelessWidget {
   final Function(String text)? onChanged;

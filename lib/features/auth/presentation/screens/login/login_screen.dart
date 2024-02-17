@@ -48,17 +48,14 @@ class _LoginPageState extends BaseScreenState<LoginScreen> {
         bloc: _loginCubit,
         listenWhen: (previous, current) => previous.status != current.status,
         listener: (context, state) {
-          if (state.status is Loading) {
-
-          }
-
-          if (state.status is Success<LoginInfoEntity>) {
-            final data = state.status as Success<LoginInfoEntity>;
-          }
-
-          if (state.status is Error) {
-            final error = state.status as Error;
-          }
+          state.status.observeData<LoginInfoEntity>(
+            context,
+            onSuccess: (data, message) {
+              /*
+              * Navigate to home screen
+              * */
+            },
+          );
         },
         child: SizedBox(
           height: context.height,

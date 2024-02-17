@@ -2,9 +2,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../../core/widgets/widgets.dart';
 import '../../../../../../gen/assets.gen.dart';
 import '../../../../../../gen/locale_keys.g.dart';
-import '../../../widgets/label_text_field.dart';
 import '../bloc/login_cubit.dart';
 
 class PasswordInputField extends StatelessWidget {
