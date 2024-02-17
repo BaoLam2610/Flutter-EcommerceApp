@@ -1,24 +1,22 @@
-import 'package:equatable/equatable.dart';
+import '../../domain/entities/user_entity.dart';
+import '../../domain/entities/user_type.dart';
 
-class UserDto extends Equatable {
-  final String id;
-  final String email;
-  final String userType;
+class UserDto extends UserEntity {
+  UserDto({
+    String? id,
+    String? email,
+    String? userType,
+  }) : super(
+          id: id ?? '',
+          email: email ?? '',
+          userType: userType.userType,
+        );
 
-  const UserDto({
-    required this.id,
-    required this.email,
-    required this.userType,
-  });
-
-  factory UserDto.fromJson(Map<String, dynamic> map) {
+  factory UserDto.fromJson(Map<String, dynamic> json) {
     return UserDto(
-      id: map['id'] as String,
-      email: map['email'] as String,
-      userType: map['userType'] as String,
+      id: json['id'],
+      email: json['email'],
+      userType: json['userType'],
     );
   }
-
-  @override
-  List<Object> get props => [id, email, userType];
 }

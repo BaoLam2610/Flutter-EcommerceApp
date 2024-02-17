@@ -1,6 +1,7 @@
 part of 'injection_container.dart';
 
 void provideUseCase() {
-  sl.registerLazySingleton(() => ValidateEmailUseCase());
-  sl.registerLazySingleton(() => ValidatePasswordUseCase());
+  inject.registerLazySingleton(() => ValidateEmailUseCase());
+  inject.registerLazySingleton(() => ValidatePasswordUseCase());
+  inject.registerLazySingleton(() => LoginUseCase(inject.get<AuthRepository>()));
 }

@@ -30,7 +30,7 @@ class _LoginPageState extends BaseScreenState<LoginScreen> {
   @override
   void initState() {
     super.initState();
-    _loginCubit = sl<LoginCubit>();
+    _loginCubit = inject<LoginCubit>();
   }
 
   @override
