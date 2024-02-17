@@ -69,7 +69,7 @@ class RestApiClient {
     }
   }
 
-  Future<dynamic> get(
+  Future<DataState> get(
     String path, {
     dynamic data,
     Map<String, dynamic>? queryParameters,
@@ -85,18 +85,19 @@ class RestApiClient {
         onSuccess(response);
         return DataSuccess(response.data);
       }
+      return const DataSuccess(null);
     } on DioException catch (error) {
       return DataError(error);
     }
   }
 
   dynamic onSuccess(Response<dynamic> response) async {
-    final data = response.data;
-    Log.info('response: $data');
+    // final data = response.data;
+    // Log.info('response: $data');
 
-    final dataResponse = DataResponse.fromJson(data as Map<String, dynamic>);
-    Log.info('json from response : $json');
-    Log.info('data response : $dataResponse');
+    // final dataResponse = DataResponse.fromJson(data as Map<String, dynamic>);
+    // Log.info('json from response : $json');
+    // Log.info('data response : $dataResponse');
   }
 
 // dynamic onError(DioException err) {

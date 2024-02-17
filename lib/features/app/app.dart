@@ -25,7 +25,7 @@ class _BLMarketAppState extends State<BLMarketApp> {
   @override
   void initState() {
     super.initState();
-    _globalAppCubit = sl.get<GlobalAppCubit>();
+    _globalAppCubit = inject.get<GlobalAppCubit>();
   }
 
   @override
