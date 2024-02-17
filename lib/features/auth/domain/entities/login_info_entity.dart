@@ -13,4 +13,9 @@ class LoginInfoEntity extends Equatable {
 
   @override
   List<Object?> get props => [user, accessToken];
+
+  @override
+  String toString() {
+    return 'LoginInfoEntity{user: $user, accessToken: $accessToken}';
+  }
 }

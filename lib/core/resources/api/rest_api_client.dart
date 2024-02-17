@@ -48,8 +48,9 @@ class RestApiClient {
 
   Options get _options => Options(headers: {});
 
-  Future<DataState> post(
+  Future<DataState<T>> post<T>(
     String path, {
+    required void Function(Map<String, dynamic> json) create,
     dynamic data,
     Map<String, dynamic>? queryParameters,
   }) async {
@@ -61,16 +62,17 @@ class RestApiClient {
         queryParameters: queryParameters,
       );
       if (response.statusCode == HttpStatus.ok) {
-        return onSuccess(response);
+        return _onSuccess(response, create);
       }
-      return systemAppError;
+      return _systemAppError();
     } on DioException catch (e) {
-      return onError(e);
+      return _onError(e);
     }
   }
 
-  Future<DataState> get(
+  Future<DataState<T>> get<T>(
     String path, {
+    required void Function(Map<String, dynamic> json) create,
     dynamic data,
     Map<String, dynamic>? queryParameters,
   }) async {
@@ -82,25 +84,34 @@ class RestApiClient {
         queryParameters: queryParameters,
       );
       if (response.statusCode == HttpStatus.ok) {
-        return onSuccess(response);
+        return _onSuccess(response, create);
       }
-      return systemAppError;
+      return _systemAppError();
     } on DioException catch (e) {
-      return onError(e);
+      return _onError(e);
     }
   }
+}
 
-  DataSuccess onSuccess(Response<dynamic> response) {
+extension RestApiClientExtension on RestApiClient {
+  DataSuccess<T> _onSuccess<T>(
+      Response<dynamic> response,
+      Function(Map<String, dynamic>) create,
+      ) {
     final data = response.data;
-    final dataResponse = DataResponse.fromJson(data as Map<String, dynamic>);
-    return DataSuccess(dataResponse.data);
+    final dataResponse =
+    DataResponse.fromJson(data as Map<String, dynamic>, create);
+    return DataSuccess<T>(
+      data: dataResponse.data,
+      message: dataResponse.message,
+    );
   }
 
-  DataError get systemAppError => const DataError(
-        exception: AppSystemException(),
-      );
+  DataError<T> _systemAppError<T>() => const DataError(
+    exception: AppSystemException(),
+  );
 
-  DataError onError(DioException err) {
+  DataError<T> _onError<T>(DioException err) {
     switch (err.type) {
       case DioExceptionType.connectionTimeout:
       case DioExceptionType.sendTimeout:
@@ -127,14 +138,14 @@ class RestApiClient {
               exception: InternalServerErrorException(),
             );
           default:
-            return systemAppError;
+            return _systemAppError();
         }
       case DioExceptionType.connectionError:
         return const DataError(
           exception: NoInternetConnectionException(),
         );
       default:
-        return systemAppError;
+        return _systemAppError();
     }
   }
 }

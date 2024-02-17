@@ -1,20 +1,18 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../../core/bloc/base_bloc.dart';
 import '../../../../../../core/bloc/bloc_state.dart';
-import '../../../../../../core/resources/api/model/data_response.dart';
-import '../../../../../../core/resources/data_state.dart';
 import '../../../../../../core/usecases/validate/validate_email.dart';
 import '../../../../../../core/usecases/validate/validate_password.dart';
-import '../../../../../../utils/logger.dart';
 import '../../../../data/dto/login_request.dart';
+import '../../../../domain/entities/login_info_entity.dart';
 import '../../../../domain/entities/user_type.dart';
 import '../../../../domain/usecases/login_usecase.dart';
 
 part 'login_state.dart';
 
-class LoginCubit extends Cubit<LoginState> {
+class LoginCubit extends BaseCubit<LoginState> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -69,6 +67,8 @@ class LoginCubit extends Cubit<LoginState> {
       return;
     }
 
+    emit(state.copyWith(status: Loading()));
+
     final result = await _loginUseCase.call(
       params: LoginRequest(
         email: emailController.text,
@@ -77,12 +77,18 @@ class LoginCubit extends Cubit<LoginState> {
       ),
     );
 
-    if (result is DataSuccess) {
-      final dataResponse = DataResponse.fromJson(result.data as Map<String, dynamic>);
-      Log.info('lamnb success : $dataResponse');
-    } else if(result is DataError) {
-
-      Log.info('lamnb error : ${result.error?.message}');
-    }
+    callApi<LoginInfoEntity>(
+      result,
+      onSuccess: (successStatus) {
+        emit(
+          state.copyWith(status: successStatus),
+        );
+      },
+      onError: (errorStatus) {
+        emit(
+          state.copyWith(status: errorStatus),
+        );
+      },
+    );
   }
 }

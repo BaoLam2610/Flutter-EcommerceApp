@@ -1,15 +1,18 @@
 class BaseResponse {
   final dynamic error;
+  final String? message;
   final bool isSuccess;
 
   const BaseResponse({
     this.error,
+    this.message,
     required this.isSuccess,
   });
 
   factory BaseResponse.fromJson(Map<String, dynamic> json) {
     return BaseResponse(
       isSuccess: json["isSuccess"],
+      message: json['message'],
       error: json["error"] ?? '',
     );
   }
@@ -21,20 +24,18 @@ class DataResponse extends BaseResponse {
   DataResponse({
     this.data,
     super.error,
+    super.message,
     required super.isSuccess,
   });
 
   factory DataResponse.fromJson(
     Map<String, dynamic> json,
+    Function(Map<String, dynamic>) create,
   ) =>
       DataResponse(
         isSuccess: json["isSuccess"],
+        message: json['message'],
         error: json["error"] ?? '',
-        data: json['data'],
+        data: create(json['data']),
       );
-
-  @override
-  String toString() {
-    return 'DataResponse{isSuccess: ${super.isSuccess}, data: $data, error: ${super.error}';
-  }
 }

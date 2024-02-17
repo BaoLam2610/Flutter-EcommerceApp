@@ -12,15 +12,24 @@ class BaseBloc<Event extends BlocEvent, State extends BlocState>
 class BaseCubit<S> extends Cubit<S> {
   BaseCubit(super.initialState);
 
-  void callApi(
+  void callApi<T>(
     DataState result, {
-    void Function(dynamic data)? onSuccess,
-    void Function(String error)? onError,
+    void Function(Success<T> successStatus)? onSuccess,
+    void Function(Error errorStatus)? onError,
   }) {
-    if (result is DataSuccess) {
-      onSuccess?.call(result.data);
+    if (result is DataSuccess<T>) {
+      onSuccess?.call(
+        Success(
+          data: result.data,
+          message: result.message,
+        ),
+      );
     } else if (result is DataError) {
-      onError?.call(result.exception.toString());
+      onError?.call(
+        Error(
+          message: result.exception.toString(),
+        ),
+      );
     }
   }
 }
