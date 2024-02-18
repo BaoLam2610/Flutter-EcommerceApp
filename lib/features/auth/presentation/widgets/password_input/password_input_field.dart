@@ -2,16 +2,26 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../configs/di/injection_container.dart';
 import '../../../../../core/widgets/widgets.dart';
 import '../../../../../gen/assets.gen.dart';
 import '../../../../../gen/locale_keys.g.dart';
 import 'bloc/password_input_cubit.dart';
 
-class PasswordInputField extends StatelessWidget {
-  final PasswordInputCubit _cubit = inject.get<PasswordInputCubit>();
+class PasswordInputField extends StatefulWidget {
+  const PasswordInputField({super.key});
 
-  PasswordInputField({super.key});
+  @override
+  State<PasswordInputField> createState() => _PasswordInputFieldState();
+}
+
+class _PasswordInputFieldState extends State<PasswordInputField> {
+  late PasswordInputCubit _cubit;
+
+  @override
+  void initState() {
+    super.initState();
+    _cubit = ReadContext(context).read<PasswordInputCubit>();
+  }
 
   @override
   Widget build(BuildContext context) {

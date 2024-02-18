@@ -9,7 +9,6 @@ import '../../../configs/routes/routes.dart';
 import '../../../configs/themes/themes.dart';
 import '../../../core/constants/constants.dart';
 import '../../../gen/codegen_loader.g.dart';
-import '../../splash/presentation/screens/splash_screen.dart';
 import 'bloc/global_app_cubit.dart';
 
 class BLMarketApp extends StatefulWidget {
@@ -62,7 +61,7 @@ class _BLMarketAppState extends State<BLMarketApp> {
           supportedLocales: context.supportedLocales,
           locale: context.locale,
           routes: AppRoutes.routes,
-          initialRoute: SplashScreen.route,
+          initialRoute: AppRoutes.splashRoute,
         ),
       );
 }

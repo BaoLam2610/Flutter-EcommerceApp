@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../configs/routes/routes.dart';
 import '../../../../core/constants/constants.dart';
 import '../../../../core/extensions/extensions.dart';
 import '../../../../gen/assets.gen.dart';
-import '../../../intro/presentation/screens/intro_screen.dart';
 
 class SplashScreen extends StatefulWidget {
-  static const String route = '/';
-
   const SplashScreen({super.key});
 
   @override
@@ -57,7 +55,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(
       AppDurations.delaySplash,
       () {
-        context.navigator.pushReplacementNamed(IntroScreen.route);
+        context.navigator.pushReplacementNamed(AppRoutes.introRoute);
       },
     );
   }

@@ -2,8 +2,8 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../../../core/usecases/validate/validate_email.dart';
 import '../../../../../../configs/di/injection_container.dart';
+import '../../../../../app/domain/usecases/validate/validate_email.dart';
 
 part 'email_input_state.dart';
 

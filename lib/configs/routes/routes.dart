@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 
-import '../../features/auth/presentation/screens/login/login_screen.dart';
-import '../../features/intro/presentation/screens/intro_screen.dart';
+import '../../features/auth/presentation/screens/login/login_provider.dart';
+import '../../features/intro/presentation/screens/intro_provider.dart';
 import '../../features/splash/presentation/screens/splash_screen.dart';
 
 class AppRoutes {
+  const AppRoutes._();
+
+  static const String splashRoute = '/';
+  static const String introRoute = '/intro';
+  static const String loginRoute = '/login';
+
   static Map<String, Widget Function(BuildContext)> routes = {
-    SplashScreen.route: (_) => const SplashScreen(),
-    IntroScreen.route: (_) => const IntroScreen(),
-    LoginScreen.route: (_) => const LoginScreen(),
+    splashRoute: (_) => const SplashScreen(),
+    introRoute: (_) => const IntroProvider(),
+    loginRoute: (_) => const LoginProvider(),
   };
 }

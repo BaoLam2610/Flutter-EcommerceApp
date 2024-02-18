@@ -58,7 +58,7 @@ extension BlocStateExtension on BlocState {
     } else if (this is Error) {
       final error = this as Error;
       AppLoading.hideLoading();
-      AppDialog.showConfirmDialog(context: context, content: error.message);
+      AppDialog.showOkDialog(context: context, content: error.message);
       onError?.call(error.message);
     } else if (this is Loading) {
       AppLoading.showLoading();

@@ -3,22 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../configs/di/injection_container.dart';
-import '../../../../configs/themes/app_colors.dart';
-import '../../../../configs/themes/app_text_styles.dart';
+import '../../../../configs/routes/routes.dart';
+import '../../../../configs/themes/themes.dart';
 import '../../../../core/constants/constants.dart';
-import '../../../../core/constants/durations.dart';
-import '../../../../core/constants/strings.dart';
 import '../../../../core/extensions/widget_extensions.dart';
 import '../../../../core/screen/base_screen.dart';
 import '../../../../core/widgets/button/app_button.dart';
 import '../../../../gen/locale_keys.g.dart';
-import '../../../auth/presentation/screens/login/login_screen.dart';
 import 'bloc/intro_cubit.dart';
 
 class IntroScreen extends BaseScreen {
-  static const String route = '/intro_screen';
-
   const IntroScreen({super.key});
 
   @override
@@ -30,7 +24,7 @@ class _IntroScreenState extends BaseScreenState<IntroScreen> {
 
   @override
   void initState() {
-    _cubit = inject.get<IntroCubit>();
+    _cubit = ReadContext(context).read<IntroCubit>();
     super.initState();
   }
 
@@ -43,7 +37,6 @@ class _IntroScreenState extends BaseScreenState<IntroScreen> {
   }
 
   Widget get _buildBody => BlocBuilder<IntroCubit, IntroState>(
-        bloc: _cubit,
         buildWhen: (previous, current) =>
             previous.currentIndex != current.currentIndex,
         builder: (context, state) => Column(
@@ -144,6 +137,6 @@ class _IntroScreenState extends BaseScreenState<IntroScreen> {
       );
 
   void _onButtonPressed() {
-    context.navigator.pushReplacementNamed(LoginScreen.route);
+    context.navigator.pushReplacementNamed(AppRoutes.loginRoute);
   }
 }

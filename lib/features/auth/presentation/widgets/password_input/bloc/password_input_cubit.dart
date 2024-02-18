@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../configs/di/injection_container.dart';
-import '../../../../../../core/usecases/validate/validate_password.dart';
+import '../../../../../app/domain/usecases/validate/validate_password.dart';
 
 part 'password_input_state.dart';
 

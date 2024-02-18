@@ -8,10 +8,21 @@ import '../../../../../gen/assets.gen.dart';
 import '../../../../../gen/locale_keys.g.dart';
 import 'bloc/email_input_cubit.dart';
 
-class EmailInputField extends StatelessWidget {
-  final EmailInputCubit _cubit = inject.get<EmailInputCubit>();
+class EmailInputField extends StatefulWidget {
+  const EmailInputField({super.key});
 
-  EmailInputField({super.key});
+  @override
+  State<EmailInputField> createState() => _EmailInputFieldState();
+}
+
+class _EmailInputFieldState extends State<EmailInputField> {
+  late EmailInputCubit _cubit;
+
+  @override
+  void initState() {
+    super.initState();
+    _cubit = ReadContext(context).read<EmailInputCubit>();
+  }
 
   @override
   Widget build(BuildContext context) {

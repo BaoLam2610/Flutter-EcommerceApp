@@ -1,4 +1,6 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../configs/di/injection_container.dart';
 import '../../../../../../core/bloc/base_bloc.dart';
@@ -14,11 +16,15 @@ part 'login_state.dart';
 
 class LoginCubit extends BaseCubit<LoginState> {
   final LoginUseCase _loginUseCase = inject.get<LoginUseCase>();
-  final EmailInputCubit _emailInputCubit = inject.get<EmailInputCubit>();
-  final PasswordInputCubit _passwordInputCubit =
-      inject.get<PasswordInputCubit>();
+  late EmailInputCubit _emailInputCubit;
+  late PasswordInputCubit _passwordInputCubit;
 
   LoginCubit() : super(LoginState(status: Initialize()));
+
+  void init(BuildContext context) {
+    _emailInputCubit = ReadContext(context).read<EmailInputCubit>();
+    _passwordInputCubit = ReadContext(context).read<PasswordInputCubit>();
+  }
 
   Future<bool> _validForm() async {
     final validEmail = await _emailInputCubit.validateEmail();

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../configs/di/injection_container.dart';
 import '../../../../../configs/themes/themes.dart';
 import '../../../../../core/bloc/bloc_state.dart';
 import '../../../../../core/extensions/extensions.dart';
@@ -19,8 +18,6 @@ import 'bloc/login_cubit.dart';
 import 'widgets/remember_checkbox.dart';
 
 class LoginScreen extends BaseScreen {
-  static const String route = '/login_screen';
-
   const LoginScreen({super.key});
 
   @override
@@ -33,7 +30,7 @@ class _LoginPageState extends BaseScreenState<LoginScreen> {
   @override
   void initState() {
     super.initState();
-    _loginCubit = inject.get<LoginCubit>();
+    _loginCubit = ReadContext(context).read<LoginCubit>()..init(context);
   }
 
   @override
@@ -45,7 +42,6 @@ class _LoginPageState extends BaseScreenState<LoginScreen> {
   }
 
   Widget get _buildBody => BlocListener<LoginCubit, LoginState>(
-        bloc: _loginCubit,
         listenWhen: (previous, current) => previous.status != current.status,
         listener: (context, state) {
           state.status.observeData<LoginInfoEntity>(
