@@ -4,10 +4,10 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../configs/di/injection_container.dart';
-import '../../../configs/themes/themes.dart';
-import '../../../core/constants/constants.dart';
-import '../../../utils/logger.dart';
+import '../../../../configs/di/injection_container.dart';
+import '../../../../configs/themes/themes.dart';
+import '../../../../core/constants/constants.dart';
+import '../../../../utils/logger.dart';
 
 part 'global_app_state.dart';
 

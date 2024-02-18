@@ -3,9 +3,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../core/resources/api/api_list.dart';
 import '../../core/resources/api/rest_api_client.dart';
-import '../../core/usecases/validate/validate_email.dart';
-import '../../core/usecases/validate/validate_password.dart';
-import '../../features/app/bloc/global_app_cubit.dart';
+import '../../features/app/domain/usecases/validate/validate_email.dart';
+import '../../features/app/domain/usecases/validate/validate_password.dart';
+import '../../features/app/presentation/bloc/global_app_cubit.dart';
 import '../../features/auth/data/repository/auth_repository_impl.dart';
 import '../../features/auth/domain/repository/auth_repository.dart';
 import '../../features/auth/domain/usecases/login_usecase.dart';

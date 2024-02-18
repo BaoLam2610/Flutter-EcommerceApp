@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../configs/di/injection_container.dart';
 import '../../../../configs/themes/app_colors.dart';
 import '../../../../configs/themes/app_text_styles.dart';
+import '../../../../core/constants/constants.dart';
 import '../../../../core/constants/durations.dart';
 import '../../../../core/constants/strings.dart';
 import '../../../../core/extensions/widget_extensions.dart';
@@ -102,7 +103,7 @@ class _IntroScreenState extends BaseScreenState<IntroScreen> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.w),
             child: Text(
-              intro[AppStrings.text].toString(),
+              intro[AppKeys.text].toString(),
               style: AppTextStyles.regular18,
               textAlign: TextAlign.center,
             ),
@@ -113,7 +114,7 @@ class _IntroScreenState extends BaseScreenState<IntroScreen> {
             child: AspectRatio(
               aspectRatio: 1,
               child: Image.asset(
-                intro[AppStrings.image].toString(),
+                intro[AppKeys.image].toString(),
                 fit: BoxFit.fill,
               ),
             ),

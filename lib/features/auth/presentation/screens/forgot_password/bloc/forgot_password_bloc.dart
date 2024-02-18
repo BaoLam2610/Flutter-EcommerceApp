@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../../../../../core/bloc/bloc_state.dart';
-import '../../../../../../core/usecases/validate/validate_email.dart';
+import '../../../../../app/domain/usecases/validate/validate_email.dart';
 
 part 'forgot_password_event.dart';
 

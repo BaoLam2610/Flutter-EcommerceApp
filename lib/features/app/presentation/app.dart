@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../configs/di/injection_container.dart';
-import '../../configs/routes/routes.dart';
-import '../../configs/themes/themes.dart';
-import '../../core/constants/navigator_key.dart';
-import '../../gen/codegen_loader.g.dart';
-import '../splash/presentation/screens/splash_screen.dart';
+import '../../../configs/di/injection_container.dart';
+import '../../../configs/routes/routes.dart';
+import '../../../configs/themes/themes.dart';
+import '../../../core/constants/constants.dart';
+import '../../../gen/codegen_loader.g.dart';
+import '../../splash/presentation/screens/splash_screen.dart';
 import 'bloc/global_app_cubit.dart';
 
 class BLMarketApp extends StatefulWidget {
@@ -51,7 +51,7 @@ class _BLMarketAppState extends State<BLMarketApp> {
   Widget get _appContainer => BlocBuilder<GlobalAppCubit, GlobalAppState>(
         bloc: _globalAppCubit,
         builder: (context, state) => MaterialApp(
-          navigatorKey: navigatorKey,
+          navigatorKey: AppKeys.navigatorKey,
           builder: BotToastInit(),
           navigatorObservers: [BotToastNavigatorObserver()],
           theme: lightTheme,

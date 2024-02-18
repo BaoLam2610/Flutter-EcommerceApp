@@ -13,16 +13,16 @@ class IntroCubit extends Cubit<IntroState> {
 
   final List<Map<String, dynamic>> introList = [
     {
-      AppStrings.text: LocaleKeys.intro_1.tr(),
-      AppStrings.image: Assets.images.splash1.path,
+      AppKeys.text: LocaleKeys.intro_1.tr(),
+      AppKeys.image: Assets.images.splash1.path,
     },
     {
-      AppStrings.text: LocaleKeys.intro_2.tr(),
-      AppStrings.image: Assets.images.splash2.path,
+      AppKeys.text: LocaleKeys.intro_2.tr(),
+      AppKeys.image: Assets.images.splash2.path,
     },
     {
-      AppStrings.text: LocaleKeys.intro_3.tr(),
-      AppStrings.image: Assets.images.splash3.path,
+      AppKeys.text: LocaleKeys.intro_3.tr(),
+      AppKeys.image: Assets.images.splash3.path,
     },
   ];
 
