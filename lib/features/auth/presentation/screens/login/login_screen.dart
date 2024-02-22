@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../configs/routes/routes.dart';
 import '../../../../../configs/themes/themes.dart';
 import '../../../../../core/bloc/bloc_state.dart';
 import '../../../../../core/extensions/extensions.dart';
@@ -211,6 +212,6 @@ class _LoginPageState extends BaseScreenState<LoginScreen> {
   }
 
   void _onRegisterTextPressed() {
-    // context.navigator.pushNamed(AppRoutes.registerPage);
+    context.navigator.pushNamed(AppRoutes.registerRoute);
   }
 }
