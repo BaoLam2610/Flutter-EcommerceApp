@@ -41,6 +41,7 @@
   "validate_valid": "Please enter valid {}!",
   "validate_length": "{} must be more than {}",
   "validate_password_not_match": "Confirm password don't match with password",
+  "please_enter_password_first": "Please enter password first!",
   "ok": "OK",
   "cancel": "Cancel",
   "notification": "Notification"

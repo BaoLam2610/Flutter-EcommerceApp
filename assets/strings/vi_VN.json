@@ -41,6 +41,7 @@
   "validate_valid": "Vui lòng nhập {} hợp lệ!",
   "validate_length": "{} phải lớn hơn {}",
   "validate_password_not_match": "Xác nhận mật khẩu không khớp với mật khẩu",
+  "please_enter_password_first": "Vui lòng nhập mật khẩu trước",
   "ok": "OK",
   "cancel": "Hủy",
   "notification": "Thông báo"

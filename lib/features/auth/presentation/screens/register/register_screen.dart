@@ -25,7 +25,7 @@ class _RegisterScreenState extends BaseScreenState<RegisterScreen> {
   @override
   void initState() {
     super.initState();
-    _registerCubit = ReadContext(context).read<RegisterCubit>()..init(context);
+    _registerCubit = ReadContext(context).read<RegisterCubit>();
   }
 
   @override
@@ -88,17 +88,58 @@ class _RegisterScreenState extends BaseScreenState<RegisterScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            const EmailInputField(),
+            _emailInputField,
             SizedBox(height: 20.h),
-            const PasswordInputField(),
+            _passwordInputField,
+            SizedBox(height: 20.h),
+            _passwordConfirmInputField,
             SizedBox(height: 32.h),
             _buildRegisterButton,
           ],
         ),
       );
 
+  Widget get _emailInputField => BlocBuilder<RegisterCubit, RegisterState>(
+        buildWhen: (previous, current) =>
+            previous.emailError != current.emailError,
+        builder: (context, state) {
+          return EmailInputField(
+            controller: _registerCubit.emailController,
+            errorText: state.emailError,
+            onTextChanged: (text) => _registerCubit.validateEmail(),
+          );
+        },
+      );
+
+  Widget get _passwordInputField => BlocBuilder<RegisterCubit, RegisterState>(
+        buildWhen: (previous, current) =>
+            previous.passwordError != current.passwordError,
+        builder: (context, state) {
+          return PasswordInputField(
+            controller: _registerCubit.passwordController,
+            errorText: state.passwordError,
+            onTextChanged: (text) => _registerCubit.validatePassword(),
+          );
+        },
+      );
+
+  Widget get _passwordConfirmInputField =>
+      BlocBuilder<RegisterCubit, RegisterState>(
+        buildWhen: (previous, current) =>
+            previous.passwordConfirmError != current.passwordConfirmError,
+        builder: (context, state) {
+          return PasswordInputField(
+            label: LocaleKeys.confirm_password.tr(),
+            hint: LocaleKeys.confirm_password_hint.tr(),
+            controller: _registerCubit.passwordConfirmController,
+            errorText: state.passwordConfirmError,
+            onTextChanged: (text) => _registerCubit.validatePasswordConfirm(),
+          );
+        },
+      );
+
   Widget get _buildRegisterButton => AppButton.primary(
         text: LocaleKeys.register.tr(),
-        onTap: () {}, //_registerCubit.doLogin,
+        onTap: _registerCubit.doRegister,
       );
 }
