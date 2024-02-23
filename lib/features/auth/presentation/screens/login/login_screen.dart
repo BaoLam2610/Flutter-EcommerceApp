@@ -7,6 +7,7 @@ import '../../../../../configs/themes/themes.dart';
 import '../../../../../core/bloc/bloc_state.dart';
 import '../../../../../core/extensions/extensions.dart';
 import '../../../../../core/screen/base_screen.dart';
+import '../../../../../core/widgets/app_bar/app_bar.dart';
 import '../../../../../core/widgets/widgets.dart';
 import '../../../../../gen/assets.gen.dart';
 import '../../../../../gen/locale_keys.g.dart';
@@ -37,9 +38,17 @@ class _LoginPageState extends BaseScreenState<LoginScreen> {
   Widget buildScreen(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
+      appBar: _buildAppBar,
       body: _buildBody,
     );
   }
+
+  PreferredSizeWidget get _buildAppBar => CustomAppBar(
+        title: LocaleKeys.login.tr(),
+        textStyle: AppTextStyles.bold24.copyWith(
+          color: AppColors.current.primary,
+        ),
+      );
 
   Widget get _buildBody => BlocListener<LoginCubit, LoginState>(
         listenWhen: (previous, current) => previous.status != current.status,
@@ -58,36 +67,14 @@ class _LoginPageState extends BaseScreenState<LoginScreen> {
           width: context.width,
           child: ScrollColumnExpandable(
             children: [
+              SizedBox(height: 18.h),
               Expanded(
-                flex: 1,
-                child: _buildTitle,
-              ),
-              Expanded(
-                flex: 3,
                 child: _buildLoginInputArea,
               ),
-              Expanded(
-                flex: 1,
-                child: _buildFooterArea,
-              ),
+              SizedBox(height: 20.h),
+              _buildFooterArea,
             ],
           ),
-        ),
-      );
-
-  Widget get _buildTitle => Padding(
-        padding: EdgeInsets.symmetric(horizontal: 18.w),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(height: 12.h),
-            Text(
-              LocaleKeys.login.tr(),
-              style: AppTextStyles.bold32.copyWith(
-                color: AppColors.current.primary,
-              ),
-            ),
-          ],
         ),
       );
 
