@@ -30,7 +30,7 @@ class _LoginPageState extends BaseScreenState<LoginScreen> {
   @override
   void initState() {
     super.initState();
-    _loginCubit = ReadContext(context).read<LoginCubit>()..init(context);
+    _loginCubit = ReadContext(context).read<LoginCubit>();
   }
 
   @override
@@ -97,15 +97,39 @@ class _LoginPageState extends BaseScreenState<LoginScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            EmailInputField(),
+            _emailInputField,
             SizedBox(height: 20.h),
-            PasswordInputField(),
+            _passwordInputField,
             SizedBox(height: 20.h),
             _buildRememberMeArea,
             SizedBox(height: 32.h),
             _buildLoginButton,
           ],
         ),
+      );
+
+  Widget get _emailInputField => BlocBuilder<LoginCubit, LoginState>(
+        buildWhen: (previous, current) =>
+            previous.emailError != current.emailError,
+        builder: (context, state) {
+          return EmailInputField(
+            controller: _loginCubit.emailController,
+            errorText: state.emailError,
+            onTextChanged: (text) => _loginCubit.validateEmail(),
+          );
+        },
+      );
+
+  Widget get _passwordInputField => BlocBuilder<LoginCubit, LoginState>(
+        buildWhen: (previous, current) =>
+            previous.passwordError != current.passwordError,
+        builder: (context, state) {
+          return PasswordInputField(
+            controller: _loginCubit.passwordController,
+            errorText: state.passwordError,
+            onTextChanged: (text) => _loginCubit.validatePassword(),
+          );
+        },
       );
 
   Widget get _buildLoginButton => AppButton.primary(
