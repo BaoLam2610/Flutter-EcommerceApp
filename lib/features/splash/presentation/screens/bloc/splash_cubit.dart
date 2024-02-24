@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../configs/di/injection_container.dart';
-import '../../../../app/domain/usecases/first_open_app/get_first_open_app_usecase.dart';
+import '../../../../app/domain/usecases/first_open_app/get_first_open_app.dart';
 
 part 'splash_state.dart';
 

@@ -7,7 +7,7 @@ import '../../../../../../core/constants/constants.dart';
 import '../../../../../../gen/assets.gen.dart';
 import '../../../../../../gen/locale_keys.g.dart';
 import '../../../../../configs/di/injection_container.dart';
-import '../../../../app/domain/usecases/first_open_app/save_first_open_app_usecase.dart';
+import '../../../../app/domain/usecases/first_open_app/save_first_open_app.dart';
 
 part 'intro_state.dart';
 

@@ -9,7 +9,7 @@ import '../../../../../app/domain/usecases/validate/validate_password.dart';
 import '../../../../../app/domain/usecases/validate/validate_password_confirm.dart';
 import '../../../../data/dto/register_request.dart';
 import '../../../../domain/entities/user_type.dart';
-import '../../../../domain/usecases/register_usecase.dart';
+import '../../../../domain/usecases/register.dart';
 
 part 'register_state.dart';
 

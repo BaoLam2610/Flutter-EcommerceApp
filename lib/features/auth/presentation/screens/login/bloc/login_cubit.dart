@@ -8,10 +8,10 @@ import '../../../../../app/domain/usecases/validate/validate_email.dart';
 import '../../../../../app/domain/usecases/validate/validate_password.dart';
 import '../../../../data/dto/login_request.dart';
 import '../../../../domain/entities/user_type.dart';
-import '../../../../domain/usecases/get_remember_account_usecase.dart';
-import '../../../../domain/usecases/login_usecase.dart';
-import '../../../../domain/usecases/save_access_token_usecase.dart';
-import '../../../../domain/usecases/save_remember_account_usecase.dart';
+import '../../../../domain/usecases/get_remember_account.dart';
+import '../../../../domain/usecases/login.dart';
+import '../../../../domain/usecases/save_access_token.dart';
+import '../../../../domain/usecases/save_remember_account.dart';
 
 part 'login_state.dart';
 
