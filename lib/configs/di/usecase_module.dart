@@ -5,4 +5,5 @@ void provideUseCase() {
   inject.registerLazySingleton(() => ValidatePasswordUseCase());
   inject.registerLazySingleton(() => ValidatePasswordConfirmUseCase());
   inject.registerLazySingleton(() => LoginUseCase(inject.get<AuthRepository>()));
+  inject.registerLazySingleton(() => RegisterUseCase());
 }

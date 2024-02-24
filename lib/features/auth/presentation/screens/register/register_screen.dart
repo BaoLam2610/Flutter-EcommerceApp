@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../configs/themes/themes.dart';
+import '../../../../../core/bloc/bloc_state.dart';
 import '../../../../../core/extensions/extensions.dart';
 import '../../../../../core/screen/base_screen.dart';
 import '../../../../../core/widgets/widgets.dart';
@@ -49,14 +50,16 @@ class _RegisterScreenState extends BaseScreenState<RegisterScreen> {
   Widget get _buildBody => BlocListener<RegisterCubit, RegisterState>(
         listenWhen: (previous, current) => previous.status != current.status,
         listener: (context, state) {
-          // state.status.observeData<LoginInfoEntity>(
-          //   context,
-          //   onSuccess: (data, message) {
-          //     /*
-          //         * Navigate to home screen
-          //         * */
-          //   },
-          // );
+          /*state.status.observeData(
+            context,
+            onSuccess: (_, message) {
+              AppDialog.showOkDialog(
+                context: context,
+                content: 'Đăng kí thành công',
+                onAccept: () => context.navigator.maybePop(),
+              );
+            },
+          );*/
         },
         child: SizedBox(
           height: context.height,

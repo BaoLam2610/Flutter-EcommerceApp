@@ -1,7 +1,9 @@
 class ApiList {
   const ApiList._();
 
-  static const String baseUrl = 'http://192.168.0.102:8080';
+  static const String baseUrl = 'http://192.168.0.103:8080';
 
+  /* Authentication */
   static const String login = '/login';
+  static const String register = '/register';
 }

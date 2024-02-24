@@ -10,6 +10,7 @@ import '../../features/app/presentation/bloc/global_app_cubit.dart';
 import '../../features/auth/data/repository/auth_repository_impl.dart';
 import '../../features/auth/domain/repository/auth_repository.dart';
 import '../../features/auth/domain/usecases/login_usecase.dart';
+import '../../features/auth/domain/usecases/register_usecase.dart';
 import '../../features/auth/presentation/screens/login/bloc/login_cubit.dart';
 import '../../features/auth/presentation/screens/register/bloc/register_cubit.dart';
 import '../../features/intro/presentation/screens/bloc/intro_cubit.dart';
