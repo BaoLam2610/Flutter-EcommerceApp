@@ -3,27 +3,49 @@ import 'package:flutter/cupertino.dart';
 import '../../../../../../configs/di/injection_container.dart';
 import '../../../../../../core/bloc/base_bloc.dart';
 import '../../../../../../core/bloc/bloc_state.dart';
+import '../../../../../../core/constants/constants.dart';
 import '../../../../../app/domain/usecases/validate/validate_email.dart';
 import '../../../../../app/domain/usecases/validate/validate_password.dart';
 import '../../../../data/dto/login_request.dart';
 import '../../../../domain/entities/user_type.dart';
+import '../../../../domain/usecases/get_remember_account_usecase.dart';
 import '../../../../domain/usecases/login_usecase.dart';
+import '../../../../domain/usecases/save_access_token_usecase.dart';
+import '../../../../domain/usecases/save_remember_account_usecase.dart';
 
 part 'login_state.dart';
 
 class LoginCubit extends BaseCubit<LoginState> {
   final emailController = TextEditingController();
+
   final passwordController = TextEditingController();
 
-  final ValidateEmailUseCase _validateEmailUseCase =
-      inject.get<ValidateEmailUseCase>();
+  final _validateEmailUseCase = inject.get<ValidateEmailUseCase>();
 
-  final ValidatePasswordUseCase _validatePasswordUseCase =
-      inject.get<ValidatePasswordUseCase>();
+  final _validatePasswordUseCase = inject.get<ValidatePasswordUseCase>();
 
-  final LoginUseCase _loginUseCase = inject.get<LoginUseCase>();
+  final _loginUseCase = inject.get<LoginUseCase>();
+
+  final _saveAccessTokenUseCase = inject.get<SaveAccessTokenUseCase>();
+
+  final _saveRememberAccountUseCase = inject.get<SaveRememberAccountUseCase>();
+
+  final _getRememberAccountUseCase = inject.get<GetRememberAccountUseCase>();
 
   LoginCubit() : super(LoginState(status: Initialize()));
+
+  void init() async {
+    final rememberAccount = await _getRememberAccountUseCase.call();
+    if (rememberAccount == null) {
+      return;
+    }
+    emailController.text = (rememberAccount[AppKeys.email] as String?) ?? '';
+    passwordController.text =
+        (rememberAccount[AppKeys.password] as String?) ?? '';
+    emit(state.copyWith(
+      isRememberMe: true,
+    ));
+  }
 
   Future<bool> validateEmail() async {
     final validateResult =
@@ -66,6 +88,18 @@ class LoginCubit extends BaseCubit<LoginState> {
         userType: UserType.user,
       ),
     );
+
+    if (resource is Success) {
+      await _saveAccessTokenUseCase.call(params: resource.data?.accessToken);
+      await _saveRememberAccountUseCase.call(
+        params: state.isRememberMe
+            ? {
+                AppKeys.email: emailController.text,
+                AppKeys.password: passwordController.text,
+              }
+            : null,
+      );
+    }
 
     emit(state.copyWith(status: resource));
   }

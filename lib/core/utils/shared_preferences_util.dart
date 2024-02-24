@@ -51,9 +51,13 @@ class SharedPreferencesUtil {
     return await _prefs.setString(key, jsonEncode(json));
   }
 
-  Map<String, dynamic> getObject(String key) {
-    final value = getValue(key);
-    return jsonDecode(value) as Map<String, dynamic>;
+  Map<String, dynamic>? getObject(String key) {
+    try {
+      final value = getValue(key);
+      return jsonDecode(value) as Map<String, dynamic>;
+    } catch (e) {
+      return null;
+    }
   }
 
   Future<bool> remove(String key) async {

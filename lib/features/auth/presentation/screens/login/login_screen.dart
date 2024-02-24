@@ -31,7 +31,7 @@ class _LoginPageState extends BaseScreenState<LoginScreen> {
   @override
   void initState() {
     super.initState();
-    _loginCubit = ReadContext(context).read<LoginCubit>();
+    _loginCubit = ReadContext(context).read<LoginCubit>()..init();
   }
 
   @override

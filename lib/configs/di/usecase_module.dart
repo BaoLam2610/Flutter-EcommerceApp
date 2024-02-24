@@ -6,4 +6,7 @@ void provideUseCase() {
   inject.registerLazySingleton(() => ValidatePasswordConfirmUseCase());
   inject.registerLazySingleton(() => LoginUseCase());
   inject.registerLazySingleton(() => RegisterUseCase());
+  inject.registerLazySingleton(() => SaveAccessTokenUseCase());
+  inject.registerLazySingleton(() => SaveRememberAccountUseCase());
+  inject.registerLazySingleton(() => GetRememberAccountUseCase());
 }

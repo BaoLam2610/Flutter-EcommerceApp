@@ -32,9 +32,8 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  bool getRememberAccount() {
-    return SharedPreferencesUtil.instance.getBool(AppKeys.rememberAccount) ??
-        false;
+  Map<String, dynamic>? getRememberAccount() {
+    return SharedPreferencesUtil.instance.getObject(AppKeys.rememberAccount);
   }
 
   @override
@@ -43,10 +42,14 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  void saveRememberAccount(bool isRemember) {
-    SharedPreferencesUtil.instance.setValue(
+  void saveRememberAccount(Map<String, dynamic>? account) {
+    if (account == null) {
+      SharedPreferencesUtil.instance.remove(AppKeys.rememberAccount);
+      return;
+    }
+    SharedPreferencesUtil.instance.setObject(
       AppKeys.rememberAccount,
-      isRemember,
+      account,
     );
   }
 }
