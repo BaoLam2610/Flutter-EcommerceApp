@@ -12,7 +12,7 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<DataState<LoginInfoDto>> doLogin({required LoginRequest request}) {
-    return _apiService.get<LoginInfoDto>(
+    return _apiService.post<LoginInfoDto>(
       ApiList.login,
       create: (json) => LoginInfoDto.fromJson(json),
       queryParameters: request.toJson(),
