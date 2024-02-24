@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../configs/themes/themes.dart';
 import '../../../../../core/bloc/bloc_state.dart';
+import '../../../../../core/constants/constants.dart';
 import '../../../../../core/extensions/extensions.dart';
 import '../../../../../core/screen/base_screen.dart';
 import '../../../../../core/widgets/widgets.dart';
@@ -56,7 +57,11 @@ class _RegisterScreenState extends BaseScreenState<RegisterScreen> {
               AppDialog.showOkDialogCallBack(
                 context: context,
                 content: message,
-              ).then((value) => context.navigator.maybePop());
+              ).then(
+                (value) => context.navigator.maybePop(
+                  AppKeys.popBackReload,
+                ),
+              );
             },
           );
         },

@@ -90,4 +90,23 @@ class LoginCubit extends BaseCubit<LoginState> {
       isRememberMe: !state.isRememberMe,
     ));
   }
+
+  void clearInputData() {
+    emailController.text = '';
+    passwordController.text = '';
+    emit(
+      state.copyWith(
+        emailError: '',
+        passwordError: '',
+        isRememberMe: false,
+      ),
+    );
+  }
+
+  @override
+  Future<void> close() {
+    emailController.dispose();
+    passwordController.dispose();
+    return super.close();
+  }
 }

@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../configs/routes/routes.dart';
 import '../../../../../configs/themes/themes.dart';
 import '../../../../../core/bloc/bloc_state.dart';
+import '../../../../../core/constants/constants.dart';
 import '../../../../../core/extensions/extensions.dart';
 import '../../../../../core/screen/base_screen.dart';
 import '../../../../../core/widgets/widgets.dart';
@@ -70,7 +72,15 @@ class _LoginPageState extends BaseScreenState<LoginScreen> {
                 child: _buildLoginInputArea,
               ),
               SizedBox(height: 20.h),
-              LoginSocial.login(),
+              LoginSocial.login(
+                onTapFooterText: () => context.navigator
+                    .pushNamed(AppRoutes.registerRoute)
+                    .then((value) {
+                  if (value is String && value == AppKeys.popBackReload) {
+                    _loginCubit.clearInputData();
+                  }
+                }),
+              ),
             ],
           ),
         ),

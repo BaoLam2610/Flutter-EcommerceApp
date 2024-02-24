@@ -14,4 +14,7 @@ class AppKeys {
   static const String password = 'password';
   static const String passwordConfirm = 'password_confirm';
   static const String userType = 'userType';
+
+  /// Back to previous screen and reload data
+  static const String popBackReload = 'pop_back_reload';
 }

@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../configs/routes/routes.dart';
 import '../../../../configs/themes/themes.dart';
 import '../../../../core/extensions/extensions.dart';
 import '../../../../gen/assets.gen.dart';
@@ -13,11 +12,16 @@ enum LoginSocialType { login, register }
 
 class LoginSocial extends StatelessWidget {
   final LoginSocialType type;
+  final VoidCallback? onTapFooterText;
 
-  const LoginSocial({super.key, required this.type});
+  const LoginSocial({super.key, required this.type, this.onTapFooterText});
 
-  factory LoginSocial.login() => const LoginSocial(
+  factory LoginSocial.login({
+    VoidCallback? onTapFooterText,
+  }) =>
+      LoginSocial(
         type: LoginSocialType.login,
+        onTapFooterText: onTapFooterText,
       );
 
   factory LoginSocial.register() => const LoginSocial(
@@ -102,7 +106,7 @@ class LoginSocial extends StatelessWidget {
 
   void _onTapFooter(BuildContext context) {
     if (type == LoginSocialType.login) {
-      context.navigator.pushNamed(AppRoutes.registerRoute);
+      onTapFooterText?.call();
       return;
     }
     context.navigator.maybePop();
