@@ -9,6 +9,7 @@ import '../../../../../core/screen/base_screen.dart';
 import '../../../../../core/widgets/widgets.dart';
 import '../../../../../gen/locale_keys.g.dart';
 import '../../widgets/email_input/email_input_field.dart';
+import '../../widgets/login_social.dart';
 import '../../widgets/password_input/password_input_field.dart';
 import 'bloc/register_cubit.dart';
 
@@ -32,9 +33,18 @@ class _RegisterScreenState extends BaseScreenState<RegisterScreen> {
   Widget buildScreen(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
+      appBar: _buildAppBar,
       body: _buildBody,
     );
   }
+
+  PreferredSizeWidget get _buildAppBar => CustomAppBar(
+        title: LocaleKeys.register.tr(),
+        textStyle: AppTextStyles.bold24.copyWith(
+          color: AppColors.current.primary,
+        ),
+        isShowBack: true,
+      );
 
   Widget get _buildBody => BlocListener<RegisterCubit, RegisterState>(
         listenWhen: (previous, current) => previous.status != current.status,
@@ -53,32 +63,14 @@ class _RegisterScreenState extends BaseScreenState<RegisterScreen> {
           width: context.width,
           child: ScrollColumnExpandable(
             children: [
+              SizedBox(height: 18.h),
               Expanded(
-                flex: 1,
-                child: _buildTitle,
-              ),
-              Expanded(
-                flex: 4,
                 child: _buildRegisterInputArea,
               ),
+              SizedBox(height: 20.h),
+              LoginSocial.register(),
             ],
           ),
-        ),
-      );
-
-  Widget get _buildTitle => Padding(
-        padding: EdgeInsets.symmetric(horizontal: 18.w),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(height: 12.h),
-            Text(
-              LocaleKeys.register.tr(),
-              style: AppTextStyles.bold32.copyWith(
-                color: AppColors.current.primary,
-              ),
-            ),
-          ],
         ),
       );
 
@@ -93,7 +85,7 @@ class _RegisterScreenState extends BaseScreenState<RegisterScreen> {
             _passwordInputField,
             SizedBox(height: 20.h),
             _passwordConfirmInputField,
-            SizedBox(height: 32.h),
+            SizedBox(height: 48.h),
             _buildRegisterButton,
           ],
         ),

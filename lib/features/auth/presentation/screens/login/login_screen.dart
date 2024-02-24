@@ -3,19 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../configs/routes/routes.dart';
 import '../../../../../configs/themes/themes.dart';
 import '../../../../../core/bloc/bloc_state.dart';
 import '../../../../../core/extensions/extensions.dart';
 import '../../../../../core/screen/base_screen.dart';
-import '../../../../../core/widgets/app_bar/app_bar.dart';
 import '../../../../../core/widgets/widgets.dart';
-import '../../../../../gen/assets.gen.dart';
 import '../../../../../gen/locale_keys.g.dart';
 import '../../../domain/entities/login_info_entity.dart';
 import '../../widgets/email_input/email_input_field.dart';
+import '../../widgets/login_social.dart';
 import '../../widgets/password_input/password_input_field.dart';
-import '../../widgets/social_card.dart';
 import 'bloc/login_cubit.dart';
 import 'widgets/remember_checkbox.dart';
 
@@ -73,7 +70,7 @@ class _LoginPageState extends BaseScreenState<LoginScreen> {
                 child: _buildLoginInputArea,
               ),
               SizedBox(height: 20.h),
-              _buildFooterArea,
+              LoginSocial.login(),
             ],
           ),
         ),
@@ -90,7 +87,7 @@ class _LoginPageState extends BaseScreenState<LoginScreen> {
             _passwordInputField,
             SizedBox(height: 20.h),
             _buildRememberMeArea,
-            SizedBox(height: 32.h),
+            SizedBox(height: 48.h),
             _buildLoginButton,
           ],
         ),
@@ -152,66 +149,7 @@ class _LoginPageState extends BaseScreenState<LoginScreen> {
         ],
       );
 
-  Widget get _buildFooterArea => Padding(
-        padding: EdgeInsets.symmetric(horizontal: 18.w),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            _buildLoginWithSocial,
-            SizedBox(height: 20.h),
-            _buildSignUpText,
-            SizedBox(height: 30.h),
-          ],
-        ),
-      );
-
-  Widget get _buildLoginWithSocial => Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SocialCard(icon: Assets.icons.googleIcon.path),
-          SizedBox(width: 10.w),
-          SocialCard(icon: Assets.icons.facebook2.path),
-          SizedBox(width: 10.w),
-          SocialCard(icon: Assets.icons.twitter.path),
-        ],
-      );
-
-  Widget get _buildSignUpText => GestureDetector(
-        onTap: _onRegisterTextPressed,
-        child: Text.rich(
-          TextSpan(
-            children: [
-              TextSpan(
-                text: LocaleKeys.dont_have_an_account.tr(),
-                style: AppTextStyles.regular16,
-              ),
-              TextSpan(
-                text: LocaleKeys.register.tr(),
-                style: AppTextStyles.regular16.copyWith(
-                  color: AppColors.current.primary,
-                ),
-              ),
-            ],
-          ),
-        ),
-      );
-
-  void _onLoginButtonPressed() {
-    // context.read<LoginBloc>().add(
-    //       ValidateLogin(
-    //         UserLogin(
-    //           email: _emailTextController.text,
-    //           password: _passwordTextController.text,
-    //         ),
-    //       ),
-    //     );
-  }
-
   void _onForgotPasswordTextPressed() {
     // context.navigator.pushNamed(AppRoutes.forgotPasswordPage);
-  }
-
-  void _onRegisterTextPressed() {
-    context.navigator.pushNamed(AppRoutes.registerRoute);
   }
 }

@@ -29,6 +29,7 @@
   "submit": "Submit",
   "dont_worry": "Don't worry",
   "dont_have_an_account": "Don't have an account? ",
+  "do_have_an_account": "Do you already have an account? ",
   "register_with_social_description": "By continuing your confirm that you agree with our Term and Condition",
   "complete_profile": "Complete Profile",
   "full_name": "Full Name",
@@ -44,5 +45,6 @@
   "please_enter_password_first": "Please enter password first!",
   "ok": "OK",
   "cancel": "Cancel",
-  "notification": "Notification"
+  "notification": "Notification",
+  "or": "Hoặc"
 }

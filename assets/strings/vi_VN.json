@@ -29,6 +29,7 @@
   "submit": "Gửi",
   "dont_worry": "Đừng lo",
   "dont_have_an_account": "Bạn chưa có tài khoản? ",
+  "do_have_an_account": "Bạn đã có tài khoản? ",
   "register_with_social_description": "Bằng cách tiếp tục xác nhận rằng bạn đồng ý với Điều khoản và Điều kiện của chúng tôi",
   "complete_profile": "Hồ sơ hoàn chỉnh",
   "full_name": "Họ và tên",
@@ -44,5 +45,6 @@
   "please_enter_password_first": "Vui lòng nhập mật khẩu trước",
   "ok": "OK",
   "cancel": "Hủy",
-  "notification": "Thông báo"
+  "notification": "Thông báo",
+  "or": "Hoặc"
 }
