@@ -1,13 +1,12 @@
 part of 'login_cubit.dart';
 
-class LoginState extends Equatable {
-  final BlocState status;
+class LoginState extends BaseState {
   final bool isRememberMe;
   final String passwordError;
   final String emailError;
 
   const LoginState({
-    required this.status,
+    required super.status,
     this.isRememberMe = false,
     this.passwordError = '',
     this.emailError = '',
@@ -21,8 +20,9 @@ class LoginState extends Equatable {
         emailError,
       ];
 
+  @override
   LoginState copyWith({
-    BlocState? status,
+    Resource? status,
     bool? isRememberMe,
     String? passwordError,
     String? emailError,

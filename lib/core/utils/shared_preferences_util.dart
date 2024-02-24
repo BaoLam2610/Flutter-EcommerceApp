@@ -27,6 +27,22 @@ class SharedPreferencesUtil {
     }
   }
 
+  int? getInt(String key) {
+    return _prefs.getInt(key);
+  }
+
+  double? getDouble(String key) {
+    return _prefs.getDouble(key);
+  }
+
+  String? getString(String key) {
+    return _prefs.getString(key);
+  }
+
+  bool? getBool(String key) {
+    return _prefs.getBool(key);
+  }
+
   dynamic getValue(String key) {
     return _prefs.get(key);
   }

@@ -1,20 +1,42 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/widgets.dart';
 
-sealed class BlocState {}
+class BaseState extends Equatable {
+  final Resource status;
 
-class Initialize extends BlocState {}
+  const BaseState({required this.status});
 
-class Loading extends BlocState {}
+  @override
+  List<Object> get props => [status];
 
-class Success<T> extends BlocState {
+  BaseState copyWith({
+    Resource? status,
+  }) {
+    return BaseState(
+      status: status ?? this.status,
+    );
+  }
+}
+
+class Resource<T> {
   final T? data;
   final String? message;
 
+  const Resource({this.data, this.message});
+}
+
+class None<T> extends Resource<T> {}
+
+class Initialize extends Resource {}
+
+class Loading extends Resource {}
+
+class Success<T> extends Resource<T> {
   Success({
-    this.data,
-    this.message,
+    super.data,
+    super.message,
   });
 
   @override
@@ -29,10 +51,8 @@ class Success<T> extends BlocState {
   int get hashCode => data.hashCode ^ message.hashCode;
 }
 
-class Error extends BlocState {
-  final String message;
-
-  Error({required this.message});
+class Error<T> extends Resource<T> {
+  Error({super.message});
 
   @override
   bool operator ==(Object other) =>
@@ -45,31 +65,27 @@ class Error extends BlocState {
   int get hashCode => message.hashCode;
 }
 
-extension BlocStateExtension on BlocState {
+extension BaseStateExtension on BaseState {
   void observeData<T>(
     BuildContext context, {
     void Function(T? data, String? message)? onSuccess,
     void Function(String? error)? onError,
   }) {
-    if (this is Success<T>) {
+    if (status is Success<T>) {
       AppLoading.hideLoading();
-      final success = this as Success<T>;
+      final success = status as Success<T>;
       onSuccess?.call(success.data, success.message);
-    } else if (this is Error) {
-      final error = this as Error;
+      return;
+    }
+    if (status is Error<T>) {
+      final error = status as Error<T>;
       AppLoading.hideLoading();
       AppDialog.showOkDialog(context: context, content: error.message);
       onError?.call(error.message);
-    } else if (this is Loading) {
+      return;
+    }
+    if (status is Loading) {
       AppLoading.showLoading();
     }
-  }
-
-  void observeDataDynamic(
-    BuildContext context, {
-    void Function(dynamic data, String? message)? onSuccess,
-    void Function(String? error)? onError,
-  }) {
-    observeData<dynamic>(context, onSuccess: onSuccess, onError: onError);
   }
 }

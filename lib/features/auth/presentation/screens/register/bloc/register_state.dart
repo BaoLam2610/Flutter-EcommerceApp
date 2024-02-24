@@ -1,13 +1,12 @@
 part of 'register_cubit.dart';
 
-class RegisterState extends Equatable {
-  final BlocState status;
+class RegisterState extends BaseState {
   final String emailError;
   final String passwordError;
   final String passwordConfirmError;
 
   const RegisterState({
-    required this.status,
+    required super.status,
     this.emailError = '',
     this.passwordError = '',
     this.passwordConfirmError = '',
@@ -15,14 +14,15 @@ class RegisterState extends Equatable {
 
   @override
   List<Object> get props => [
-        status,
-        emailError,
-        passwordError,
-        passwordConfirmError,
-      ];
+    status,
+    emailError,
+    passwordError,
+    passwordConfirmError,
+  ];
 
+  @override
   RegisterState copyWith({
-    BlocState? status,
+    Resource? status,
     String? emailError,
     String? passwordError,
     String? passwordConfirmError,

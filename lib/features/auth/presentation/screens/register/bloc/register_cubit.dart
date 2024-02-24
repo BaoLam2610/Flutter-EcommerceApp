@@ -1,4 +1,3 @@
-import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../configs/di/injection_container.dart';
@@ -83,7 +82,7 @@ class RegisterCubit extends BaseCubit<RegisterState> {
 
     emit(state.copyWith(status: Loading()));
 
-    final result = await _registerUseCase.call(
+    final resource = await _registerUseCase.call(
       params: RegisterRequest(
         email: emailController.text,
         password: passwordController.text,
@@ -91,19 +90,7 @@ class RegisterCubit extends BaseCubit<RegisterState> {
       ),
     );
 
-    callApiNoData(
-      result,
-      onSuccess: (successStatus) {
-        emit(
-          state.copyWith(status: successStatus),
-        );
-      },
-      onError: (errorStatus) {
-        emit(
-          state.copyWith(status: errorStatus),
-        );
-      },
-    );
+    emit(state.copyWith(status: resource));
   }
 
   @override

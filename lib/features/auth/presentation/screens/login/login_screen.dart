@@ -53,7 +53,7 @@ class _LoginPageState extends BaseScreenState<LoginScreen> {
   Widget get _buildBody => BlocListener<LoginCubit, LoginState>(
         listenWhen: (previous, current) => previous.status != current.status,
         listener: (context, state) {
-          state.status.observeData<LoginInfoEntity>(
+          state.observeData<LoginInfoEntity>(
             context,
             onSuccess: (data, message) {
               /*
