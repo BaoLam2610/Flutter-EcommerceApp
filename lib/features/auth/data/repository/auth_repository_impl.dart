@@ -17,7 +17,7 @@ class AuthRepositoryImpl implements AuthRepository {
     return _apiService.post<LoginInfoDto>(
       ApiList.login,
       create: (json) => LoginInfoDto.fromJson(json),
-      queryParameters: request.toJson(),
+      data: request.toJson(),
     );
   }
 
