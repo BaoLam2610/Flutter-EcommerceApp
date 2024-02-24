@@ -50,16 +50,15 @@ class _RegisterScreenState extends BaseScreenState<RegisterScreen> {
   Widget get _buildBody => BlocListener<RegisterCubit, RegisterState>(
         listenWhen: (previous, current) => previous.status != current.status,
         listener: (context, state) {
-          /*state.status.observeData(
+          state.status.observeData(
             context,
             onSuccess: (_, message) {
-              AppDialog.showOkDialog(
+              AppDialog.showOkDialogCallBack(
                 context: context,
-                content: 'Đăng kí thành công',
-                onAccept: () => context.navigator.maybePop(),
-              );
+                content: message,
+              ).then((value) => context.navigator.maybePop());
             },
-          );*/
+          );
         },
         child: SizedBox(
           height: context.height,
