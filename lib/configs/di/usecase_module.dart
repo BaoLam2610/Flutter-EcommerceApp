@@ -1,6 +1,8 @@
 part of 'injection_container.dart';
 
 void provideUseCase() {
+  inject.registerLazySingleton(() => SaveFirstOpenAppUseCase());
+  inject.registerLazySingleton(() => GetFirstOpenAppUseCase());
   inject.registerLazySingleton(() => ValidateEmailUseCase());
   inject.registerLazySingleton(() => ValidatePasswordUseCase());
   inject.registerLazySingleton(() => ValidatePasswordConfirmUseCase());

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../features/auth/presentation/screens/login/login_provider.dart';
 import '../../features/auth/presentation/screens/register/register_provider.dart';
 import '../../features/intro/presentation/screens/intro_provider.dart';
+import '../../features/splash/presentation/screens/splash_provider.dart';
 import '../../features/splash/presentation/screens/splash_screen.dart';
 
 class AppRoutes {
@@ -14,7 +15,7 @@ class AppRoutes {
   static const String registerRoute = '/register';
 
   static Map<String, Widget Function(BuildContext)> routes = {
-    splashRoute: (_) => const SplashScreen(),
+    splashRoute: (_) => const SplashProvider(),
     introRoute: (_) => const IntroProvider(),
     loginRoute: (_) => const LoginProvider(),
     registerRoute: (_) => const RegisterProvider(),

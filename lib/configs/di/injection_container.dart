@@ -16,7 +16,12 @@ import '../../features/auth/domain/usecases/save_access_token_usecase.dart';
 import '../../features/auth/domain/usecases/save_remember_account_usecase.dart';
 import '../../features/auth/presentation/screens/login/bloc/login_cubit.dart';
 import '../../features/auth/presentation/screens/register/bloc/register_cubit.dart';
+import '../../features/app/data/repository/app_repository_impl.dart';
+import '../../features/app/domain/repository/app_repository.dart';
+import '../../features/app/domain/usecases/first_open_app/get_first_open_app_usecase.dart';
+import '../../features/app/domain/usecases/first_open_app/save_first_open_app_usecase.dart';
 import '../../features/intro/presentation/screens/bloc/intro_cubit.dart';
+import '../../features/splash/presentation/screens/bloc/splash_cubit.dart';
 import '../../utils/logger.dart';
 
 part 'app_module.dart';

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../configs/routes/routes.dart';
 import '../../../../core/constants/constants.dart';
 import '../../../../core/extensions/extensions.dart';
 import '../../../../gen/assets.gen.dart';
+import 'bloc/splash_cubit.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -14,7 +16,20 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  late SplashCubit _cubit;
   bool _isLogoVisible = false;
+  bool _isFirstOpenApp = false;
+
+  void checkFirstOpenApp() async {
+    _isFirstOpenApp = await _cubit.isFirstOpenApp();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _cubit = ReadContext(context).read<SplashCubit>();
+    checkFirstOpenApp();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,9 +69,9 @@ class _SplashScreenState extends State<SplashScreen> {
 
     Future.delayed(
       AppDurations.delaySplash,
-      () {
-        context.navigator.pushReplacementNamed(AppRoutes.introRoute);
-      },
+      () => context.navigator.pushReplacementNamed(
+        _isFirstOpenApp ? AppRoutes.introRoute : AppRoutes.loginRoute,
+      ),
     );
   }
 }
