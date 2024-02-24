@@ -1,9 +1,11 @@
 import '../../../../core/resources/api/api_list.dart';
+import '../../../../core/resources/api/model/data_response.dart';
 import '../../../../core/resources/api/rest_api_client.dart';
 import '../../../../core/resources/data_state.dart';
 import '../../domain/repository/auth_repository.dart';
 import '../dto/login_info_dto.dart';
 import '../dto/login_request.dart';
+import '../dto/register_request.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   final RestApiClient _apiService;
@@ -16,6 +18,14 @@ class AuthRepositoryImpl implements AuthRepository {
       ApiList.login,
       create: (json) => LoginInfoDto.fromJson(json),
       queryParameters: request.toJson(),
+    );
+  }
+
+  @override
+  Future<DataState<NoData>> doRegister({required RegisterRequest request}) {
+    return _apiService.post<NoData>(
+      ApiList.register,
+      data: request.toJson(),
     );
   }
 }

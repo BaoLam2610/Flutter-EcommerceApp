@@ -4,4 +4,5 @@ void provideBloc() {
   inject.registerFactory(() => GlobalAppCubit());
   inject.registerFactory(() => IntroCubit());
   inject.registerFactory(() => LoginCubit());
+  inject.registerFactory(() => RegisterCubit());
 }
