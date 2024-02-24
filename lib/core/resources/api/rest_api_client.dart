@@ -50,7 +50,7 @@ class RestApiClient {
 
   Future<DataState<T>> post<T>(
     String path, {
-    required void Function(Map<String, dynamic> json) create,
+    void Function(Map<String, dynamic> json)? create,
     dynamic data,
     Map<String, dynamic>? queryParameters,
   }) async {
@@ -72,7 +72,7 @@ class RestApiClient {
 
   Future<DataState<T>> get<T>(
     String path, {
-    required void Function(Map<String, dynamic> json) create,
+    void Function(Map<String, dynamic> json)? create,
     dynamic data,
     Map<String, dynamic>? queryParameters,
   }) async {
@@ -95,12 +95,12 @@ class RestApiClient {
 
 extension RestApiClientExtension on RestApiClient {
   DataSuccess<T> _onSuccess<T>(
-      Response<dynamic> response,
-      Function(Map<String, dynamic>) create,
-      ) {
+    Response<dynamic> response,
+    Function(Map<String, dynamic>)? create,
+  ) {
     final data = response.data;
     final dataResponse =
-    DataResponse.fromJson(data as Map<String, dynamic>, create);
+        DataResponse.fromJson(data as Map<String, dynamic>, create);
     return DataSuccess<T>(
       data: dataResponse.data,
       message: dataResponse.message,
@@ -108,8 +108,8 @@ extension RestApiClientExtension on RestApiClient {
   }
 
   DataError<T> _systemAppError<T>() => const DataError(
-    exception: AppSystemException(),
-  );
+        exception: AppSystemException(),
+      );
 
   DataError<T> _onError<T>(DioException err) {
     switch (err.type) {

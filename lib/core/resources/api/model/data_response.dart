@@ -30,12 +30,16 @@ class DataResponse extends BaseResponse {
 
   factory DataResponse.fromJson(
     Map<String, dynamic> json,
-    Function(Map<String, dynamic>) create,
+    Function(Map<String, dynamic>)? create,
   ) =>
       DataResponse(
         isSuccess: json["isSuccess"],
         message: json['message'],
         error: json["error"] ?? '',
-        data: create(json['data']),
+        data: create != null ? create(json['data']) : null,
       );
+}
+
+class NoData {
+
 }

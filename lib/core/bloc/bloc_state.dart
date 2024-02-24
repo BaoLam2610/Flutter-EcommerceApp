@@ -64,4 +64,12 @@ extension BlocStateExtension on BlocState {
       AppLoading.showLoading();
     }
   }
+
+  void observeDataDynamic(
+    BuildContext context, {
+    void Function(dynamic data, String? message)? onSuccess,
+    void Function(String? error)? onError,
+  }) {
+    observeData<dynamic>(context, onSuccess: onSuccess, onError: onError);
+  }
 }
