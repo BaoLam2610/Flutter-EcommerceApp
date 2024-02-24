@@ -26,12 +26,12 @@ class BadRequestException implements Exception {
         final json = exception.response?.data as Map<String, dynamic>;
         final response = BaseResponse.fromJson(json);
 
-        if (response.error is String) {
-          messageError = response.error;
+        if (response.message is String) {
+          messageError = response.message;
         }
-        if (response.error is List<dynamic>) {
+        if (response.message is List<dynamic>) {
           messageError =
-              response.error.map((e) => e.toString()).toList().join(", ");
+              response.message.map((e) => e.toString()).toList().join(", ");
         }
         return messageError;
       }

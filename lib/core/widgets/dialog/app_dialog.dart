@@ -10,6 +10,25 @@ part 'action_button_type.dart';
 class AppDialog {
   const AppDialog._();
 
+  static Future<T?> showAppDialog<T>({
+    required BuildContext context,
+    required Widget Function(BuildContext) builder,
+    bool barrierDismissible = false,
+    Color? barrierColor = Colors.black54,
+    String? barrierLabel,
+    bool useSafeArea = true,
+    bool useRootNavigator = true,
+    RouteSettings? routeSettings,
+    Offset? anchorPoint,
+    TraversalEdgeBehavior? traversalEdgeBehavior,
+  }) {
+    return showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: builder,
+    );
+  }
+
   static AlertDialog _baseAlertDialog({
     String? title,
     String? content,
@@ -51,7 +70,8 @@ class AppDialog {
     VoidCallback? onAccept,
     VoidCallback? onCancel,
   }) =>
-      showDialog(
+      showAppDialog(
+        barrierDismissible: false,
         context: context,
         builder: (context) => _baseAlertDialog(
           title: title,
@@ -77,8 +97,9 @@ class AppDialog {
     String? content,
     VoidCallback? onAccept,
   }) =>
-      showDialog(
+      showAppDialog(
         context: context,
+        barrierDismissible: false,
         builder: (context) => _baseAlertDialog(
           title: title,
           content: content,
@@ -90,5 +111,18 @@ class AppDialog {
             ),
           ],
         ),
+      );
+
+  static Future<T?> showOkDialogCallBack<T>({
+    required BuildContext context,
+    String? title,
+    String? content,
+    T? result,
+  }) =>
+      showOkDialog(
+        context: context,
+        title: title,
+        content: content,
+        onAccept: () => context.navigator.maybePop(T),
       );
 }

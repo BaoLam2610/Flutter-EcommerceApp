@@ -1,10 +1,8 @@
 class BaseResponse {
-  final dynamic error;
-  final String? message;
+  final dynamic message;
   final bool isSuccess;
 
   const BaseResponse({
-    this.error,
     this.message,
     required this.isSuccess,
   });
@@ -12,8 +10,7 @@ class BaseResponse {
   factory BaseResponse.fromJson(Map<String, dynamic> json) {
     return BaseResponse(
       isSuccess: json["isSuccess"],
-      message: json['message'],
-      error: json["error"] ?? '',
+      message: json["message"] ?? '',
     );
   }
 }
@@ -23,7 +20,6 @@ class DataResponse extends BaseResponse {
 
   DataResponse({
     this.data,
-    super.error,
     super.message,
     required super.isSuccess,
   });
@@ -34,8 +30,7 @@ class DataResponse extends BaseResponse {
   ) =>
       DataResponse(
         isSuccess: json["isSuccess"],
-        message: json['message'],
-        error: json["error"] ?? '',
+        message: json["message"] ?? '',
         data: create != null ? create(json['data']) : null,
       );
 }
