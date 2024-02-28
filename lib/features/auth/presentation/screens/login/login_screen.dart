@@ -8,13 +8,14 @@ import '../../../../../configs/themes/themes.dart';
 import '../../../../../core/bloc/bloc_state.dart';
 import '../../../../../core/constants/constants.dart';
 import '../../../../../core/extensions/extensions.dart';
-import '../../../../../core/screen/base_screen.dart';
+import '../../../../../core/widgets/screen/base_screen.dart';
 import '../../../../../core/widgets/widgets.dart';
+import '../../../../../gen/assets.gen.dart';
 import '../../../../../gen/locale_keys.g.dart';
 import '../../../domain/entities/login_info_entity.dart';
-import '../../widgets/email_input/email_input_field.dart';
-import '../../widgets/login_social.dart';
-import '../../widgets/password_input/password_input_field.dart';
+import '../../widgets/footer/login_social.dart';
+import '../../widgets/input/email_input_field.dart';
+import '../../widgets/input/password_input_field.dart';
 import 'bloc/login_cubit.dart';
 import 'widgets/remember_checkbox.dart';
 
@@ -47,6 +48,10 @@ class _LoginPageState extends BaseScreenState<LoginScreen> {
         title: LocaleKeys.login.tr(),
         textStyle: AppTextStyles.bold24.copyWith(
           color: AppColors.current.primary,
+        ),
+        actionButton: Assets.icons.flagVn.svg(
+          width: 24.r,
+          height: 24.r,
         ),
       );
 

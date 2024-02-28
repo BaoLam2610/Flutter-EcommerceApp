@@ -9,7 +9,7 @@ class AppTextStyles {
 
   static String fontFamily = FontFamily.muli;
   static Color defaultTextColor = AppColors.current.primaryText;
-  static double defaultTextHeight = 0.sp;
+  static double? defaultTextHeight;
 
   /* Regular */
   static TextStyle regular12 = TextStyle(

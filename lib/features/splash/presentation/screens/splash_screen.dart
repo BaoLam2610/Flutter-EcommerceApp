@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../configs/di/injection_container.dart';
 import '../../../../configs/routes/routes.dart';
 import '../../../../core/constants/constants.dart';
 import '../../../../core/extensions/extensions.dart';
 import '../../../../gen/assets.gen.dart';
+import '../../../app/presentation/bloc/global_app_cubit.dart';
 import 'bloc/splash_cubit.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -17,6 +19,7 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   late SplashCubit _cubit;
+  final GlobalAppCubit _globalAppCubit = inject.get<GlobalAppCubit>();
   bool _isLogoVisible = false;
   bool _isFirstOpenApp = false;
 
@@ -28,6 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     _cubit = ReadContext(context).read<SplashCubit>();
+    // _globalAppCubit.initLocale(contextSetLocale: Locale);
     checkFirstOpenApp();
   }
 
@@ -70,7 +74,8 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(
       AppDurations.delaySplash,
       () => context.navigator.pushReplacementNamed(
-        _isFirstOpenApp ? AppRoutes.introRoute : AppRoutes.loginRoute,
+        AppRoutes.introRoute
+        // _isFirstOpenApp ? AppRoutes.introRoute : AppRoutes.loginRoute,
       ),
     );
   }

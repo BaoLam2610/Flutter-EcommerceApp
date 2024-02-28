@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/widgets/card/rounded_icon_card.dart';
+import '../../../../../core/widgets/card/rounded_icon_card.dart';
 
 class SocialCard extends StatelessWidget {
   final String icon;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../configs/themes/app_colors.dart';
+import '../../../configs/themes/app_colors.dart';
 
 abstract class BaseScreen extends StatefulWidget {
   const BaseScreen({super.key});

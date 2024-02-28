@@ -7,12 +7,12 @@ import '../../../../../configs/themes/themes.dart';
 import '../../../../../core/bloc/bloc_state.dart';
 import '../../../../../core/constants/constants.dart';
 import '../../../../../core/extensions/extensions.dart';
-import '../../../../../core/screen/base_screen.dart';
+import '../../../../../core/widgets/screen/base_screen.dart';
 import '../../../../../core/widgets/widgets.dart';
 import '../../../../../gen/locale_keys.g.dart';
-import '../../widgets/email_input/email_input_field.dart';
-import '../../widgets/login_social.dart';
-import '../../widgets/password_input/password_input_field.dart';
+import '../../widgets/input/email_input_field.dart';
+import '../../widgets/footer/login_social.dart';
+import '../../widgets/input/password_input_field.dart';
 import 'bloc/register_cubit.dart';
 
 class RegisterScreen extends BaseScreen {
