@@ -6,4 +6,5 @@ void provideRestApiClient() {
     interceptors: [LoggerInterceptor()],
   );
   inject.registerLazySingleton(() => apiClient);
+  inject.registerLazySingleton(() => AuthService());
 }

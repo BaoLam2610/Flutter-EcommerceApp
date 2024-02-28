@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../configs/themes/color_themes.dart';
-import '../../../configs/themes/dimens.dart';
+import '../../../configs/themes/themes.dart';
 
 class RoundedImageCard extends StatelessWidget {
-  final double cardSize;
+  final double? cardSize;
   final Color? backgroundColor;
   final Color? iconColor;
   final String image;
-  final EdgeInsets padding;
+  final EdgeInsets? padding;
   final double? iconSize;
   final BoxShape? boxShape;
   final BoxFit? fit;
@@ -16,10 +16,10 @@ class RoundedImageCard extends StatelessWidget {
 
   const RoundedImageCard({
     super.key,
-    this.cardSize = iconSizeLarge,
+    this.cardSize,
     this.backgroundColor,
     required this.image,
-    this.padding = const EdgeInsets.all(12),
+    this.padding,
     this.iconSize,
     this.iconColor,
     this.boxShape,
@@ -30,11 +30,11 @@ class RoundedImageCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: padding,
-      height: cardSize,
-      width: cardSize,
+      padding: padding ?? EdgeInsets.all(12.r),
+      height: cardSize ?? 52.r,
+      width: cardSize ?? 52.r,
       decoration: BoxDecoration(
-        color: backgroundColor ?? colorLightGrey,
+        color: backgroundColor ?? AppColors.current.surface,
         shape: boxShape ?? BoxShape.rectangle,
         borderRadius: borderRadius ?? BorderRadius.circular(10),
       ),

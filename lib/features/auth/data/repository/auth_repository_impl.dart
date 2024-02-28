@@ -1,34 +1,22 @@
+import '../../../../configs/di/injection_container.dart';
 import '../../../../core/constants/constants.dart';
-import '../../../../core/resources/api/api_list.dart';
-import '../../../../core/resources/api/model/data_response.dart';
-import '../../../../core/resources/api/rest_api_client.dart';
-import '../../../../core/resources/data_state.dart';
 import '../../../../core/utils/shared_preferences_util.dart';
 import '../../domain/repository/auth_repository.dart';
-import '../dto/login_info_dto.dart';
 import '../dto/login_request.dart';
 import '../dto/register_request.dart';
+import '../remote/auth_service.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
-  final RestApiClient _apiService;
-
-  const AuthRepositoryImpl(this._apiService);
+  final AuthService _apiService = inject.get<AuthService>();
 
   @override
-  Future<DataState<LoginInfoDto>> doLogin({required LoginRequest request}) {
-    return _apiService.post<LoginInfoDto>(
-      ApiList.login,
-      create: (json) => LoginInfoDto.fromJson(json),
-      data: request.toJson(),
-    );
+  Future<dynamic> doLogin({required LoginRequest request}) {
+    return _apiService.login(request);
   }
 
   @override
-  Future<DataState<NoData>> doRegister({required RegisterRequest request}) {
-    return _apiService.post<NoData>(
-      ApiList.register,
-      data: request.toJson(),
-    );
+  Future<dynamic> doRegister({required RegisterRequest request}) {
+    return _apiService.register(request);
   }
 
   @override

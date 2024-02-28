@@ -8,8 +8,6 @@ import '../repository/auth_repository.dart';
 class RegisterUseCase extends NetworkUseCase<RegisterRequest, NoData> {
   final AuthRepository _repository = inject.get<AuthRepository>();
 
-  RegisterUseCase();
-
   @override
   Future<Resource<NoData>> call({RegisterRequest? params}) async {
     return handleApi(await _repository.doRegister(request: params!));
