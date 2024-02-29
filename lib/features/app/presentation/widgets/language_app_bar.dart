@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/widgets/app_bar/app_bar.dart';
+import '../../../../configs/di/injection_container.dart';
+import '../../../../core/widgets/widgets.dart';
 import '../../../../gen/assets.gen.dart';
+import '../bloc/global_app_cubit.dart';
 
 class LanguageAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -12,7 +15,9 @@ class LanguageAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool isShowBack;
   final VoidCallback? onTapBack;
 
-  const LanguageAppBar({
+  final GlobalAppCubit _globalAppCubit = inject.get<GlobalAppCubit>();
+
+  LanguageAppBar({
     super.key,
     required this.title,
     this.textStyle,
@@ -27,17 +32,32 @@ class LanguageAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomAppBar(
-      title: title,
-      textStyle: textStyle,
-      colorBgr: colorBgr,
-      isShowBack: isShowBack,
-      onTapBack: onTapBack,
-      height: height,
-      actionButton: Assets.icons.flagVn.svg(
-        width: 24.r,
-        height: 24.r,
-      ),
+    return BlocBuilder<GlobalAppCubit, GlobalAppState>(
+      bloc: _globalAppCubit,
+      buildWhen: (previous, current) =>
+          previous.currentLocale != current.currentLocale,
+      builder: (context, state) {
+        return CustomAppBar(
+          title: title,
+          textStyle: textStyle,
+          colorBgr: colorBgr,
+          isShowBack: isShowBack,
+          onTapBack: onTapBack,
+          height: height,
+          actionButton: MaterialEffect(
+            onTap: _globalAppCubit.onChangeLocale,
+            child: _globalAppCubit.isViLocale
+                ? Assets.icons.flagVn.svg(
+                    width: 24.r,
+                    height: 24.r,
+                  )
+                : Assets.icons.flagEn.svg(
+                    width: 24.r,
+                    height: 24.r,
+                  ),
+          ),
+        );
+      },
     );
   }
 }

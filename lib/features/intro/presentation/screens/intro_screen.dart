@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../configs/di/injection_container.dart';
 import '../../../../configs/routes/routes.dart';
 import '../../../../configs/themes/themes.dart';
 import '../../../../core/constants/constants.dart';
@@ -11,6 +12,7 @@ import '../../../../core/widgets/screen/base_screen.dart';
 import '../../../../core/widgets/widgets.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../gen/locale_keys.g.dart';
+import '../../../app/presentation/bloc/global_app_cubit.dart';
 import '../../../app/presentation/widgets/language_app_bar.dart';
 import 'bloc/intro_cubit.dart';
 

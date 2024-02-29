@@ -2,17 +2,20 @@ import 'dart:ui';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../configs/di/injection_container.dart';
 import '../../../../configs/themes/themes.dart';
 import '../../../../core/constants/constants.dart';
 import '../../../../utils/logger.dart';
+import '../../domain/usecases/locale/get_locale.dart';
+import '../../domain/usecases/locale/save_locale.dart';
 
 part 'global_app_state.dart';
 
 class GlobalAppCubit extends Cubit<GlobalAppState> {
-  final SharedPreferences _prefs = inject.get<SharedPreferences>();
+  final GetLocaleUseCase _getLocaleUseCase = inject.get<GetLocaleUseCase>();
+  final SaveLocaleUseCase _saveLocaleUseCase = inject.get<SaveLocaleUseCase>();
+
   late Future<void> Function(Locale locale) _contextSetLocale;
 
   GlobalAppCubit() : super(const GlobalAppState());
@@ -37,60 +40,34 @@ class GlobalAppCubit extends Cubit<GlobalAppState> {
   }) async {
     try {
       _contextSetLocale = contextSetLocale;
-      final Locale? locale = await _getLocaleFromSharedPreferences(_prefs);
-      // If saved locale not null set it as current locale.
-      if (locale != null) {
-        emit(state.copyWith(currentLocale: locale));
-        _contextSetLocale(locale);
-        return;
-      }
-      // If saved locale null set device locale as current locale.
-      // final deviceLocale =
-      //     AppUtils.getLocaleFromLocaleName(Platform.localeName);
-        emit(state.copyWith(currentLocale: AppLocalizations.vi));
-        _contextSetLocale.call(AppLocalizations.vi);
+      final Locale locale = await _getLocaleUseCase.call();
+      Log.info('sos: ${locale}');
+
+      emit(state.copyWith(currentLocale: locale));
+      _contextSetLocale(locale);
     } catch (e) {
       Log.error(e.toString());
     }
   }
 
   void changeAppLocale(Locale locale) {
-    if (locale.languageCode != state.currentLocale.languageCode ||
-        locale.countryCode != state.currentLocale.countryCode) {
-      _saveLocaleToSharedPreferences(
-          _prefs, locale.languageCode, locale.countryCode);
-      _contextSetLocale(locale);
-      emit(state.copyWith(currentLocale: locale));
-    }
+    _saveLocaleUseCase.call(params: {
+      AppKeys.languageCode: locale.languageCode,
+      AppKeys.countryCode: locale.countryCode,
+    });
+    _contextSetLocale(locale);
+    emit(state.copyWith(currentLocale: locale));
   }
 
-  /// Get language code from shared preferences.
-  Future<Locale?> _getLocaleFromSharedPreferences(
-      SharedPreferences prefs) async {
-    String? languageCode;
-    String? countryCode;
-    try {
-      languageCode = prefs.getString(AppStrings.currentLanguageCodeKey);
-      countryCode = prefs.getString(AppStrings.currentCountryCodeKey);
-    } catch (_) {}
-    if (languageCode != null) {
-      return Locale(languageCode, countryCode);
+  void onChangeLocale() async {
+    if (isViLocale) {
+      changeAppLocale(AppLocalizations.en);
+      return;
     }
-    return null;
+    changeAppLocale(AppLocalizations.vi);
   }
 
-  /// Save language code to shared preferences.
-  /// Include: save language code and country code.
-  void _saveLocaleToSharedPreferences(
-    SharedPreferences prefs,
-    String languageCode,
-    String? countryCode,
-  ) async {
-    try {
-      prefs.setString(AppStrings.currentLanguageCodeKey, languageCode);
-      if (countryCode != null) {
-        prefs.setString(AppStrings.currentCountryCodeKey, countryCode);
-      }
-    } catch (_) {}
-  }
+  bool get isViLocale =>
+      state.currentLocale.languageCode == AppLocalizations.vi.languageCode &&
+      state.currentLocale.countryCode == AppLocalizations.vi.countryCode;
 }

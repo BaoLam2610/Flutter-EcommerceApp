@@ -10,8 +10,8 @@ import '../../../../../core/constants/constants.dart';
 import '../../../../../core/extensions/extensions.dart';
 import '../../../../../core/widgets/screen/base_screen.dart';
 import '../../../../../core/widgets/widgets.dart';
-import '../../../../../gen/assets.gen.dart';
 import '../../../../../gen/locale_keys.g.dart';
+import '../../../../app/presentation/widgets/language_app_bar.dart';
 import '../../../domain/entities/login_info_entity.dart';
 import '../../widgets/footer/login_social.dart';
 import '../../widgets/input/email_input_field.dart';
@@ -44,14 +44,10 @@ class _LoginPageState extends BaseScreenState<LoginScreen> {
     );
   }
 
-  PreferredSizeWidget get _buildAppBar => CustomAppBar(
+  PreferredSizeWidget get _buildAppBar => LanguageAppBar(
         title: LocaleKeys.login.tr(),
         textStyle: AppTextStyles.bold24.copyWith(
           color: AppColors.current.primary,
-        ),
-        actionButton: Assets.icons.flagVn.svg(
-          width: 24.r,
-          height: 24.r,
         ),
       );
 

@@ -10,8 +10,9 @@ import '../../../../../core/extensions/extensions.dart';
 import '../../../../../core/widgets/screen/base_screen.dart';
 import '../../../../../core/widgets/widgets.dart';
 import '../../../../../gen/locale_keys.g.dart';
-import '../../widgets/input/email_input_field.dart';
+import '../../../../app/presentation/widgets/language_app_bar.dart';
 import '../../widgets/footer/login_social.dart';
+import '../../widgets/input/email_input_field.dart';
 import '../../widgets/input/password_input_field.dart';
 import 'bloc/register_cubit.dart';
 
@@ -40,7 +41,7 @@ class _RegisterScreenState extends BaseScreenState<RegisterScreen> {
     );
   }
 
-  PreferredSizeWidget get _buildAppBar => CustomAppBar(
+  PreferredSizeWidget get _buildAppBar => LanguageAppBar(
         title: LocaleKeys.register.tr(),
         textStyle: AppTextStyles.bold24.copyWith(
           color: AppColors.current.primary,

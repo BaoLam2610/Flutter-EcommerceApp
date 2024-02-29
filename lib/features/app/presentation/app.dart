@@ -11,44 +11,33 @@ import '../../../core/constants/constants.dart';
 import '../../../gen/codegen_loader.g.dart';
 import 'bloc/global_app_cubit.dart';
 
-class BLMarketApp extends StatefulWidget {
+class BLMarketApp extends StatelessWidget {
   const BLMarketApp({super.key});
 
   @override
-  State<BLMarketApp> createState() => _BLMarketAppState();
-}
-
-class _BLMarketAppState extends State<BLMarketApp> {
-  late GlobalAppCubit _globalAppCubit;
-
-  @override
-  void initState() {
-    super.initState();
-    _globalAppCubit = inject.get<GlobalAppCubit>();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return _easyLocalizationContainer;
+    return _easyLocalizationContainer(context);
   }
 
-  Widget get _easyLocalizationContainer => EasyLocalization(
+  Widget _easyLocalizationContainer(BuildContext context) => EasyLocalization(
         path: AppLocalizations.path,
         fallbackLocale: AppLocalizations.fallBackLocale,
         supportedLocales: AppLocalizations.supportedLocales,
         assetLoader: const CodegenLoader(),
-        child: _screenUtilContainer,
+        child: _screenUtilContainer(context),
       );
 
-  Widget get _screenUtilContainer => ScreenUtilInit(
+  Widget _screenUtilContainer(BuildContext context) => ScreenUtilInit(
         designSize: const Size(360, 690),
         minTextAdapt: true,
         splitScreenMode: true,
-        builder: (context, child) => _appContainer,
+        builder: (context, child) => _appContainer(context),
       );
 
-  Widget get _appContainer => BlocBuilder<GlobalAppCubit, GlobalAppState>(
-        bloc: _globalAppCubit,
+  Widget _appContainer(BuildContext context) =>
+      BlocBuilder<GlobalAppCubit, GlobalAppState>(
+        bloc: inject.get<GlobalAppCubit>()
+          ..initLocale(contextSetLocale: context.setLocale),
         builder: (context, state) => MaterialApp(
           navigatorKey: AppKeys.navigatorKey,
           builder: BotToastInit(),

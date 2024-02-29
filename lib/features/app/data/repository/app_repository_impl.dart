@@ -5,12 +5,21 @@ import '../../domain/repository/app_repository.dart';
 class AppRepositoryImpl extends AppRepository {
   @override
   bool getFirstOpenApp() {
-    return SharedPreferencesUtil.instance.getBool(AppKeys.firstOpenApp) ??
-        true;
+    return SharedPreferencesUtil.instance.getBool(AppKeys.firstOpenApp) ?? true;
   }
 
   @override
   void saveFirstOpenApp() {
     SharedPreferencesUtil.instance.setValue(AppKeys.firstOpenApp, false);
+  }
+
+  @override
+  Map<String, dynamic>? getLocale() {
+    return SharedPreferencesUtil.instance.getObject(AppKeys.currentLocale);
+  }
+
+  @override
+  void saveLocale(Map<String, dynamic> locale) {
+    SharedPreferencesUtil.instance.setObject(AppKeys.currentLocale, locale);
   }
 }

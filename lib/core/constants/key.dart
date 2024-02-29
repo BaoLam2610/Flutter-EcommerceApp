@@ -6,6 +6,10 @@ class AppKeys {
   static GlobalKey<NavigatorState> navigatorKey =
       GlobalKey(debugLabel: 'navigatorKey');
 
+  static const String currentLocale = 'current_locale';
+  static const String languageCode = 'language_code';
+  static const String countryCode = 'country_code';
+
   static const String firstOpenApp = 'first_open_app';
   static const String clickAction = 'click_action';
   static const String text = 'text';
