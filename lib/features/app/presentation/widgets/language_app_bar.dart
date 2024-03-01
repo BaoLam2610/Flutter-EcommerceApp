@@ -44,7 +44,7 @@ class LanguageAppBar extends StatelessWidget implements PreferredSizeWidget {
           isShowBack: isShowBack,
           onTapBack: onTapBack,
           height: height,
-          actionButton: MaterialEffect(
+          actionButton: InkWell(
             onTap: _globalAppCubit.onChangeLocale,
             child: _globalAppCubit.isViLocale
                 ? Assets.icons.flagVn.svg(

@@ -10,3 +10,6 @@ Run in terminal before build on device
 2. flutter pub run easy_localization:generate -S assets/strings -f keys -O lib/gen -o locale_keys.g.dart
 3. flutter pub run easy_localization:generate -S assets/strings -O lib/gen -o codegen_loader.g.dart
 Explain: Generate image, icon, language string assets resources
+
+## Ignore
+ignore const: // ignore_for_file: prefer_const_constructors

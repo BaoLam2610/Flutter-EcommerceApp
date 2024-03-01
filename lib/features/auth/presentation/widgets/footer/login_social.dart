@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -24,7 +26,7 @@ class LoginSocial extends StatelessWidget {
         onTapFooterText: onTapFooterText,
       );
 
-  factory LoginSocial.register() => const LoginSocial(
+  factory LoginSocial.register() => LoginSocial(
         type: LoginSocialType.register,
       );
 

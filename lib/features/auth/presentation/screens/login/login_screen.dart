@@ -110,7 +110,7 @@ class _LoginPageState extends BaseScreenState<LoginScreen> {
         builder: (context, state) {
           return EmailInputField(
             controller: _loginCubit.emailController,
-            errorText: state.emailError,
+            errorText: state.emailError.tr(),
             onTextChanged: (text) => _loginCubit.validateEmail(),
           );
         },
@@ -122,7 +122,7 @@ class _LoginPageState extends BaseScreenState<LoginScreen> {
         builder: (context, state) {
           return PasswordInputField(
             controller: _loginCubit.passwordController,
-            errorText: state.passwordError,
+            errorText: state.passwordError.tr(),
             onTextChanged: (text) => _loginCubit.validatePassword(),
           );
         },

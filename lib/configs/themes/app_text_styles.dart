@@ -9,63 +9,62 @@ class AppTextStyles {
 
   static String fontFamily = FontFamily.muli;
   static Color defaultTextColor = AppColors.current.primaryText;
-  static double? defaultTextHeight;
 
   /* Regular */
   static TextStyle regular12 = TextStyle(
     fontFamily: fontFamily,
     fontSize: 12.sp,
     color: defaultTextColor,
-    height: defaultTextHeight,
+    height: 12 / 8,
   );
 
   static TextStyle regular14 = TextStyle(
     fontFamily: fontFamily,
     fontSize: 14.sp,
     color: defaultTextColor,
-    height: defaultTextHeight,
+    height: 14 / 10,
   );
 
   static TextStyle regular16 = TextStyle(
     fontFamily: fontFamily,
     fontSize: 16.sp,
     color: defaultTextColor,
-    height: defaultTextHeight,
+    height: 16 / 12,
   );
 
   static TextStyle regular18 = TextStyle(
     fontFamily: fontFamily,
     fontSize: 18.sp,
     color: defaultTextColor,
-    height: defaultTextHeight,
+    height: 18 / 14,
   );
 
   static TextStyle regular20 = TextStyle(
     fontFamily: fontFamily,
     fontSize: 20.sp,
     color: defaultTextColor,
-    height: defaultTextHeight,
+    height: 20 / 16,
   );
 
   static TextStyle regular24 = TextStyle(
     fontFamily: fontFamily,
     fontSize: 24.sp,
     color: defaultTextColor,
-    height: defaultTextHeight,
+    height: 24 / 20,
   );
 
   static TextStyle regular28 = TextStyle(
     fontFamily: fontFamily,
     fontSize: 28.sp,
     color: defaultTextColor,
-    height: defaultTextHeight,
+    height: 28 / 24,
   );
 
   static TextStyle regular32 = TextStyle(
     fontFamily: fontFamily,
     fontSize: 32.sp,
     color: defaultTextColor,
-    height: defaultTextHeight,
+    height: 32 / 28,
   );
 
   /* Bold */
@@ -74,7 +73,7 @@ class AppTextStyles {
     fontFamily: fontFamily,
     fontSize: 12.sp,
     color: defaultTextColor,
-    height: defaultTextHeight,
+    height: 12 / 8,
   );
 
   static TextStyle bold14 = TextStyle(
@@ -82,7 +81,7 @@ class AppTextStyles {
     fontFamily: fontFamily,
     fontSize: 14.sp,
     color: defaultTextColor,
-    height: defaultTextHeight,
+    height: 14 / 10,
   );
 
   static TextStyle bold16 = TextStyle(
@@ -90,7 +89,7 @@ class AppTextStyles {
     fontFamily: fontFamily,
     fontSize: 16.sp,
     color: defaultTextColor,
-    height: defaultTextHeight,
+    height: 16 / 12,
   );
 
   static TextStyle bold18 = TextStyle(
@@ -98,7 +97,7 @@ class AppTextStyles {
     fontFamily: fontFamily,
     fontSize: 18.sp,
     color: defaultTextColor,
-    height: defaultTextHeight,
+    height: 18 / 14,
   );
 
   static TextStyle bold20 = TextStyle(
@@ -106,7 +105,7 @@ class AppTextStyles {
     fontFamily: fontFamily,
     fontSize: 20.sp,
     color: defaultTextColor,
-    height: defaultTextHeight,
+    height: 20 / 16,
   );
 
   static TextStyle bold24 = TextStyle(
@@ -114,7 +113,7 @@ class AppTextStyles {
     fontFamily: fontFamily,
     fontSize: 24.sp,
     color: defaultTextColor,
-    height: defaultTextHeight,
+    height: 24 / 20,
   );
 
   static TextStyle bold28 = TextStyle(
@@ -122,7 +121,7 @@ class AppTextStyles {
     fontFamily: fontFamily,
     fontSize: 28.sp,
     color: defaultTextColor,
-    height: defaultTextHeight,
+    height: 28 / 24,
   );
 
   static TextStyle bold32 = TextStyle(
@@ -130,6 +129,6 @@ class AppTextStyles {
     fontFamily: fontFamily,
     fontSize: 32.sp,
     color: defaultTextColor,
-    height: defaultTextHeight,
+    height: 32 / 28,
   );
 }

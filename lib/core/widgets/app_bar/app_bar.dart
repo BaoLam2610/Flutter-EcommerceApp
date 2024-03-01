@@ -33,7 +33,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Container(
       height: preferredSize.height + context.mediaQuery.viewPadding.top,
       width: context.width,
-      padding: EdgeInsets.only(top: context.mediaQuery.viewPadding.top),
+      padding: EdgeInsets.only(
+        top: context.mediaQuery.viewPadding.top,
+        left: 18.w,
+        right: 18.w,
+      ),
       color: colorBgr ?? AppColors.current.background,
       child: Stack(
         children: [
@@ -49,9 +53,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 },
                 child: Padding(
                   padding: EdgeInsets.all(18.r),
-                  child: Assets.icons.backICon.svg(
-                    height: 24.r,
-                    width: 24.r,
+                  child: Transform.translate(
+                    offset: Offset(-18.r, 0),
+                    child: Assets.icons.backICon.svg(
+                      height: 18.r,
+                      width: 18.r,
+                    ),
                   ),
                 ),
               ),
@@ -62,10 +69,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               top: 0,
               right: 0,
               bottom: 0,
-              child: Padding(
-                padding: EdgeInsets.only(right: 18.w),
-                child: actionButton!,
-              ),
+              child: actionButton!,
             ),
           },
           Positioned(
@@ -76,7 +80,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             child: Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: isShowBack || actionButton != null
-                    ? 18.w + 24.r + 4.w
+                    ? 18.w + 18.r + 4.w
                     : 18.w,
               ),
               child: Center(

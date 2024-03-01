@@ -1,5 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
-
 import '../../../../../core/constants/constants.dart';
 import '../../../../../core/extensions/extensions.dart';
 import '../../../../../gen/locale_keys.g.dart';
@@ -14,11 +12,11 @@ class ValidatePasswordConfirmUseCase
     final clickAction = params[AppKeys.clickAction] as bool;
 
     if (password.isNullOrEmpty) {
-      return LocaleKeys.please_enter_password_first.tr();
+      return LocaleKeys.please_enter_password_first;
     }
 
     if ((password != passwordConfirm) && clickAction) {
-      return LocaleKeys.validate_password_not_match.tr();
+      return LocaleKeys.validate_password_not_match;
     }
 
     return "";

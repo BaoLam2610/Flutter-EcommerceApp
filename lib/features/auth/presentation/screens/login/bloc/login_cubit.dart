@@ -1,9 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../../../../../configs/di/injection_container.dart';
 import '../../../../../../core/bloc/base_bloc.dart';
 import '../../../../../../core/bloc/bloc_state.dart';
 import '../../../../../../core/constants/constants.dart';
+import '../../../../../../gen/locale_keys.g.dart';
 import '../../../../../app/domain/usecases/validate/validate_email.dart';
 import '../../../../../app/domain/usecases/validate/validate_password.dart';
 import '../../../../data/dto/login_request.dart';

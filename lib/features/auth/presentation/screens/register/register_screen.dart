@@ -105,7 +105,7 @@ class _RegisterScreenState extends BaseScreenState<RegisterScreen> {
         builder: (context, state) {
           return EmailInputField(
             controller: _registerCubit.emailController,
-            errorText: state.emailError,
+            errorText: state.emailError.tr(),
             onTextChanged: (text) => _registerCubit.validateEmail(),
           );
         },
@@ -117,7 +117,7 @@ class _RegisterScreenState extends BaseScreenState<RegisterScreen> {
         builder: (context, state) {
           return PasswordInputField(
             controller: _registerCubit.passwordController,
-            errorText: state.passwordError,
+            errorText: state.passwordError.tr(),
             onTextChanged: (text) => _registerCubit.validatePassword(),
           );
         },
@@ -132,7 +132,7 @@ class _RegisterScreenState extends BaseScreenState<RegisterScreen> {
             label: LocaleKeys.confirm_password.tr(),
             hint: LocaleKeys.confirm_password_hint.tr(),
             controller: _registerCubit.passwordConfirmController,
-            errorText: state.passwordConfirmError,
+            errorText: state.passwordConfirmError.tr(),
             onTextChanged: (text) => _registerCubit.validatePasswordConfirm(),
           );
         },
