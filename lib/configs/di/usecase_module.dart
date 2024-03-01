@@ -6,7 +6,7 @@ void provideUseCase() {
   inject.registerLazySingleton(() => GetLocaleUseCase());
   inject.registerLazySingleton(() => SaveFirstOpenAppUseCase());
   inject.registerLazySingleton(() => GetFirstOpenAppUseCase());
-  inject.registerFactory(() => ValidateEmailUseCase());
+  inject.registerLazySingleton(() => ValidateEmailUseCase());
   inject.registerLazySingleton(() => ValidatePasswordUseCase());
   inject.registerLazySingleton(() => ValidatePasswordConfirmUseCase());
   inject.registerLazySingleton(() => LoginUseCase());
@@ -14,4 +14,5 @@ void provideUseCase() {
   inject.registerLazySingleton(() => SaveAccessTokenUseCase());
   inject.registerLazySingleton(() => SaveRememberAccountUseCase());
   inject.registerLazySingleton(() => GetRememberAccountUseCase());
+  inject.registerLazySingleton(() => AppStorage());
 }

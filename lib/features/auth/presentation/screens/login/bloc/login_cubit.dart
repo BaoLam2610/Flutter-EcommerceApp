@@ -8,6 +8,7 @@ import '../../../../../../core/constants/constants.dart';
 import '../../../../../../gen/locale_keys.g.dart';
 import '../../../../../app/domain/usecases/validate/validate_email.dart';
 import '../../../../../app/domain/usecases/validate/validate_password.dart';
+import '../../../../../app/domain/utils/app_storage.dart';
 import '../../../../data/dto/login_request.dart';
 import '../../../../domain/entities/user_type.dart';
 import '../../../../domain/usecases/get_remember_account.dart';
@@ -32,18 +33,13 @@ class LoginCubit extends BaseCubit<LoginState> {
 
   final _saveRememberAccountUseCase = inject.get<SaveRememberAccountUseCase>();
 
-  final _getRememberAccountUseCase = inject.get<GetRememberAccountUseCase>();
+  final _appStorage = inject.get<AppStorage>();
 
   LoginCubit() : super(LoginState(status: Initialize()));
 
   void init() async {
-    final rememberAccount = await _getRememberAccountUseCase.call();
-    if (rememberAccount == null) {
-      return;
-    }
-    emailController.text = (rememberAccount[AppKeys.email] as String?) ?? '';
-    passwordController.text =
-        (rememberAccount[AppKeys.password] as String?) ?? '';
+    emailController.text = _appStorage.account;
+    passwordController.text = _appStorage.password;
     emit(state.copyWith(
       isRememberMe: true,
     ));

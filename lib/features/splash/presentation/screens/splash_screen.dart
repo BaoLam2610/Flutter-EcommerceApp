@@ -27,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    _cubit = ReadContext(context).read<SplashCubit>();
+    _cubit = ReadContext(context).read<SplashCubit>()..fetchDataStorage();
     checkFirstOpenApp();
   }
 
@@ -69,8 +69,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
     Future.delayed(
       AppDurations.delaySplash,
-      () => context.navigator.pushReplacementNamed(AppRoutes.introRoute
-          // _isFirstOpenApp ? AppRoutes.introRoute : AppRoutes.loginRoute,
+      () => context.navigator.pushReplacementNamed(
+          _isFirstOpenApp ? AppRoutes.introRoute : AppRoutes.loginRoute,
           ),
     );
   }

@@ -13,6 +13,7 @@ import '../../features/app/domain/usecases/locale/save_locale.dart';
 import '../../features/app/domain/usecases/validate/validate_email.dart';
 import '../../features/app/domain/usecases/validate/validate_password.dart';
 import '../../features/app/domain/usecases/validate/validate_password_confirm.dart';
+import '../../features/app/domain/utils/app_storage.dart';
 import '../../features/app/presentation/bloc/global_app_cubit.dart';
 import '../../features/auth/data/remote/auth_service.dart';
 import '../../features/auth/data/repository/auth_repository_impl.dart';

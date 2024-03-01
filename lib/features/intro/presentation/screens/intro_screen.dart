@@ -146,6 +146,6 @@ class _IntroScreenState extends BaseScreenState<IntroScreen> {
 
   void _onSkipButtonPressed() {
     _cubit.onSaveFirstOpenApp();
-    context.navigator.pushReplacementNamed(AppRoutes.loginRoute);
+    context.navigator.pushNamed(AppRoutes.loginRoute);
   }
 }
