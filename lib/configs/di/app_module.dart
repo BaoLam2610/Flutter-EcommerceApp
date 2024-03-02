@@ -1,4 +1,6 @@
-part of 'injection_container.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../configs.dart';
 
 Future<void> provideSharePreferences() async {
   final sharedPreferences = await SharedPreferences.getInstance();

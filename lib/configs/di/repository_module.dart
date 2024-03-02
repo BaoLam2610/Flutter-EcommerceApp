@@ -1,4 +1,8 @@
-part of 'injection_container.dart';
+import '../../features/app/data/repository/app_repository_impl.dart';
+import '../../features/app/domain/repository/app_repository.dart';
+import '../../features/auth/data/repository/auth_repository_impl.dart';
+import '../../features/auth/domain/repository/auth_repository.dart';
+import '../configs.dart';
 
 void provideRepository() {
   inject.registerLazySingleton<AppRepository>(() => AppRepositoryImpl());
