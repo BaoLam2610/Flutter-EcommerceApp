@@ -2,9 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../../configs/themes/themes.dart';
-import '../../../../gen/assets.gen.dart';
-import '../../../../gen/locale_keys.g.dart';
+import '../../../../configs/configs.dart';
+import '../../../../gen/gen.dart';
 
 enum MenuItemType { home, category, store, notification, profile }
 
@@ -47,7 +46,7 @@ extension MenuItemTypeExtension on MenuItemType {
         return LocaleKeys.category.tr();
       case MenuItemType.store:
         return LocaleKeys.store.tr();
-        case MenuItemType.notification:
+      case MenuItemType.notification:
         return LocaleKeys.notification.tr();
       case MenuItemType.profile:
         return LocaleKeys.profile.tr();

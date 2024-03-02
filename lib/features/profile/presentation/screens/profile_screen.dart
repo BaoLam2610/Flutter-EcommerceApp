@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/widgets/screen/base_screen.dart';
+import '../../../../core/core.dart';
 
 class ProfileScreen extends BaseScreen {
   const ProfileScreen({super.key});
@@ -13,7 +13,9 @@ class _ProfileScreenState extends BaseScreenState<ProfileScreen> {
   @override
   Widget buildScreen(BuildContext context) {
     return Scaffold(
-      body: Center(child: Text('Profile Screen'),),
+      body: Center(
+        child: Text('Profile Screen'),
+      ),
     );
   }
 }

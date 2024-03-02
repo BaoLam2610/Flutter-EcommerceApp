@@ -1,7 +1,5 @@
-import '../../../../../core/constants/constants.dart';
-import '../../../../../core/extensions/extensions.dart';
-import '../../../../../gen/locale_keys.g.dart';
-import '../use_case.dart';
+import '../../../../../core/core.dart';
+import '../../../../../gen/gen.dart';
 
 class ValidatePasswordConfirmUseCase
     extends UseCase<String, Map<String, dynamic>> {

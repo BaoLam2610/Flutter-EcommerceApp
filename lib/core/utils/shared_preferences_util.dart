@@ -4,10 +4,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../configs/di/injection_container.dart';
 
-class SharedPreferencesUtil {
-  SharedPreferencesUtil._();
+class PrefUtil {
+  PrefUtil._();
 
-  static final SharedPreferencesUtil instance = SharedPreferencesUtil._();
+  static final PrefUtil instance = PrefUtil._();
 
   final SharedPreferences _prefs = inject.get<SharedPreferences>();
 

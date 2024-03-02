@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'dart:ui';
 
-import '../use_case.dart';
+import '../../../../../core/core.dart';
 
 class GetDeviceLocaleUseCase extends UseCase<Locale, void> {
   @override

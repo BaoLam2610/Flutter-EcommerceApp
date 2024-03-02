@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../configs/di/injection_container.dart';
-import '../../../../core/widgets/widgets.dart';
-import '../../../../gen/assets.gen.dart';
+import '../../../../configs/configs.dart';
+import '../../../../core/core.dart';
+import '../../../../gen/gen.dart';
 import '../bloc/global_app_cubit.dart';
 
 class LanguageAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -37,7 +37,7 @@ class LanguageAppBar extends StatelessWidget implements PreferredSizeWidget {
       buildWhen: (previous, current) =>
           previous.currentLocale != current.currentLocale,
       builder: (context, state) {
-        return CustomAppBar(
+        return AppBarWidget(
           title: title,
           textStyle: textStyle,
           colorBgr: colorBgr,

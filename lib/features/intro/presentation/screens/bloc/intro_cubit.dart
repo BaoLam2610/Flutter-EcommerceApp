@@ -2,11 +2,10 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../../core/constants/constants.dart';
-import '../../../../../../gen/assets.gen.dart';
-import '../../../../../../gen/locale_keys.g.dart';
-import '../../../../../configs/di/injection_container.dart';
-import '../../../../app/domain/usecases/first_open_app/save_first_open_app.dart';
+import '../../../../../configs/configs.dart';
+import '../../../../../core/core.dart';
+import '../../../../../gen/gen.dart';
+import '../../../domain/usecases/save_first_open_app.dart';
 
 part 'intro_state.dart';
 

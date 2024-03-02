@@ -1,13 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
-// Author: Hari Shankar
-// Date: 28-07-2023
-/*
-No 3rd party plugin
-Purpose: Flutter Dio Logger: Simplifying HTTP Request & Response Logging.
-*/
-
 // Define an enum for the different log levels
 enum Level { debug, info, warning, error, alien }
 
@@ -76,14 +69,14 @@ class LoggerInterceptor extends Interceptor {
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     Log.info(
         "--> ${options.method.toUpperCase()} ${"${options.baseUrl}${options.path}"}");
-    Log.info("Headers:");
+    Log.info('Headers:');
     options.headers.forEach((k, v) => Log.info('$k: $v'));
-    Log.info("queryParameters:");
+    Log.info('queryParameters:');
     options.queryParameters.forEach((k, v) => Log.info('$k: $v'));
     if (options.data != null) {
-      Log.info("Body: ${options.data}");
+      Log.info('Body: ${options.data}');
     }
-    Log.info("--> END ${options.method.toUpperCase()}");
+    Log.info('--> END ${options.method.toUpperCase()}');
 
     return super.onRequest(options, handler);
   }
@@ -102,18 +95,18 @@ class LoggerInterceptor extends Interceptor {
     Log.error(
       'onError: ${err.response}',
     );
-    Log.error("<-- End error");
+    Log.error('<-- End error');
     // Call the super class to continue handling the error
     return super.onError(err, handler);
   }
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
-    Log.info("<-- ${response.statusCode} ${response.realUri}");
-    Log.info("Headers:");
+    Log.info('<-- ${response.statusCode} ${response.realUri}');
+    Log.info('Headers:');
     response.headers.forEach((k, v) => Log.info('$k: $v'));
-    Log.info("Response: ${response.data}");
-    Log.info("<-- END HTTP");
+    Log.info('Response: ${response.data}');
+    Log.info('<-- END HTTP');
     // Call the super class to continue handling the response
     return super.onResponse(response, handler);
   }

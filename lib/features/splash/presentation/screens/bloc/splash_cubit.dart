@@ -1,12 +1,10 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../configs/di/injection_container.dart';
-import '../../../../../configs/routes/routes.dart';
-import '../../../../../core/bloc/bloc_state.dart';
-import '../../../../../core/constants/constants.dart';
-import '../../../../app/domain/usecases/first_open_app/get_first_open_app.dart';
+import '../../../../../configs/configs.dart';
+import '../../../../../core/core.dart';
 import '../../../../app/domain/utils/app_storage.dart';
+import '../../../domain/usecases/get_first_open_app.dart';
 import '../../../domain/usecases/get_logged.dart';
 
 part 'splash_state.dart';

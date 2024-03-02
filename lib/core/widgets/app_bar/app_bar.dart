@@ -5,7 +5,7 @@ import '../../../configs/themes/themes.dart';
 import '../../../gen/assets.gen.dart';
 import '../../extensions/extensions.dart';
 
-class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final TextStyle? textStyle;
   final double? height;
@@ -14,7 +14,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool isShowBack;
   final VoidCallback? onTapBack;
 
-  const CustomAppBar({
+  const AppBarWidget({
     super.key,
     this.height,
     this.colorBgr,

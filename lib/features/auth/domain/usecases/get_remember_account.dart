@@ -1,5 +1,5 @@
-import '../../../../configs/di/injection_container.dart';
-import '../../../app/domain/usecases/use_case.dart';
+import '../../../../configs/configs.dart';
+import '../../../../core/core.dart';
 import '../repository/auth_repository.dart';
 
 class GetRememberAccountUseCase extends UseCase<Map<String, dynamic>?, void> {

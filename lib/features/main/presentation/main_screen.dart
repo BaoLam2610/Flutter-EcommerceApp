@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../core/widgets/screen/base_screen.dart';
+import '../../../core/core.dart';
 import 'bloc/main_cubit.dart';
 import 'widgets/menu_bottom_bar.dart';
 

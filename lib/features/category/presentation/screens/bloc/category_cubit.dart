@@ -1,5 +1,4 @@
-import '../../../../../core/bloc/base_bloc.dart';
-import '../../../../../core/bloc/bloc_state.dart';
+import '../../../../../core/core.dart';
 
 part 'category_state.dart';
 

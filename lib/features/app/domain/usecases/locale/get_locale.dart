@@ -1,9 +1,8 @@
 import 'dart:ui';
 
-import '../../../../../configs/di/injection_container.dart';
-import '../../../../../core/constants/constants.dart';
+import '../../../../../configs/configs.dart';
+import '../../../../../core/core.dart';
 import '../../repository/app_repository.dart';
-import '../use_case.dart';
 import 'get_device_locale.dart';
 
 class GetLocaleUseCase extends UseCase<Locale, void> {

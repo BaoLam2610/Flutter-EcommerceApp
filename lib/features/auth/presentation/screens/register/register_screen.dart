@@ -3,13 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../configs/themes/themes.dart';
-import '../../../../../core/bloc/bloc_state.dart';
-import '../../../../../core/constants/constants.dart';
-import '../../../../../core/extensions/extensions.dart';
-import '../../../../../core/widgets/screen/base_screen.dart';
-import '../../../../../core/widgets/widgets.dart';
-import '../../../../../gen/locale_keys.g.dart';
+import '../../../../../configs/configs.dart';
+import '../../../../../core/core.dart';
+import '../../../../../gen/gen.dart';
 import '../../../../app/presentation/widgets/language_app_bar.dart';
 import '../../widgets/footer/login_social.dart';
 import '../../widgets/input/email_input_field.dart';

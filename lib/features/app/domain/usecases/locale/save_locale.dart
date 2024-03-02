@@ -1,6 +1,6 @@
-import '../../../../../configs/di/injection_container.dart';
+import '../../../../../configs/configs.dart';
+import '../../../../../core/core.dart';
 import '../../repository/app_repository.dart';
-import '../use_case.dart';
 
 class SaveLocaleUseCase extends UseCase<void, Map<String, dynamic>> {
   final AppRepository _repository = inject.get<AppRepository>();

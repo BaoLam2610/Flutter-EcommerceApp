@@ -4,11 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../configs/di/injection_container.dart';
-import '../../../configs/routes/routes.dart';
-import '../../../configs/themes/themes.dart';
-import '../../../core/constants/constants.dart';
-import '../../../gen/codegen_loader.g.dart';
+import '../../../configs/configs.dart';
+import '../../../core/core.dart';
+import '../../../gen/gen.dart';
 import 'bloc/global_app_cubit.dart';
 
 class BLMarketApp extends StatelessWidget {

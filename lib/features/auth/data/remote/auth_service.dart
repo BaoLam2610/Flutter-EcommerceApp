@@ -1,7 +1,5 @@
-import '../../../../configs/di/injection_container.dart';
-import '../../../../core/resources/api/api_list.dart';
-import '../../../../core/resources/api/model/data_response.dart';
-import '../../../../core/resources/api/rest_api_client.dart';
+import '../../../../configs/configs.dart';
+import '../../../../core/core.dart';
 import '../dto/login_info_dto.dart';
 import '../dto/login_request.dart';
 import '../dto/register_request.dart';

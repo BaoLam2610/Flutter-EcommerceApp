@@ -1,6 +1,5 @@
-import '../../../../../core/extensions/string_extensions.dart';
-import '../../../../../gen/locale_keys.g.dart';
-import '../use_case.dart';
+import '../../../../../core/core.dart';
+import '../../../../../gen/gen.dart';
 
 class ValidatePasswordUseCase extends UseCase<String, String> {
   @override

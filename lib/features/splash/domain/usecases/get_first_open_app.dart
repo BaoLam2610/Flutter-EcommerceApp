@@ -1,6 +1,6 @@
-import '../../../../../configs/di/injection_container.dart';
-import '../../repository/app_repository.dart';
-import '../use_case.dart';
+import '../../../../configs/configs.dart';
+import '../../../../core/core.dart';
+import '../../../app/domain/repository/app_repository.dart';
 
 class GetFirstOpenAppUseCase extends UseCase<bool, void> {
   final AppRepository _repository = inject.get<AppRepository>();

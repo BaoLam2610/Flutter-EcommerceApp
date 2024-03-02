@@ -4,10 +4,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../configs/themes/themes.dart';
-import '../../../../../core/extensions/extensions.dart';
-import '../../../../../gen/assets.gen.dart';
-import '../../../../../gen/locale_keys.g.dart';
+import '../../../../../configs/configs.dart';
+import '../../../../../core/core.dart';
+import '../../../../../gen/gen.dart';
 import 'social_card.dart';
 
 enum LoginSocialType { login, register }

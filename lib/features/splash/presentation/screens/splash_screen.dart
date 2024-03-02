@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/bloc/bloc_state.dart';
-import '../../../../core/constants/constants.dart';
-import '../../../../core/extensions/extensions.dart';
-import '../../../../gen/assets.gen.dart';
+import '../../../../core/core.dart';
+import '../../../../gen/gen.dart';
 import 'bloc/splash_cubit.dart';
 
 class SplashScreen extends StatefulWidget {

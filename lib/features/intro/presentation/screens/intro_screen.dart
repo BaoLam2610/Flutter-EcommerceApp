@@ -3,13 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../configs/routes/routes.dart';
-import '../../../../configs/themes/themes.dart';
-import '../../../../core/constants/constants.dart';
-import '../../../../core/extensions/widget_extensions.dart';
-import '../../../../core/widgets/screen/base_screen.dart';
-import '../../../../core/widgets/widgets.dart';
-import '../../../../gen/locale_keys.g.dart';
+import '../../../../configs/configs.dart';
+import '../../../../core/core.dart';
+import '../../../../gen/gen.dart';
 import '../../../app/presentation/widgets/language_app_bar.dart';
 import 'bloc/intro_cubit.dart';
 

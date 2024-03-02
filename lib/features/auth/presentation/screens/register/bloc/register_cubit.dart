@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../../configs/di/injection_container.dart';
-import '../../../../../../core/bloc/base_bloc.dart';
-import '../../../../../../core/bloc/bloc_state.dart';
-import '../../../../../../core/constants/constants.dart';
+import '../../../../../../configs/configs.dart';
+import '../../../../../../core/core.dart';
 import '../../../../../app/domain/usecases/validate/validate_email.dart';
 import '../../../../../app/domain/usecases/validate/validate_password.dart';
 import '../../../../../app/domain/usecases/validate/validate_password_confirm.dart';

@@ -3,10 +3,9 @@ import 'dart:ui';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../configs/di/injection_container.dart';
-import '../../../../configs/themes/themes.dart';
-import '../../../../core/constants/constants.dart';
-import '../../../../utils/logger.dart';
+import '../../../../configs/configs.dart';
+import '../../../../core/core.dart';
+import '../../../../utils/utils.dart';
 import '../../domain/usecases/locale/get_locale.dart';
 import '../../domain/usecases/locale/save_locale.dart';
 
@@ -41,8 +40,6 @@ class GlobalAppCubit extends Cubit<GlobalAppState> {
     try {
       _contextSetLocale = contextSetLocale;
       final Locale locale = await _getLocaleUseCase.call();
-      Log.info('sos: ${locale}');
-
       emit(state.copyWith(currentLocale: locale));
       _contextSetLocale(locale);
     } catch (e) {

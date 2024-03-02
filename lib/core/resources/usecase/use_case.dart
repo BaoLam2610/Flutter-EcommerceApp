@@ -1,5 +1,5 @@
-import '../../../../core/bloc/bloc_state.dart';
-import '../../../../core/resources/data_state.dart';
+import '../../bloc/base_state.dart';
+import '../data_state.dart';
 
 abstract class NetworkUseCase<Params, Data> with CallApi<Data> {
   Future<Resource<Data>> call({Params params});
