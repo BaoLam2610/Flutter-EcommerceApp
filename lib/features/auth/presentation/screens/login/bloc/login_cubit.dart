@@ -1,19 +1,17 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../../../../../configs/di/injection_container.dart';
 import '../../../../../../core/bloc/base_bloc.dart';
 import '../../../../../../core/bloc/bloc_state.dart';
 import '../../../../../../core/constants/constants.dart';
-import '../../../../../../gen/locale_keys.g.dart';
 import '../../../../../app/domain/usecases/validate/validate_email.dart';
 import '../../../../../app/domain/usecases/validate/validate_password.dart';
 import '../../../../../app/domain/utils/app_storage.dart';
 import '../../../../data/dto/login_request.dart';
 import '../../../../domain/entities/user_type.dart';
-import '../../../../domain/usecases/get_remember_account.dart';
 import '../../../../domain/usecases/login.dart';
 import '../../../../domain/usecases/save_access_token.dart';
+import '../../../../domain/usecases/save_logged.dart';
 import '../../../../domain/usecases/save_remember_account.dart';
 
 part 'login_state.dart';
@@ -33,6 +31,8 @@ class LoginCubit extends BaseCubit<LoginState> {
 
   final _saveRememberAccountUseCase = inject.get<SaveRememberAccountUseCase>();
 
+  final _saveLoggedUseCase = inject.get<SaveLoggedUseCase>();
+
   final _appStorage = inject.get<AppStorage>();
 
   LoginCubit() : super(LoginState(status: Initialize()));
@@ -41,7 +41,8 @@ class LoginCubit extends BaseCubit<LoginState> {
     emailController.text = _appStorage.account;
     passwordController.text = _appStorage.password;
     emit(state.copyWith(
-      isRememberMe: true,
+      isRememberMe:
+          _appStorage.account.isNotEmpty && _appStorage.password.isNotEmpty,
     ));
   }
 
@@ -89,6 +90,7 @@ class LoginCubit extends BaseCubit<LoginState> {
 
     if (resource is Success) {
       await _saveAccessTokenUseCase.call(params: resource.data?.accessToken);
+      await _saveLoggedUseCase.call();
       await _saveRememberAccountUseCase.call(
         params: state.isRememberMe
             ? {

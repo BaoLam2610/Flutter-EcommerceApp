@@ -22,4 +22,14 @@ class AppRepositoryImpl extends AppRepository {
   void saveLocale(Map<String, dynamic> locale) {
     SharedPreferencesUtil.instance.setObject(AppKeys.currentLocale, locale);
   }
+
+  @override
+  bool getLogged() {
+    return SharedPreferencesUtil.instance.getBool(AppKeys.isLogged) ?? false;
+  }
+
+  @override
+  void saveLogged() {
+    SharedPreferencesUtil.instance.setValue(AppKeys.isLogged, false);
+  }
 }

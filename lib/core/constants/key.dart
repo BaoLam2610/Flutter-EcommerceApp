@@ -11,6 +11,7 @@ class AppKeys {
   static const String countryCode = 'country_code';
 
   static const String firstOpenApp = 'first_open_app';
+  static const String isLogged = 'is_logged';
   static const String clickAction = 'click_action';
   static const String text = 'text';
   static const String image = 'image';

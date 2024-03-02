@@ -6,4 +6,8 @@ abstract class AppRepository {
   void saveLocale(Map<String, dynamic> locale);
 
   Map<String, dynamic>? getLocale();
+
+  void saveLogged();
+
+  bool getLogged();
 }
