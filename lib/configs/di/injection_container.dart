@@ -25,8 +25,13 @@ import '../../features/auth/domain/usecases/save_access_token.dart';
 import '../../features/auth/domain/usecases/save_remember_account.dart';
 import '../../features/auth/presentation/screens/login/bloc/login_cubit.dart';
 import '../../features/auth/presentation/screens/register/bloc/register_cubit.dart';
+import '../../features/category/presentation/screens/bloc/category_cubit.dart';
+import '../../features/home/presentation/screens/bloc/home_cubit.dart';
 import '../../features/intro/presentation/screens/bloc/intro_cubit.dart';
+import '../../features/main/presentation/bloc/main_cubit.dart';
+import '../../features/profile/presentation/screens/bloc/profile_cubit.dart';
 import '../../features/splash/presentation/screens/bloc/splash_cubit.dart';
+import '../../features/store/presentation/screens/bloc/store_cubit.dart';
 import '../../utils/logger.dart';
 
 part 'app_module.dart';

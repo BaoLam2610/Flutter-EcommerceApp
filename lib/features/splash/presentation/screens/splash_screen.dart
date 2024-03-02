@@ -70,7 +70,8 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(
       AppDurations.delaySplash,
       () => context.navigator.pushReplacementNamed(
-          _isFirstOpenApp ? AppRoutes.introRoute : AppRoutes.loginRoute,
+        AppRoutes.mainRoute
+          // _isFirstOpenApp ? AppRoutes.introRoute : AppRoutes.loginRoute,
           ),
     );
   }

@@ -56,11 +56,8 @@ class _LoginPageState extends BaseScreenState<LoginScreen> {
         listener: (context, state) {
           state.observeData<LoginInfoEntity>(
             context,
-            onSuccess: (data, message) {
-              /*
-              * Navigate to home screen
-              * */
-            },
+            onSuccess: (data, message) =>
+                Navigator.pushReplacementNamed(context, AppRoutes.mainRoute),
           );
         },
         child: SizedBox(
