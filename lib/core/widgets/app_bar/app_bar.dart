@@ -26,7 +26,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   });
 
   @override
-  Size get preferredSize => Size.fromHeight(height ?? (56.h));
+  Size get preferredSize => Size.fromHeight(height ?? (kToolbarHeight.h));
 
   @override
   Widget build(BuildContext context) {

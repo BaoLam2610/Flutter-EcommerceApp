@@ -28,7 +28,7 @@ class EmailInputField extends StatelessWidget {
       hint: hint ?? LocaleKeys.email_hint.tr(),
       suffixIcon: Assets.icons.email.svg(),
       inputType: TextInputType.emailAddress,
-      errors: errorText,
+      errorText: errorText,
       onChanged: onTextChanged,
     );
   }

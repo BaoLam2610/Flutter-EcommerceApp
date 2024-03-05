@@ -10,3 +10,4 @@ export 'material_effect/material_effect.dart';
 export 'screen/base_screen.dart';
 export 'scroll/scroll_column_expandable.dart';
 export 'text_field/label_text_field.dart';
+export 'text_field/search_field.dart';

@@ -43,7 +43,7 @@ class _PasswordInputFieldState extends State<PasswordInputField> {
       hint: widget.hint ?? LocaleKeys.password_hint.tr(),
       suffixIcon: _buildSuffixIcon,
       obscureText: !_isShowPassword,
-      errors: widget.errorText,
+      errorText: widget.errorText,
       onChanged: widget.onTextChanged,
     );
   }

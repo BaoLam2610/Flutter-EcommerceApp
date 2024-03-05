@@ -1,53 +1,94 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../configs/themes/themes.dart';
-import '../../../gen/assets.gen.dart';
-import '../../extensions/extensions.dart';
+import '../../../configs/configs.dart';
+import '../../../gen/gen.dart';
+import '../../core.dart';
 
 class LabelTextField extends StatelessWidget {
-  final Function(String text)? onChanged;
-  final TextEditingController? controller;
-  final String? label;
-  final String? hint;
-  final Widget? suffixIcon;
-  final TextInputType? inputType;
-  final String? errors;
-  final bool? obscureText;
-  final void Function(PointerDownEvent)? onTapOutSide;
+  final Function(String text)? _onChanged;
+  final TextEditingController? _controller;
+  final String? _label;
+  final String? _hint;
+  final Widget? _prefixIcon;
+  final Widget? _suffixIcon;
+  final TextInputType? _inputType;
+  final String? _errorText;
+  final bool? _obscureText;
+  final bool? _enabled;
+  final bool? _readOnly;
+  final TextStyle? _hintStyle;
+  final TextStyle? _textStyle;
+  final InputBorder? _focusedBorder;
+  final InputBorder? _enabledBorder;
+  final InputBorder? _border;
+  final VoidCallback? _onTap;
+  final void Function(PointerDownEvent)? _onTapOutSide;
 
   const LabelTextField({
     super.key,
-    this.label,
-    this.hint,
-    this.suffixIcon,
-    this.inputType,
-    this.controller,
-    this.onChanged,
-    this.errors,
-    this.obscureText,
-    this.onTapOutSide,
-  });
+    String? label,
+    String? hint,
+    Widget? prefixIcon,
+    Widget? suffixIcon,
+    TextInputType? inputType,
+    TextEditingController? controller,
+    dynamic Function(String)? onChanged,
+    String? errorText,
+    bool? obscureText,
+    bool? enabled,
+    bool? readOnly,
+    TextStyle? hintStyle,
+    TextStyle? textStyle,
+    InputBorder? focusedBorder,
+    InputBorder? enabledBorder,
+    InputBorder? border,
+    void Function(PointerDownEvent)? onTapOutSide,
+    VoidCallback? onTap,
+  })  : _onTapOutSide = onTapOutSide,
+        _obscureText = obscureText,
+        _errorText = errorText,
+        _inputType = inputType,
+        _suffixIcon = suffixIcon,
+        _prefixIcon = prefixIcon,
+        _hint = hint,
+        _label = label,
+        _controller = controller,
+        _onChanged = onChanged,
+        _enabled = enabled,
+        _readOnly = readOnly,
+        _hintStyle = hintStyle,
+        _textStyle = textStyle,
+        _onTap = onTap,
+        _border = border,
+        _focusedBorder = focusedBorder,
+        _enabledBorder = enabledBorder;
 
-  InputBorder get inputBorder => OutlineInputBorder(
+  InputBorder get _buildBorder =>
+      _border ??
+      OutlineInputBorder(
         borderRadius: BorderRadius.circular(10.r),
         borderSide: BorderSide(color: AppColors.current.secondary),
       );
 
-  InputBorder get focusBorder => inputBorder.copyWith(
+  InputBorder get _buildEnabledBorder => _enabledBorder ?? _buildBorder;
+
+  InputBorder get _buildFocusBorder =>
+      _focusedBorder ??
+      _buildBorder.copyWith(
         borderSide: BorderSide(color: AppColors.current.primary),
       );
 
-  double get paddingHorizontalSuffixIcon => 10.w;
+  double get _paddingHorizontalSuffixIcon => 10.w;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (!label.isNullOrEmpty) ...{
+        if (!_label.isNullOrEmpty) ...{
           Text(
-            label!,
+            _label!,
             style: AppTextStyles.bold16,
           ),
           SizedBox(
@@ -55,34 +96,39 @@ class LabelTextField extends StatelessWidget {
           )
         },
         TextFormField(
-          obscureText: obscureText ?? false,
-          onTapOutside: onTapOutSide ?? (_) => FocusScope.of(context).unfocus(),
-          onChanged: onChanged,
-          controller: controller,
+          readOnly: _readOnly ?? false,
+          enabled: _enabled,
+          obscureText: _obscureText ?? false,
+          onTapOutside:
+              _onTapOutSide ?? (_) => FocusScope.of(context).unfocus(),
+          onChanged: _onChanged,
+          controller: _controller,
           maxLines: 1,
-          keyboardType: inputType,
+          keyboardType: _inputType,
+          style: _textStyle ?? AppTextStyles.regular14,
           decoration: InputDecoration(
+            fillColor: AppColors.current.background,
+            filled: true,
             floatingLabelBehavior: FloatingLabelBehavior.never,
             contentPadding: EdgeInsets.symmetric(
               horizontal: 20.w,
               vertical: 14.h,
             ),
-            hintText: hint,
-            suffixIcon: Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: paddingHorizontalSuffixIcon,
-              ),
-              child: suffixIcon,
-            ),
-            suffixIconConstraints: BoxConstraints(
-              maxWidth: 24.r + (paddingHorizontalSuffixIcon * 2),
-              maxHeight: 24.h,
-            ),
-            focusedBorder: focusBorder,
-            border: inputBorder,
+            hintText: _hint,
+            hintStyle: _hintStyle ??
+                AppTextStyles.regular14.copyWith(
+                  color: AppColors.current.secondary,
+                ),
+            suffixIcon: _buildSuffixIcon,
+            suffixIconConstraints: _buildSuffixBoxConstraints,
+            prefixIcon: _buildPrefixIcon,
+            prefixIconConstraints: _buildPrefixBoxConstraints,
+            focusedBorder: _buildFocusBorder,
+            enabledBorder: _buildEnabledBorder,
           ),
+          onTap: _onTap,
         ),
-        if (!errors.isNullOrEmpty) ...{
+        if (!_errorText.isNullOrEmpty) ...{
           SizedBox(height: 4.h),
           _buildErrorArea,
         }
@@ -102,7 +148,7 @@ class LabelTextField extends StatelessWidget {
         ),
         SizedBox(width: 2.w),
         Text(
-          errors!,
+          _errorText!,
           style: AppTextStyles.regular14.copyWith(
             color: AppColors.current.critical,
           ),
@@ -110,4 +156,30 @@ class LabelTextField extends StatelessWidget {
       ],
     );
   }
+
+  Widget? get _buildSuffixIcon =>
+      _suffixIcon == null ? null : _buildIcon(_suffixIcon!);
+
+  Widget? get _buildPrefixIcon =>
+      _prefixIcon == null ? null : _buildIcon(_prefixIcon!);
+
+  BoxConstraints? get _buildSuffixBoxConstraints =>
+      _suffixIcon == null ? null : _buildBoxConstraints;
+
+  BoxConstraints? get _buildPrefixBoxConstraints =>
+      _prefixIcon == null ? null : _buildBoxConstraints;
+
+  Widget _buildIcon(Widget child) {
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        horizontal: _paddingHorizontalSuffixIcon,
+      ),
+      child: child,
+    );
+  }
+
+  BoxConstraints? get _buildBoxConstraints => BoxConstraints(
+        maxWidth: 24.r + (_paddingHorizontalSuffixIcon * 2),
+        maxHeight: 24.h,
+      );
 }

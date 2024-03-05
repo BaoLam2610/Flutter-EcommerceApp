@@ -29,6 +29,6 @@ class AppRepositoryImpl extends AppRepository {
 
   @override
   void saveLogged() {
-    PrefUtil.instance.setValue(AppKeys.isLogged, false);
+    PrefUtil.instance.setValue(AppKeys.isLogged, true);
   }
 }
