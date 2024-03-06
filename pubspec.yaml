@@ -59,6 +59,9 @@ dependencies:
   # SharedPreferences
   shared_preferences: ^2.2.2
 
+  # Pull to refresh, load more
+  pull_to_refresh: ^2.0.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

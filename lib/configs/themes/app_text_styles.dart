@@ -11,6 +11,12 @@ class AppTextStyles {
   static Color defaultTextColor = AppColors.current.primaryText;
 
   /* Regular */
+  static TextStyle regular8 = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 8.sp,
+    color: defaultTextColor,
+  );
+
   static TextStyle regular12 = TextStyle(
     fontFamily: fontFamily,
     fontSize: 12.sp,

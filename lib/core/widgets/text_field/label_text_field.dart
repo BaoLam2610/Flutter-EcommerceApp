@@ -17,11 +17,14 @@ class LabelTextField extends StatelessWidget {
   final bool? _obscureText;
   final bool? _enabled;
   final bool? _readOnly;
+  final bool? _isDense;
   final TextStyle? _hintStyle;
   final TextStyle? _textStyle;
   final InputBorder? _focusedBorder;
   final InputBorder? _enabledBorder;
+  final InputBorder? _errorBorder;
   final InputBorder? _border;
+  final EdgeInsets? _contentPadding;
   final VoidCallback? _onTap;
   final void Function(PointerDownEvent)? _onTapOutSide;
 
@@ -38,11 +41,14 @@ class LabelTextField extends StatelessWidget {
     bool? obscureText,
     bool? enabled,
     bool? readOnly,
+    bool? isDense,
     TextStyle? hintStyle,
     TextStyle? textStyle,
     InputBorder? focusedBorder,
     InputBorder? enabledBorder,
+    InputBorder? errorBorder,
     InputBorder? border,
+    EdgeInsets? contentPadding,
     void Function(PointerDownEvent)? onTapOutSide,
     VoidCallback? onTap,
   })  : _onTapOutSide = onTapOutSide,
@@ -57,12 +63,15 @@ class LabelTextField extends StatelessWidget {
         _onChanged = onChanged,
         _enabled = enabled,
         _readOnly = readOnly,
+        _isDense = isDense,
         _hintStyle = hintStyle,
         _textStyle = textStyle,
         _onTap = onTap,
         _border = border,
         _focusedBorder = focusedBorder,
-        _enabledBorder = enabledBorder;
+        _enabledBorder = enabledBorder,
+        _errorBorder = errorBorder,
+        _contentPadding = contentPadding;
 
   InputBorder get _buildBorder =>
       _border ??
@@ -79,11 +88,14 @@ class LabelTextField extends StatelessWidget {
         borderSide: BorderSide(color: AppColors.current.primary),
       );
 
+  InputBorder get _buildErrorBorder => _errorBorder ?? _buildBorder;
+
   double get _paddingHorizontalSuffixIcon => 10.w;
 
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (!_label.isNullOrEmpty) ...{
@@ -107,13 +119,15 @@ class LabelTextField extends StatelessWidget {
           keyboardType: _inputType,
           style: _textStyle ?? AppTextStyles.regular14,
           decoration: InputDecoration(
+            isDense: _isDense,
             fillColor: AppColors.current.background,
             filled: true,
             floatingLabelBehavior: FloatingLabelBehavior.never,
-            contentPadding: EdgeInsets.symmetric(
-              horizontal: 20.w,
-              vertical: 14.h,
-            ),
+            contentPadding: _contentPadding ??
+                EdgeInsets.symmetric(
+                  horizontal: 20.w,
+                  vertical: 14.h,
+                ),
             hintText: _hint,
             hintStyle: _hintStyle ??
                 AppTextStyles.regular14.copyWith(
@@ -125,6 +139,7 @@ class LabelTextField extends StatelessWidget {
             prefixIconConstraints: _buildPrefixBoxConstraints,
             focusedBorder: _buildFocusBorder,
             enabledBorder: _buildEnabledBorder,
+            errorBorder: _buildErrorBorder,
           ),
           onTap: _onTap,
         ),
