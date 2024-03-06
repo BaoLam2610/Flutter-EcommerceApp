@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/core.dart';
-import '../../../app/presentation/widgets/home_app_bar.dart';
+import '../../../main/presentation/widgets/main_app_bar.dart';
+import 'bloc/home_cubit.dart';
+import 'home_body.dart';
 
 class HomeScreen extends BaseScreen {
   const HomeScreen({super.key});
@@ -16,14 +19,16 @@ class _HomeScreenState extends BaseScreenState<HomeScreen> {
     return Scaffold(
       body: NestedScrollView(
         floatHeaderSlivers: true,
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          return [const HomeAppBar()];
-        },
-        body: SingleChildScrollView(
-          child: Column(
-            children: List.generate(100, (index) => const Text('Hello')),
+        headerSliverBuilder: (_, __) => [
+          BlocBuilder<HomeCubit, HomeState>(
+            buildWhen: (previous, current) =>
+                previous.cartBadgeCount != current.cartBadgeCount,
+            builder: (context, state) => MainAppBar(
+              cartBadgeCount: state.cartBadgeCount,
+            ),
           ),
-        ),
+        ],
+        body: const HomeBody(),
       ),
     );
   }

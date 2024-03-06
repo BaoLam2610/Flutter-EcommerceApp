@@ -62,6 +62,9 @@ dependencies:
   # Pull to refresh, load more
   pull_to_refresh: ^2.0.0
 
+  # Slider
+  carousel_slider: ^4.2.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
