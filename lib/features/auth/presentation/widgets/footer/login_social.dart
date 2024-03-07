@@ -77,11 +77,11 @@ class LoginSocial extends StatelessWidget {
   Widget get _buildLoginWithSocial => Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SocialCard(icon: Assets.icons.googleIcon.path),
+          SocialCard(icon: Assets.icons.googleIcon.svg()),
           SizedBox(width: 10.w),
-          SocialCard(icon: Assets.icons.facebook2.path),
+          SocialCard(icon: Assets.icons.facebook2.svg()),
           SizedBox(width: 10.w),
-          SocialCard(icon: Assets.icons.twitter.path),
+          SocialCard(icon: Assets.icons.twitter.svg()),
         ],
       );
 

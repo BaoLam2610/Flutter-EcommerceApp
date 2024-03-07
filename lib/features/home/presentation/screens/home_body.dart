@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/core.dart';
 import 'bloc/home_cubit.dart';
 import 'widgets/banner_sliders.dart';
+import 'widgets/menu_functions.dart';
 
 class HomeBody extends StatelessWidget {
   const HomeBody({super.key});
@@ -24,6 +25,7 @@ class HomeBody extends StatelessWidget {
             SizedBox(height: 10.h),
             _buildBannerSliders,
             SizedBox(height: 10.h),
+            MenuFunctions(),
           ],
         ),
       ),

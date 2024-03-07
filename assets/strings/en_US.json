@@ -55,5 +55,12 @@
   "home": "Home",
   "category": "Category",
   "store": "Store",
-  "profile": "Profile"
+  "profile": "Profile",
+  "manual": "Manual",
+  "brand": "Brand",
+  "check_price": "Check price",
+  "membership_card": "Membership card",
+  "flash_sale": "Flash sale",
+  "discount_code": "Discount code",
+  "trademark": "Trademark"
 }

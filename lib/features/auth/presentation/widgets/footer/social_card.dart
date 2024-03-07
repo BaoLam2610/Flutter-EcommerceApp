@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../../core/core.dart';
 
 class SocialCard extends StatelessWidget {
-  final String icon;
+  final Widget icon;
   final Function? onPress;
 
   const SocialCard({super.key, required this.icon, this.onPress});
