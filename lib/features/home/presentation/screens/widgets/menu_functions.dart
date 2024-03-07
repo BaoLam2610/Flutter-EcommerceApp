@@ -11,19 +11,18 @@ class MenuFunctions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      child: GridView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        padding: EdgeInsets.symmetric(horizontal: 4.w),
-        scrollDirection: Axis.vertical,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 4,
-        ),
-        itemCount: MenuFunctionType.values.length,
-        itemBuilder: (context, index) =>
-            _ItemMenuFunction(MenuFunctionType.values[index]),
+    return GridView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      padding: EdgeInsets.symmetric(horizontal: 6.w),
+      scrollDirection: Axis.vertical,
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 4,
+        childAspectRatio: 0.9,
       ),
+      itemCount: MenuFunctionType.values.length,
+      itemBuilder: (context, index) =>
+          _ItemMenuFunction(MenuFunctionType.values[index]),
     );
   }
 }
@@ -34,14 +33,13 @@ class _ItemMenuFunction extends StatelessWidget {
   const _ItemMenuFunction(this.menuFunction);
 
   double _getItemSize(BuildContext context) {
-    return (context.width / 4) - 8.w;
+    return (context.width / 4) - 12.w;
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 4.w, vertical: 4.h),
-      height: _getItemSize(context),
       width: _getItemSize(context),
       decoration: BoxDecoration(
         color: AppColors.current.background,

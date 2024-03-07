@@ -6,6 +6,7 @@ import '../../../../core/core.dart';
 import 'bloc/home_cubit.dart';
 import 'widgets/banner_sliders.dart';
 import 'widgets/menu_functions.dart';
+import 'widgets/selling_products.dart';
 
 class HomeBody extends StatelessWidget {
   const HomeBody({super.key});
@@ -25,7 +26,9 @@ class HomeBody extends StatelessWidget {
             SizedBox(height: 10.h),
             _buildBannerSliders,
             SizedBox(height: 10.h),
-            MenuFunctions(),
+            const MenuFunctions(),
+            SizedBox(height: 10.h),
+            const SellingProducts(),
           ],
         ),
       ),

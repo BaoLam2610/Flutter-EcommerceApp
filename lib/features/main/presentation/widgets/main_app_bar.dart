@@ -22,7 +22,7 @@ class MainAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      backgroundColor: AppColors.primaryMaterialColor[200],
+      backgroundColor: AppColors.current.primary,
       floating: true,
       collapsedHeight: 56.h,
       flexibleSpace: _buildAppBar(context),
@@ -73,7 +73,7 @@ class MainAppBar extends StatelessWidget {
                 child: Container(
                   padding: EdgeInsets.all(2.r),
                   decoration: BoxDecoration(
-                    color: AppColors.current.critical,
+                    color: AppColors.current.background,
                     shape: BoxShape.circle,
                   ),
                   constraints: BoxConstraints(
@@ -83,7 +83,7 @@ class MainAppBar extends StatelessWidget {
                   child: Text(
                     _cartBadgeCount! > 9 ? '9+' : '$_cartBadgeCount',
                     style: AppTextStyles.regular8.copyWith(
-                      color: AppColors.current.background,
+                      color: AppColors.current.critical,
                     ),
                     textAlign: TextAlign.center,
                   ),
