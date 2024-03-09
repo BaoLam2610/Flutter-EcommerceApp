@@ -3,14 +3,13 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 
-import '../../constants/constants.dart';
-import '../data_state.dart';
-import 'model/data_response.dart';
-import 'model/network_exception.dart';
+import '../../core.dart';
 
 class RestApiClient {
   static const String formUrlEncodedContentType =
       'application/json;charset=UTF-8';
+
+  static const String authorization = 'Authorization';
 
   RestApiClient({
     required this.baseUrl,
@@ -46,7 +45,14 @@ class RestApiClient {
     return Dio(options);
   }
 
-  Options get _options => Options(headers: {});
+  Options get _options {
+    final Map<String, dynamic> headers = {};
+    final accessToken = PrefUtil.instance.getString(AppKeys.accessToken);
+    if (!accessToken.isNullOrEmpty) {
+      headers[authorization] = 'Bearer $accessToken';
+    }
+    return Options(headers: headers);
+  }
 
   Future<DataState<T>> post<T>(
     String path, {

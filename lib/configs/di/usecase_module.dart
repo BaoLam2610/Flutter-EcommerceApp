@@ -11,6 +11,7 @@ import '../../features/auth/domain/usecases/register.dart';
 import '../../features/auth/domain/usecases/save_access_token.dart';
 import '../../features/auth/domain/usecases/save_logged.dart';
 import '../../features/auth/domain/usecases/save_remember_account.dart';
+import '../../features/home/domain/usecases/get_home_data.dart';
 import '../../features/intro/domain/usecases/save_first_open_app.dart';
 import '../../features/splash/domain/usecases/get_first_open_app.dart';
 import '../../features/splash/domain/usecases/get_logged.dart';
@@ -38,6 +39,8 @@ void provideUseCase() {
 
   inject.registerLazySingleton(() => SaveRememberAccountUseCase());
   inject.registerLazySingleton(() => GetRememberAccountUseCase());
+
+  inject.registerLazySingleton(() => GetHomeDataUseCase());
 
   inject.registerLazySingleton(() => AppStorage());
 }

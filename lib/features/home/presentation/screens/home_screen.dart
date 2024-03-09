@@ -15,6 +15,12 @@ class HomeScreen extends BaseScreen {
 
 class _HomeScreenState extends BaseScreenState<HomeScreen> {
   @override
+  void initState() {
+    super.initState();
+    ReadContext(context).read<HomeCubit>().getHomeData();
+  }
+
+  @override
   Widget buildScreen(BuildContext context) {
     return Scaffold(
       body: NestedScrollView(

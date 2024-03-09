@@ -24,7 +24,7 @@ class HomeBody extends StatelessWidget {
         child: Column(
           children: [
             SizedBox(height: 10.h),
-            _buildBannerSliders,
+            const BannerSliders(),
             SizedBox(height: 10.h),
             const MenuFunctions(),
             SizedBox(height: 10.h),
@@ -34,15 +34,4 @@ class HomeBody extends StatelessWidget {
       ),
     );
   }
-
-  Widget get _buildBannerSliders => BlocBuilder<HomeCubit, HomeState>(
-        builder: (context, state) {
-          return BannerSliders(
-            itemCount: 6,
-            currentIndex: state.bannerCurrentIndex,
-            onPageChanged:
-                ReadContext(context).read<HomeCubit>().updateBannerCurrentIndex,
-          );
-        },
-      );
 }

@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import '../../../../../configs/configs.dart';
 import '../../../../../gen/gen.dart';
@@ -23,19 +24,14 @@ class SellingProducts extends StatelessWidget {
           ),
         ),
         SizedBox(height: 10.h),
-        GridView.builder(
+        MasonryGridView.count(
           shrinkWrap: true,
-          padding: EdgeInsets.symmetric(horizontal: 6.w),
           physics: const NeverScrollableScrollPhysics(),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: 0.6,
-          ),
+          crossAxisCount: 2,
+          padding: EdgeInsets.symmetric(horizontal: 6.w),
           itemCount: 10,
-          itemBuilder: (context, index) {
-            return ProductTile.grid();
-          },
-        )
+          itemBuilder: (context, index) => ProductTile.grid(),
+        ),
       ],
     );
   }

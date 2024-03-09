@@ -22,19 +22,16 @@ class ProductTile extends StatelessWidget {
     if (_type == ProductTileType.grid) {
       return (context.width / 2) - 12.w;
     }
-    return 140.w;
+    return (context.width / 1.8) - 12.w;
   }
 
-  double _getImageHeight(BuildContext context) {
-    return (_getItemWidth(context) / 0.6) * 0.6;
-  }
+  double _getImageHeight(BuildContext context) => _getItemWidth(context);
 
   double get _paddingHorizontal => 6.w;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: _getItemWidth(context),
       margin: EdgeInsets.symmetric(horizontal: 4.w, vertical: 4.h),
       decoration: BoxDecoration(
         color: AppColors.current.background,
@@ -54,9 +51,7 @@ class ProductTile extends StatelessWidget {
               _buildTitle,
               SizedBox(height: 4.h),
               _buildPriceArea,
-              const Spacer(),
               _buildAddToCartButton,
-              SizedBox(height: 8.h),
             ],
           ),
         ],
@@ -112,8 +107,14 @@ class ProductTile extends StatelessWidget {
 
   Widget get _buildAddToCartButton {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: _paddingHorizontal),
+      padding: EdgeInsets.symmetric(
+        horizontal: _paddingHorizontal,
+        vertical: 8.h,
+      ),
       child: AppButton.primary(
+        onTap: () {
+          
+        },
         text: 'Add to cart',
         textStyle: AppTextStyles.bold12.copyWith(
           color: AppColors.current.background,
