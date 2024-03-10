@@ -60,7 +60,9 @@ class HomeBody extends StatelessWidget {
           await postDelay(seconds: 3);
         },
         onRefresh: () async {
-          await ReadContext(context).read<HomeCubit>().getHomeData(isRefresh: true);
+          await ReadContext(context)
+              .read<HomeCubit>()
+              .reloadHomeData();
         },
         child: SingleChildScrollView(
           child: Column(

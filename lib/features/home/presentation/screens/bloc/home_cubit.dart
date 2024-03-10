@@ -31,4 +31,8 @@ class HomeCubit extends BaseCubit<HomeState> {
       products: resource.data?.products,
     ));
   }
+
+  Future<void> reloadHomeData() async {
+    await getHomeData(isRefresh: true);
+  }
 }
