@@ -10,4 +10,7 @@ class ApiList {
 
   /* Home */
   static const String home = '/home';
+
+  /* Product */
+  static const String product = '/product';
 }

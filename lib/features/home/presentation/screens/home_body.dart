@@ -57,12 +57,14 @@ class HomeBody extends StatelessWidget {
 
   Widget _buildSuccessArea(BuildContext context) => RefreshLoadMore(
         onLoadMore: () async {
-          await postDelay(seconds: 3);
+          await ReadContext(context)
+              .read<HomeCubit>()
+              .getSellingProducts();
         },
         onRefresh: () async {
           await ReadContext(context)
               .read<HomeCubit>()
-              .reloadHomeData();
+              .onReloadHomeData();
         },
         child: SingleChildScrollView(
           child: Column(

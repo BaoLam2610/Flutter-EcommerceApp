@@ -10,4 +10,9 @@ class HomeRepositoryImpl extends HomeRepository {
   Future getHomeData({required PagingData pagingData}) {
     return _service.getHomeData(pagingData);
   }
+
+  @override
+  Future getSellingProducts({required PagingData pagingData}) {
+    return _service.getSellingProducts(pagingData);
+  }
 }

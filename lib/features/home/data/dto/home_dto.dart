@@ -1,5 +1,4 @@
 import '../../../../core/core.dart';
-import '../../../../utils/utils.dart';
 import '../../domain/entities/event_entity.dart';
 import '../../domain/entities/home_entity.dart';
 import '../../domain/entities/product_entity.dart';
@@ -8,15 +7,18 @@ import 'product_dto.dart';
 
 class HomeDto extends HomeEntity {
   HomeDto({
+    int? totalSellingProducts,
     List<EventEntity>? events,
     List<ProductEntity>? products,
   }) : super(
+          totalSellingProducts: totalSellingProducts ?? 0,
           events: events ?? [],
           products: products ?? [],
         );
 
   factory HomeDto.fromJson(Map<String, dynamic> json) {
     return HomeDto(
+      totalSellingProducts: json['totalSellingProducts'],
       events: castToList<EventDto>(
         json['events'],
         (item) => EventDto.fromJson(item),
