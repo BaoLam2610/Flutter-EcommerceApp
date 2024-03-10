@@ -1,22 +1,34 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../configs/configs.dart';
 import '../../../../../core/core.dart';
+import '../../../../../gen/gen.dart';
+import '../../../../home/domain/entities/product_entity.dart';
 
 enum ProductTileType { grid, list }
 
 class ProductTile extends StatelessWidget {
+  final ProductEntity _product;
   final ProductTileType _type;
 
-  factory ProductTile.grid() => const ProductTile(type: ProductTileType.grid);
+  factory ProductTile.grid(ProductEntity product) => ProductTile(
+        type: ProductTileType.grid,
+        product: product,
+      );
 
-  factory ProductTile.list() => const ProductTile(type: ProductTileType.list);
+  factory ProductTile.list(ProductEntity product) => ProductTile(
+        type: ProductTileType.list,
+        product: product,
+      );
 
   const ProductTile({
     super.key,
     ProductTileType? type,
-  }) : _type = type ?? ProductTileType.grid;
+    required ProductEntity product,
+  })  : _product = product,
+        _type = type ?? ProductTileType.grid;
 
   double _getItemWidth(BuildContext context) {
     if (_type == ProductTileType.grid) {
@@ -59,21 +71,21 @@ class ProductTile extends StatelessWidget {
     );
   }
 
-  Widget _buildImageArea(BuildContext context) => Container(
+  Widget _buildImageArea(BuildContext context) => NetworkImageView(
+        imageUrl: _product.imageUrl,
+        width: _getImageHeight(context),
         height: _getImageHeight(context),
-        decoration: BoxDecoration(
-          color: Colors.red,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(10.r),
-            topRight: Radius.circular(10.r),
-          ),
+        fit: BoxFit.contain,
+        imageBorderRadius: BorderRadius.only(
+          topLeft: Radius.circular(10.r),
+          topRight: Radius.circular(10.r),
         ),
       );
 
   Widget get _buildTitle => Padding(
         padding: EdgeInsets.symmetric(horizontal: _paddingHorizontal),
         child: Text(
-          'Product name\nProduct name',
+          _product.displayProduct,
           style: AppTextStyles.regular14,
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
@@ -85,22 +97,23 @@ class ProductTile extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         SizedBox(width: _paddingHorizontal),
-        /* Origin price */
         Text(
-          '140,000đ',
+          _product.textPrice,
           style: AppTextStyles.bold14.copyWith(
             color: AppColors.current.critical,
           ),
         ),
         const Spacer(),
-        Text(
-          '189,000đ',
-          style: AppTextStyles.regular14.copyWith(
-            color: AppColors.current.secondaryText,
-            decoration: TextDecoration.lineThrough,
+        if (_product.discountPrice != 0) ...{
+          Text(
+            _product.textDiscountPrice,
+            style: AppTextStyles.regular14.copyWith(
+              color: AppColors.current.secondaryText,
+              decoration: TextDecoration.lineThrough,
+            ),
           ),
-        ),
-        SizedBox(width: _paddingHorizontal),
+          SizedBox(width: _paddingHorizontal),
+        }
       ],
     );
   }
@@ -112,10 +125,8 @@ class ProductTile extends StatelessWidget {
         vertical: 8.h,
       ),
       child: AppButton.primary(
-        onTap: () {
-          
-        },
-        text: 'Add to cart',
+        onTap: () {},
+        text: LocaleKeys.add_to_cart.tr(),
         textStyle: AppTextStyles.bold12.copyWith(
           color: AppColors.current.background,
         ),

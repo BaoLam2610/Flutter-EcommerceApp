@@ -7,6 +7,8 @@ import '../widgets.dart';
 part 'button_type.dart';
 
 class AppButton extends StatelessWidget {
+  final double? width;
+  final double? height;
   final GestureTapCallback? onTap;
   final ButtonType? type;
   final String text;
@@ -24,6 +26,8 @@ class AppButton extends StatelessWidget {
     this.colorButton,
     this.colorBorder,
     this.padding,
+    this.width,
+    this.height,
   });
 
   final double _buttonElevation = 2.0;
@@ -34,6 +38,8 @@ class AppButton extends StatelessWidget {
     GestureTapCallback? onTap,
     TextStyle? textStyle,
     EdgeInsetsGeometry? padding,
+    double? width,
+    double? height,
   }) {
     return AppButton(
       key: key,
@@ -42,6 +48,8 @@ class AppButton extends StatelessWidget {
       onTap: onTap,
       textStyle: textStyle,
       padding: padding,
+      width: width,
+      height: height,
     );
   }
 
@@ -51,6 +59,8 @@ class AppButton extends StatelessWidget {
     GestureTapCallback? onTap,
     TextStyle? textStyle,
     EdgeInsetsGeometry? padding,
+    double? width,
+    double? height,
   }) {
     return AppButton(
       key: key,
@@ -59,6 +69,8 @@ class AppButton extends StatelessWidget {
       onTap: onTap,
       textStyle: textStyle,
       padding: padding,
+      width: width,
+      height: height,
     );
   }
 
@@ -73,6 +85,8 @@ class AppButton extends StatelessWidget {
         elevation: _buttonElevation,
         borderRadius: _buttonBorderRadius,
         child: Container(
+          width: width,
+          height: height,
           padding:
               padding ?? EdgeInsets.symmetric(vertical: 10.h, horizontal: 16.w),
           decoration: BoxDecoration(

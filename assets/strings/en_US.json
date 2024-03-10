@@ -63,5 +63,7 @@
   "flash_sale": "Flash sale",
   "discount_code": "Discount code",
   "trademark": "Trademark",
-  "selling_products": "Selling products"
+  "selling_products": "Selling products",
+  "add_to_cart": "Add to cart",
+  "reload_again": "Reload again"
 }

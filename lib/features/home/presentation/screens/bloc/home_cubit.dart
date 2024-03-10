@@ -21,8 +21,9 @@ class HomeCubit extends BaseCubit<HomeState> {
     emit(state.copyWith(bannerCurrentIndex: index));
   }
 
-  void getHomeData() async {
-    emit(state.copyWith(status: Loading()));
+  Future<void> getHomeData({bool isRefresh = false}) async {
+    emit(state.copyWith(status: isRefresh ? null : Loading()));
+    await postDelay(seconds: 2);
     final resource = await _getHomeDataUseCase.call(params: PagingData.deft());
     emit(state.copyWith(
       status: resource,

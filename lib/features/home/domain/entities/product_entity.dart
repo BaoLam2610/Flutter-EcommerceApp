@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
 
+import '../../../../core/extensions/number_extensions.dart';
+
 class ProductEntity extends Equatable {
   final String id;
   final String name;
@@ -44,6 +46,12 @@ class ProductEntity extends Equatable {
       imageUrl: imageUrl ?? this.imageUrl,
     );
   }
+
+  String get displayProduct => '$name - $code';
+
+  String get textPrice => price.formatCurrency;
+
+  String get textDiscountPrice => price.formatCurrency;
 
   @override
   String toString() {

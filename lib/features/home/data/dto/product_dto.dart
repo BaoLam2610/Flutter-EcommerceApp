@@ -20,11 +20,11 @@ class ProductDto extends ProductEntity {
   factory ProductDto.fromJson(Map<String, dynamic> json) {
     return ProductDto(
       id: json['id'],
-      name: json['name'],
-      code: json['code'],
+      name: json['productName'],
+      code: json['productCode'],
       price: json['price'],
       discountPrice: json['discountPrice'],
-      imageUrl: json['imageUrl'],
+      imageUrl: json['imageOne'],
     );
   }
 }
