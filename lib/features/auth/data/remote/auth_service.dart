@@ -7,16 +7,16 @@ import '../dto/register_request.dart';
 class AuthService {
   final RestApiClient _apiService = inject.get<RestApiClient>();
 
-  Future<dynamic> login(LoginRequest request) {
-    return _apiService.post<LoginInfoDto>(
+  Future<DataResponse> login(LoginRequest request) {
+    return _apiService.post(
       ApiList.login,
       create: (json) => LoginInfoDto.fromJson(json),
       data: request.toJson(),
     );
   }
 
-  Future<dynamic> register(RegisterRequest request) {
-    return _apiService.post<NoData>(
+  Future<DataResponse> register(RegisterRequest request) {
+    return _apiService.post(
       ApiList.register,
       data: request.toJson(),
     );

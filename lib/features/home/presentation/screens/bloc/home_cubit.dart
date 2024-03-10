@@ -27,7 +27,10 @@ class HomeCubit extends BaseCubit<HomeState> {
     emit(state.copyWith(status: isRefresh ? null : Loading()));
     await postDelay(seconds: 2);
     final resource = await _getHomeDataUseCase.call(
-      params: PagingData(pageSize: 2, currentPage: 1),
+      params: const PagingData(
+        pageSize: 5,
+        currentPage: 1,
+      ),
     );
 
     if (resource is Success) {
@@ -49,36 +52,38 @@ class HomeCubit extends BaseCubit<HomeState> {
         canLoadMoreSellingProducts: false,
       ));
     }
-
-    // emit(state.copyWith(
-    //   status: resource,
-    //   events: resource.data?.events,
-    //   products: resource.data?.products,
-    //   canLoadMoreSellingProducts: resource.data == null
-    //       resource.data!.products.length < resource.data!.totalSellingProducts,
-    // ));
   }
 
   Future<void> getSellingProducts() async {
     var currentPage = state.sellingProductCurrentPage + 1;
     final resource = await _getSellingProductsUseCase.call(
-      params: PagingData(pageSize: 2, currentPage: currentPage),
+      params: PagingData(
+        pageSize: 5,
+        currentPage: currentPage,
+      ),
     );
     if (resource is Success) {
       final newList = state.products + (resource.data ?? []);
-
-      emit(state.copyWith(
-        products: newList,
-        sellingProductCurrentPage: currentPage,
-      ));
+      emit(
+        state.copyWith(
+          products: newList,
+          sellingProductCurrentPage: currentPage,
+          canLoadMoreSellingProducts:
+              currentPage < (resource.pageResult?.totalPage ?? 0),
+        ),
+      );
     }
   }
 
   Future<void> onSellingProductsLoadMore() async {
+    if (!state.canLoadMoreSellingProducts) return;
     await getSellingProducts();
   }
 
   Future<void> onReloadHomeData() async {
+    emit(state.copyWith(
+      sellingProductCurrentPage: 1,
+    ));
     await getHomeData(isRefresh: true);
   }
 }

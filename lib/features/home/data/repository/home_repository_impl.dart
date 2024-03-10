@@ -7,12 +7,12 @@ class HomeRepositoryImpl extends HomeRepository {
   final HomeService _service = inject.get<HomeService>();
 
   @override
-  Future getHomeData({required PagingData pagingData}) {
+  Future<DataResponse> getHomeData({required PagingData pagingData}) {
     return _service.getHomeData(pagingData);
   }
 
   @override
-  Future getSellingProducts({required PagingData pagingData}) {
+  Future<DataResponse> getSellingProducts({required PagingData pagingData}) {
     return _service.getSellingProducts(pagingData);
   }
 }

@@ -1,10 +1,11 @@
+import '../../../../core/core.dart';
 import '../../data/dto/login_request.dart';
 import '../../data/dto/register_request.dart';
 
 abstract class AuthRepository {
-  Future<dynamic> doLogin({required LoginRequest request});
+  Future<DataResponse> doLogin({required LoginRequest request});
 
-  Future<dynamic> doRegister({required RegisterRequest request});
+  Future<DataResponse> doRegister({required RegisterRequest request});
 
   void saveAccessToken(String token);
 

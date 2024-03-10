@@ -8,6 +8,6 @@ class RegisterUseCase extends NetworkUseCase<RegisterRequest, NoData> {
 
   @override
   Future<Resource<NoData>> call({RegisterRequest? params}) async {
-    return handleApi(await _repository.doRegister(request: params!));
+    return handleApi(_repository.doRegister(request: params!));
   }
 }

@@ -9,8 +9,6 @@ class LoginUseCase extends NetworkUseCase<LoginRequest, LoginInfoEntity> {
 
   @override
   Future<Resource<LoginInfoEntity>> call({LoginRequest? params}) async {
-    return handleApi(
-      await _repository.doLogin(request: params!),
-    );
+    return handleApi(_repository.doLogin(request: params!),);
   }
 }

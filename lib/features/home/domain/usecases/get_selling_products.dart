@@ -9,6 +9,6 @@ class GetSellingProductsUseCase
 
   @override
   Future<Resource<List<ProductEntity>>> call({PagingData? params}) async {
-    return handleApi(await _repository.getSellingProducts(pagingData: params!));
+    return handleApi(_repository.getSellingProducts(pagingData: params!));
   }
 }

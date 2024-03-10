@@ -8,6 +8,6 @@ class GetHomeDataUseCase extends NetworkUseCase<PagingData, HomeEntity> {
 
   @override
   Future<Resource<HomeEntity>> call({PagingData? params}) async {
-    return handleApi(await _repository.getHomeData(pagingData: params!));
+    return handleApi(_repository.getHomeData(pagingData: params!));
   }
 }

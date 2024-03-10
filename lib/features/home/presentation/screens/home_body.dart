@@ -55,28 +55,35 @@ class HomeBody extends StatelessWidget {
   Widget get _buildLoadingArea =>
       const Center(child: CircularProgressIndicator());
 
-  Widget _buildSuccessArea(BuildContext context) => RefreshLoadMore(
-        onLoadMore: () async {
-          await ReadContext(context)
-              .read<HomeCubit>()
-              .getSellingProducts();
+  Widget _buildSuccessArea(BuildContext context) =>
+      BlocBuilder<HomeCubit, HomeState>(
+        buildWhen: (previous, current) =>
+            previous.canLoadMoreSellingProducts !=
+            current.canLoadMoreSellingProducts,
+        builder: (context, state) {
+          return RefreshLoadMore(
+            onLoadMore: () async {
+              await ReadContext(context)
+                  .read<HomeCubit>()
+                  .onSellingProductsLoadMore();
+            },
+            onRefresh: () async {
+              await ReadContext(context).read<HomeCubit>().onReloadHomeData();
+            },
+            canLoadMore: state.canLoadMoreSellingProducts,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  SizedBox(height: 10.h),
+                  const BannerSliders(),
+                  SizedBox(height: 10.h),
+                  const MenuFunctions(),
+                  SizedBox(height: 10.h),
+                  const SellingProducts(),
+                ],
+              ),
+            ),
+          );
         },
-        onRefresh: () async {
-          await ReadContext(context)
-              .read<HomeCubit>()
-              .onReloadHomeData();
-        },
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              SizedBox(height: 10.h),
-              const BannerSliders(),
-              SizedBox(height: 10.h),
-              const MenuFunctions(),
-              SizedBox(height: 10.h),
-              const SellingProducts(),
-            ],
-          ),
-        ),
       );
 }

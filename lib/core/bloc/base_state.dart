@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
-import '../widgets/widgets.dart';
+import '../core.dart';
 
 class BaseState extends Equatable {
   final Resource status;
@@ -23,8 +23,9 @@ class BaseState extends Equatable {
 class Resource<T> {
   final T? data;
   final String? message;
+  final PageResult? pageResult;
 
-  const Resource({this.data, this.message});
+  const Resource({this.data, this.message, this.pageResult});
 }
 
 class None<T> extends Resource<T> {}
@@ -37,6 +38,7 @@ class Success<T> extends Resource<T> {
   Success({
     super.data,
     super.message,
+    super.pageResult,
   });
 
   @override

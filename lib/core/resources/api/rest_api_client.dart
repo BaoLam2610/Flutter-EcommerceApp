@@ -2,7 +2,9 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:easy_localization/easy_localization.dart';
 
+import '../../../gen/gen.dart';
 import '../../core.dart';
 
 class RestApiClient {
@@ -54,7 +56,7 @@ class RestApiClient {
     return Options(headers: headers);
   }
 
-  Future<DataState<T>> post<T>(
+  Future<DataResponse> post(
     String path, {
     void Function(dynamic json)? create,
     dynamic data,
@@ -68,15 +70,15 @@ class RestApiClient {
         queryParameters: queryParameters,
       );
       if (response.statusCode == HttpStatus.ok) {
-        return _onSuccess(response, create);
+        return _onSuccessReturn(response, create);
       }
-      return _systemAppError();
-    } on DioException catch (e) {
-      return _onError(e);
+      throw Exception(LocaleKeys.error_system.tr());
+    } catch (e) {
+      rethrow;
     }
   }
 
-  Future<DataState<T>> get<T>(
+  Future<DataResponse> get(
     String path, {
     void Function(dynamic json)? create,
     dynamic data,
@@ -90,23 +92,31 @@ class RestApiClient {
         queryParameters: queryParameters,
       );
       if (response.statusCode == HttpStatus.ok) {
-        return _onSuccess(response, create);
+        return _onSuccessReturn(response, create);
       }
-      return _systemAppError();
-    } on DioException catch (e) {
-      return _onError(e);
+      throw Exception(LocaleKeys.error_system.tr());
+    } catch (e) {
+      rethrow;
     }
   }
 }
 
 extension RestApiClientExtension on RestApiClient {
+  DataResponse _onSuccessReturn(
+    Response<dynamic> response,
+    Function(dynamic json)? create,
+  ) {
+    final data = response.data;
+    final dataResponse = DataResponse.fromJson(data, create);
+    return dataResponse;
+  }
+
   DataSuccess<T> _onSuccess<T>(
     Response<dynamic> response,
     Function(dynamic json)? create,
   ) {
     final data = response.data;
-    final dataResponse =
-        DataResponse.fromJson(data, create);
+    final dataResponse = DataResponse.fromJson(data, create);
     return DataSuccess<T>(
       data: dataResponse.data,
       message: dataResponse.message,

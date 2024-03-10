@@ -1,6 +1,6 @@
 import '../../../../core/core.dart';
 
 abstract class HomeRepository {
-  Future<dynamic> getHomeData({required PagingData pagingData});
-  Future<dynamic> getSellingProducts({required PagingData pagingData});
+  Future<DataResponse> getHomeData({required PagingData pagingData});
+  Future<DataResponse> getSellingProducts({required PagingData pagingData});
 }

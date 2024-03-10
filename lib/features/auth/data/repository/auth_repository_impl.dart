@@ -9,12 +9,12 @@ class AuthRepositoryImpl implements AuthRepository {
   final AuthService _apiService = inject.get<AuthService>();
 
   @override
-  Future<dynamic> doLogin({required LoginRequest request}) {
+  Future<DataResponse> doLogin({required LoginRequest request}) {
     return _apiService.login(request);
   }
 
   @override
-  Future<dynamic> doRegister({required RegisterRequest request}) {
+  Future<DataResponse> doRegister({required RegisterRequest request}) {
     return _apiService.register(request);
   }
 
