@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../configs/di/injection_container.dart';
+import '../core.dart';
 
 class PrefUtil {
   PrefUtil._();
@@ -62,6 +63,11 @@ class PrefUtil {
 
   Future<bool> remove(String key) async {
     return await _prefs.remove(key);
+  }
+
+  Future<void> logOut() async {
+    await remove(AppKeys.accessToken);
+    await remove(AppKeys.isLogged);
   }
 
   Future<bool> clear() async {

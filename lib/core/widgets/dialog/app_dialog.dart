@@ -113,6 +113,14 @@ class AppDialog {
         ),
       );
 
+  static Future<T?> showLogoutDialog<T>({
+    required BuildContext context,
+  }) =>
+      showOkDialogCallBack(
+        context: context,
+        content: LocaleKeys.error_access_denied.tr(),
+      );
+
   static Future<T?> showOkDialogCallBack<T>({
     required BuildContext context,
     String? title,

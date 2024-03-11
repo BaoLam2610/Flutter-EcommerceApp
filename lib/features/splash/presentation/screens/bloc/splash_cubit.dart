@@ -56,7 +56,7 @@ class SplashCubit extends Cubit<SplashState> {
   void _onNextScreen() async {
     await Future.delayed(AppDurations.delaySplash);
     emit(state.copyWith(
-      status: Success(),
+      status: const Success(),
     ));
   }
 

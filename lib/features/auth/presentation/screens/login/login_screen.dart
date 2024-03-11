@@ -49,7 +49,7 @@ class _LoginPageState extends BaseScreenState<LoginScreen> {
   Widget get _buildBody => BlocListener<LoginCubit, LoginState>(
         listenWhen: (previous, current) => previous.status != current.status,
         listener: (context, state) {
-          state.observeData<LoginInfoEntity>(
+          state.listenData<LoginInfoEntity>(
             context,
             onSuccess: (data, message) =>
                 Navigator.pushReplacementNamed(context, AppRoutes.mainRoute),

@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
+import '../../configs/configs.dart';
 import '../core.dart';
 
 class BaseState extends Equatable {
@@ -20,12 +21,15 @@ class BaseState extends Equatable {
   }
 }
 
-class Resource<T> {
+class Resource<T> extends Equatable {
   final T? data;
   final String? message;
   final PageResult? pageResult;
 
   const Resource({this.data, this.message, this.pageResult});
+
+  @override
+  List<Object?> get props => [data, message, pageResult];
 }
 
 class None<T> extends Resource<T> {}
@@ -35,59 +39,57 @@ class Initialize extends Resource {}
 class Loading extends Resource {}
 
 class Success<T> extends Resource<T> {
-  Success({
+  const Success({
     super.data,
     super.message,
     super.pageResult,
   });
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is Success &&
-          runtimeType == other.runtimeType &&
-          data == other.data &&
-          message == other.message;
-
-  @override
-  int get hashCode => data.hashCode ^ message.hashCode;
 }
 
 class Error<T> extends Resource<T> {
-  Error({super.message});
+  const Error({super.message});
+}
 
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is Error &&
-          runtimeType == other.runtimeType &&
-          message == other.message;
-
-  @override
-  int get hashCode => message.hashCode;
+class Unauthorized<T> extends Resource<T> {
+  const Unauthorized();
 }
 
 extension BaseStateExtension on BaseState {
-  void observeData<T>(
+  void listenerUnauthorized(BuildContext context) {
+    if (status is Unauthorized) {
+      AppLoading.hideLoading();
+      AppDialog.showLogoutDialog(context: context).then(
+        (value) async {
+          await PrefUtil.instance.logOut();
+          if (context.mounted) {
+            return context.navigator
+                .pushReplacementNamed(AppRoutes.splashRoute);
+          }
+        },
+      );
+    }
+  }
+
+  void listenData<T>(
     BuildContext context, {
     void Function(T? data, String? message)? onSuccess,
     void Function(String? error)? onError,
   }) {
+    if (status is Loading) {
+      AppLoading.showLoading();
+      return;
+    }
     if (status is Success<T>) {
       AppLoading.hideLoading();
-      final success = status as Success<T>;
-      onSuccess?.call(success.data, success.message);
+      onSuccess?.call(status.data, status.message);
       return;
     }
     if (status is Error<T>) {
-      final error = status as Error<T>;
       AppLoading.hideLoading();
-      AppDialog.showOkDialog(context: context, content: error.message);
-      onError?.call(error.message);
+      AppDialog.showOkDialog(context: context, content: status.message);
+      onError?.call(status.message);
       return;
     }
-    if (status is Loading) {
-      AppLoading.showLoading();
-    }
+    listenerUnauthorized(context);
   }
 }

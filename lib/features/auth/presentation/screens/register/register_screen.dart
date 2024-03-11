@@ -48,7 +48,7 @@ class _RegisterScreenState extends BaseScreenState<RegisterScreen> {
   Widget get _buildBody => BlocListener<RegisterCubit, RegisterState>(
         listenWhen: (previous, current) => previous.status != current.status,
         listener: (context, state) {
-          state.observeData(
+          state.listenData(
             context,
             onSuccess: (_, message) {
               AppDialog.showOkDialogCallBack(

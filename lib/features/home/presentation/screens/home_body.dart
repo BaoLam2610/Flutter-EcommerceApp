@@ -16,7 +16,11 @@ class HomeBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeCubit, HomeState>(
+    return BlocConsumer<HomeCubit, HomeState>(
+      listenWhen: (previous, current) => previous.status != current.status,
+      listener: (context, state) {
+        state.listenerUnauthorized(context);
+      },
       buildWhen: (previous, current) => previous.status != current.status,
       builder: (context, state) {
         if (state.status is Success) {

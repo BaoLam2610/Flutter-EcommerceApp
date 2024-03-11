@@ -31,7 +31,7 @@ mixin CallApi<T> {
     }
   }
 
-  Error<T> _handleNetworkException(DioException err) {
+  Resource<T> _handleNetworkException(DioException err) {
     switch (err.type) {
       case DioExceptionType.connectionTimeout:
       case DioExceptionType.sendTimeout:
@@ -46,9 +46,7 @@ mixin CallApi<T> {
               message: BadRequestException(err).toString(),
             );
           case 401:
-            return Error(
-              message: const UnauthorizedException().toString(),
-            );
+            return const Unauthorized();
           case 404:
             return Error(
               message: const NotFoundException().toString(),
