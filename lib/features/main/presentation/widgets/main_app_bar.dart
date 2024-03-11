@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -48,6 +49,9 @@ class MainAppBar extends StatelessWidget {
       );
 
   Widget get _buildSearchArea => SearchField.small(
+        hint: LocaleKeys.hint_search_home.tr(),
+        hintStyle: AppTextStyles.regular12
+            .copyWith(color: AppColors.current.primaryText),
         readOnly: true,
         onTap: _onSearchTap,
         searchIconColor: AppColors.current.primary,
