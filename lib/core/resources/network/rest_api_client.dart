@@ -99,9 +99,7 @@ class RestApiClient {
       rethrow;
     }
   }
-}
 
-extension RestApiClientExtension on RestApiClient {
   DataResponse _onSuccessReturn(
     Response<dynamic> response,
     Function(dynamic json)? create,
@@ -109,59 +107,5 @@ extension RestApiClientExtension on RestApiClient {
     final data = response.data;
     final dataResponse = DataResponse.fromJson(data, create);
     return dataResponse;
-  }
-
-  DataSuccess<T> _onSuccess<T>(
-    Response<dynamic> response,
-    Function(dynamic json)? create,
-  ) {
-    final data = response.data;
-    final dataResponse = DataResponse.fromJson(data, create);
-    return DataSuccess<T>(
-      data: dataResponse.data,
-      message: dataResponse.message,
-    );
-  }
-
-  DataError<T> _systemAppError<T>() => const DataError(
-        exception: AppSystemException(),
-      );
-
-  DataError<T> _onError<T>(DioException err) {
-    switch (err.type) {
-      case DioExceptionType.connectionTimeout:
-      case DioExceptionType.sendTimeout:
-      case DioExceptionType.receiveTimeout:
-        return const DataError(
-          exception: ConnectionTimeOutException(),
-        );
-      case DioExceptionType.badResponse:
-        switch (err.response?.statusCode) {
-          case 400:
-            return DataError(
-              exception: BadRequestException(err),
-            );
-          case 401:
-            return const DataError(
-              exception: UnauthorizedException(),
-            );
-          case 404:
-            return const DataError(
-              exception: NotFoundException(),
-            );
-          case 500:
-            return const DataError(
-              exception: InternalServerErrorException(),
-            );
-          default:
-            return _systemAppError();
-        }
-      case DioExceptionType.connectionError:
-        return const DataError(
-          exception: NoInternetConnectionException(),
-        );
-      default:
-        return _systemAppError();
-    }
   }
 }

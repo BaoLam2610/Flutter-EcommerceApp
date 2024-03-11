@@ -6,7 +6,7 @@ import '../configs.dart';
 
 void provideRestApiClient() {
   final RestApiClient apiClient = RestApiClient(
-    baseUrl: ApiList.baseUrl,
+    baseUrl: EndPoint.baseUrl,
     interceptors: [LoggerInterceptor()],
   );
   inject.registerLazySingleton(() => apiClient);

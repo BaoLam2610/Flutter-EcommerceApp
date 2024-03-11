@@ -8,7 +8,7 @@ class HomeService {
 
   Future<DataResponse> getHomeData(PagingData pagingData) {
     return _apiService.get(
-      ApiList.home,
+      EndPoint.home,
       create: (json) => HomeDto.fromJson(json),
       queryParameters: pagingData.toJson(),
     );
@@ -16,7 +16,7 @@ class HomeService {
 
   Future<DataResponse> getSellingProducts(PagingData pagingData) {
     return _apiService.get(
-      ApiList.product,
+      EndPoint.product,
       create: (json) => castToList(json, (item) => ProductDto.fromJson(item)),
       queryParameters: pagingData.toJson(),
     );

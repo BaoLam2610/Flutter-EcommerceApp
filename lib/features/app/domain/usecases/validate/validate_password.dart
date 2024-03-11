@@ -12,6 +12,6 @@ class ValidatePasswordUseCase extends UseCase<String, String> {
     * You can add handle password by length
     * */
 
-    return "";
+    return '';
   }
 }

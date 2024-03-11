@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 import '../../../../gen/locale_keys.g.dart';
-import 'data_response.dart';
+import '../model/data_response.dart';
 
 class ConnectionTimeOutException implements Exception {
   const ConnectionTimeOutException();
@@ -31,7 +31,7 @@ class BadRequestException implements Exception {
         }
         if (response.message is List<dynamic>) {
           messageError =
-              response.message.map((e) => e.toString()).toList().join(", ");
+              response.message.map((e) => e.toString()).toList().join(', ');
         }
         return messageError;
       }

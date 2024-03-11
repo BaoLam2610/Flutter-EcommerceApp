@@ -12,6 +12,6 @@ class ValidateEmailUseCase extends UseCase<String, String> {
       return LocaleKeys.validate_valid_email;
     }
 
-    return "";
+    return '';
   }
 }

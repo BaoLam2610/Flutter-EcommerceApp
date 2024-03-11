@@ -25,7 +25,7 @@ mixin CallApi<T> {
           pageResult: response.pageResult,
         );
       }
-      return Error(message: response.message);
+      return Error<T>(message: response.message);
     } on DioException catch (e) {
       return _handleNetworkException(e);
     }

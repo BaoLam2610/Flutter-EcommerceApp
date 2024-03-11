@@ -9,7 +9,7 @@ class AuthService {
 
   Future<DataResponse> login(LoginRequest request) {
     return _apiService.post(
-      ApiList.login,
+      EndPoint.login,
       create: (json) => LoginInfoDto.fromJson(json),
       data: request.toJson(),
     );
@@ -17,7 +17,7 @@ class AuthService {
 
   Future<DataResponse> register(RegisterRequest request) {
     return _apiService.post(
-      ApiList.register,
+      EndPoint.register,
       data: request.toJson(),
     );
   }

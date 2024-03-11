@@ -1,5 +1,5 @@
-class ApiList {
-  const ApiList._();
+class EndPoint {
+  const EndPoint._();
 
   static const String baseUrl = 'http://192.168.0.103:8080';
 

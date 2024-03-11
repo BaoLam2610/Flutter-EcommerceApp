@@ -6,5 +6,5 @@ class AppStrings {
   static const String currentCountryCodeKey = 'current_country';
 
   static final RegExp emailValidatorRegExp =
-      RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+      RegExp(r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+');
 }

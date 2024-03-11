@@ -17,6 +17,6 @@ class ValidatePasswordConfirmUseCase
       return LocaleKeys.validate_password_not_match;
     }
 
-    return "";
+    return '';
   }
 }
