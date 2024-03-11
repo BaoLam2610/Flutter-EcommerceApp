@@ -2,11 +2,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../configs/configs.dart';
-import '../../../../core/core.dart';
-import '../../../../gen/gen.dart';
+import '../../../../../configs/configs.dart';
+import '../../../../../core/core.dart';
+import '../../../../../gen/gen.dart';
 
 class MainAppBar extends StatelessWidget {
+  final Color? _colorBgr;
   final int? _cartBadgeCount;
   final VoidCallback? _onCartTap;
   final VoidCallback? _onSearchTap;
@@ -16,21 +17,19 @@ class MainAppBar extends StatelessWidget {
     int? cartBadgeCount,
     void Function()? onCartTap,
     void Function()? onSearchTap,
-  })  : _onSearchTap = onSearchTap,
+    Color? colorBgr,
+  })  : _colorBgr = colorBgr,
+        _onSearchTap = onSearchTap,
         _onCartTap = onCartTap,
         _cartBadgeCount = cartBadgeCount;
 
   @override
   Widget build(BuildContext context) {
-    return SliverAppBar(
-      backgroundColor: AppColors.current.primary,
-      floating: true,
-      collapsedHeight: 56.h,
-      flexibleSpace: _buildAppBar(context),
-    );
+    return _buildAppBar(context);
   }
 
-  Widget _buildAppBar(BuildContext context) => Padding(
+  Widget _buildAppBar(BuildContext context) => Container(
+        color: _colorBgr,
         padding: EdgeInsets.only(
           top: context.mediaQuery.viewPadding.top,
           left: 18.w,

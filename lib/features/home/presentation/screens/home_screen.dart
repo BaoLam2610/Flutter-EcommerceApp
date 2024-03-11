@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/core.dart';
-import '../../../main/presentation/widgets/main_app_bar.dart';
+import '../../../main/presentation/widgets/app_bar/main_sliver_app_bar.dart';
 import 'bloc/home_cubit.dart';
 import 'home_body.dart';
 
@@ -29,7 +29,7 @@ class _HomeScreenState extends BaseScreenState<HomeScreen> {
           BlocBuilder<HomeCubit, HomeState>(
             buildWhen: (previous, current) =>
                 previous.cartBadgeCount != current.cartBadgeCount,
-            builder: (context, state) => MainAppBar(
+            builder: (context, state) => MainSliverAppBar(
               cartBadgeCount: state.cartBadgeCount,
             ),
           ),
