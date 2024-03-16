@@ -12,6 +12,7 @@ class CategoryCubit extends BaseCubit<CategoryState> {
 
   void getCategories() async {
     emit(state.copyWith(status: Loading()));
+    await postDelay(seconds: 2);
     final resource = await _getCategoriesUseCase.call();
     if (resource is Success) {
       emit(state.copyWith(categories: resource.data));

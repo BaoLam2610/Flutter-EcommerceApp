@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
+import '../../../shared/shared.dart';
 import 'event_entity.dart';
-import 'product_entity.dart';
 
 class HomeEntity extends Equatable {
   final int totalSellingProducts;

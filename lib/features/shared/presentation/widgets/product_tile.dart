@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../configs/configs.dart';
 import '../../../../../core/core.dart';
 import '../../../../../gen/gen.dart';
-import '../../../../home/domain/entities/product_entity.dart';
+import '../../shared.dart';
 
 enum ProductTileType { grid, list }
 

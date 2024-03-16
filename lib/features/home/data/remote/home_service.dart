@@ -1,7 +1,7 @@
 import '../../../../configs/configs.dart';
 import '../../../../core/core.dart';
+import '../../../shared/shared.dart';
 import '../dto/home_dto.dart';
-import '../dto/product_dto.dart';
 
 class HomeService {
   final RestApiClient _apiService = inject.get<RestApiClient>();

@@ -1,9 +1,8 @@
 import '../../../../core/core.dart';
+import '../../../shared/shared.dart';
 import '../../domain/entities/event_entity.dart';
 import '../../domain/entities/home_entity.dart';
-import '../../domain/entities/product_entity.dart';
 import 'event_dto.dart';
-import 'product_dto.dart';
 
 class HomeDto extends HomeEntity {
   HomeDto({

@@ -1,6 +1,6 @@
 import '../../../../configs/configs.dart';
 import '../../../../core/core.dart';
-import '../entities/product_entity.dart';
+import '../../../shared/shared.dart';
 import '../repository/home_repository.dart';
 
 class GetSellingProductsUseCase

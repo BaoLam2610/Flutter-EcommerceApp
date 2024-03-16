@@ -1,7 +1,7 @@
 import '../../../../../configs/configs.dart';
 import '../../../../../core/core.dart';
+import '../../../../shared/shared.dart';
 import '../../../domain/entities/event_entity.dart';
-import '../../../domain/entities/product_entity.dart';
 import '../../../domain/usecases/get_home_data.dart';
 import '../../../domain/usecases/get_selling_products.dart';
 

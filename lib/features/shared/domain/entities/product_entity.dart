@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import '../../../../core/extensions/number_extensions.dart';
+import '../../../../../core/extensions/number_extensions.dart';
 
 class ProductEntity extends Equatable {
   final String id;

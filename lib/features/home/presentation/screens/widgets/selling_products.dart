@@ -6,7 +6,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import '../../../../../configs/configs.dart';
 import '../../../../../gen/gen.dart';
-import '../../../../app/presentation/widgets/item/product_tile.dart';
+import '../../../../shared/shared.dart';
 import '../bloc/home_cubit.dart';
 
 class SellingProducts extends StatelessWidget {

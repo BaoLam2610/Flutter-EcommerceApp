@@ -4,7 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import '../../../../configs/configs.dart';
-import '../../../../utils/utils.dart';
+import '../../../../core/core.dart';
+import '../../../../core/widgets/loading/loading_view.dart';
 import 'bloc/category_cubit.dart';
 import 'widgets/category_tile.dart';
 
@@ -13,6 +14,40 @@ class CategoryBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return BlocBuilder<CategoryCubit, CategoryState>(
+      buildWhen: (previous, current) => previous.status != current.status,
+      builder: (context, state) {
+        if (state.status is Loading) {
+          return const LoadingView();
+        }
+
+        if (state.status is Error) {
+          return ErrorView(
+            onTapReload: () {},
+          );
+        }
+
+        if (state.status is Success) {
+          return Container(
+            color: AppColors.current.background,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: _buildCategoryColumn,
+                ),
+                Expanded(flex: 3, child: _buildProductColumn),
+              ],
+            ),
+          );
+        }
+        return const SizedBox.shrink();
+      },
+    );
+  }
+
+  Widget get _successArea {
     return Container(
       color: AppColors.current.background,
       child: Row(

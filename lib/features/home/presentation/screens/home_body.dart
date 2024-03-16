@@ -1,11 +1,9 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../configs/configs.dart';
 import '../../../../core/core.dart';
-import '../../../../gen/gen.dart';
+import '../../../../core/widgets/loading/loading_view.dart';
 import 'bloc/home_cubit.dart';
 import 'widgets/banner_sliders.dart';
 import 'widgets/menu_functions.dart';
@@ -27,37 +25,18 @@ class HomeBody extends StatelessWidget {
           return _buildSuccessArea(context);
         }
         if (state.status is Loading) {
-          return _buildLoadingArea;
+          return const LoadingView();
         }
         if (state.status is Error) {
-          return _buildErrorArea(context);
+          return ErrorView(
+            onTapReload: () =>
+                ReadContext(context).read<HomeCubit>().getHomeData(),
+          );
         }
         return const SizedBox.shrink();
       },
     );
   }
-
-  Widget _buildErrorArea(BuildContext context) => Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            LocaleKeys.error_system.tr(),
-            style: AppTextStyles.regular18,
-          ),
-          SizedBox(height: 8.h),
-          AppButton.primary(
-            width: 80.w,
-            text: LocaleKeys.reload_again.tr(),
-            onTap: () {
-              ReadContext(context).read<HomeCubit>().getHomeData();
-            },
-          ),
-        ],
-      );
-
-  Widget get _buildLoadingArea =>
-      const Center(child: CircularProgressIndicator());
 
   Widget _buildSuccessArea(BuildContext context) =>
       BlocBuilder<HomeCubit, HomeState>(
