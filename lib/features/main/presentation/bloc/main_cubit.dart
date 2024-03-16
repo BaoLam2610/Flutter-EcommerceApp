@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../utils/utils.dart';
 import '../../../category/category.dart';
 import '../../../home/home.dart';
 import '../../../notification/notification.dart';
@@ -32,5 +33,11 @@ class MainCubit extends Cubit<MainState> {
 
   void setCurrentIndex(int newIndex) {
     emit(state.copyWith(currentIndex: newIndex));
+  }
+
+  @override
+  Future<void> close() {
+    Log.info('main cubit close');
+    return super.close();
   }
 }

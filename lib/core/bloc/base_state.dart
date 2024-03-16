@@ -11,14 +11,6 @@ class BaseState extends Equatable {
 
   @override
   List<Object> get props => [status];
-
-  BaseState copyWith({
-    Resource? status,
-  }) {
-    return BaseState(
-      status: status ?? this.status,
-    );
-  }
 }
 
 class Resource<T> extends Equatable {

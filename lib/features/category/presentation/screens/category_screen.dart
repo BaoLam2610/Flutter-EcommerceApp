@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/core.dart';
-import '../../../main/presentation/widgets/app_bar/main_app_bar.dart';
 import '../../../main/presentation/widgets/app_bar/main_normal_app_bar.dart';
+import 'bloc/category_cubit.dart';
 import 'category_body.dart';
 
 class CategoryScreen extends BaseScreen {
@@ -14,10 +15,16 @@ class CategoryScreen extends BaseScreen {
 
 class _CategoryScreenState extends BaseScreenState<CategoryScreen> {
   @override
+  void initState() {
+    super.initState();
+    ReadContext(context).read<CategoryCubit>().getCategories();
+  }
+
+  @override
   Widget buildScreen(BuildContext context) {
     return const Scaffold(
       appBar: MainNormalAppBar(),
-      body: CategoryBody()
+      body: CategoryBody(),
     );
   }
 }

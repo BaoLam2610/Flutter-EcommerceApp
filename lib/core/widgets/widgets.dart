@@ -1,3 +1,4 @@
+export 'animated/animated_visibility.dart';
 export 'app_bar/app_bar.dart';
 export 'bottom_sheet/app_bottom_sheet.dart';
 export 'button/app_button.dart';

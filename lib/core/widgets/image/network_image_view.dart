@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class NetworkImageView extends StatelessWidget {
   final double? _width;
@@ -11,7 +10,36 @@ class NetworkImageView extends StatelessWidget {
   final Widget? _errorBuilder;
   final BorderRadius? _imageBorderRadius;
   final BoxFit? _fit;
+  final BoxShape? _shape;
+  final Color? _colorBgr;
   final EdgeInsetsGeometry? _margin;
+
+  factory NetworkImageView.circle({
+    Key? key,
+    required String imageUrl,
+    double? width,
+    double? height,
+    Widget? imageBuilder,
+    Widget? loadingBuilder,
+    Widget? errorBuilder,
+    BoxFit? fit,
+    Color? colorBgr,
+    EdgeInsetsGeometry? margin,
+  }) {
+    return NetworkImageView(
+      key: key,
+      imageUrl: imageUrl,
+      width: width,
+      height: height,
+      imageBuilder: imageBuilder,
+      loadingBuilder: loadingBuilder,
+      errorBuilder: errorBuilder,
+      fit: fit,
+      margin: margin,
+      colorBgr: colorBgr,
+      shape: BoxShape.circle,
+    );
+  }
 
   const NetworkImageView({
     super.key,
@@ -24,7 +52,11 @@ class NetworkImageView extends StatelessWidget {
     BorderRadius? imageBorderRadius,
     BoxFit? fit,
     EdgeInsetsGeometry? margin,
-  })  : _margin = margin,
+    BoxShape? shape,
+    Color? colorBgr,
+  })  : _colorBgr = colorBgr,
+        _shape = shape,
+        _margin = margin,
         _fit = fit,
         _imageBorderRadius = imageBorderRadius,
         _errorBuilder = errorBuilder,
@@ -52,11 +84,13 @@ class NetworkImageView extends StatelessWidget {
       Container(
         margin: _margin,
         decoration: BoxDecoration(
+          color: _colorBgr,
           image: DecorationImage(
             image: imageProvider,
             fit: _fit ?? BoxFit.fill,
           ),
-          borderRadius: _buildImageBorderRadius,
+          borderRadius: _imageBorderRadius,
+          shape: _shape ?? BoxShape.rectangle,
         ),
       );
 
@@ -81,12 +115,10 @@ class NetworkImageView extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.black.withOpacity(0.08),
         image: decorationImage,
-        borderRadius: _buildImageBorderRadius,
+        borderRadius: _imageBorderRadius,
+        shape: _shape ?? BoxShape.rectangle,
       ),
       child: child,
     );
   }
-
-  BorderRadius get _buildImageBorderRadius =>
-      _imageBorderRadius ?? BorderRadius.circular(10.r);
 }

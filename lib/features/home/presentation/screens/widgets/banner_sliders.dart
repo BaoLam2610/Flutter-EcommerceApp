@@ -48,6 +48,7 @@ class BannerSliders extends StatelessWidget {
                   child: NetworkImageView(
                     imageUrl: state.events[index].bannerUrl,
                     margin: EdgeInsets.symmetric(horizontal: 12.w),
+                    imageBorderRadius: BorderRadius.circular(10.r),
                   ),
                 );
               },

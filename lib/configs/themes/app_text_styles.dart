@@ -17,6 +17,12 @@ class AppTextStyles {
     color: defaultTextColor,
   );
 
+  static TextStyle regular10 = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 10.sp,
+    color: defaultTextColor,
+  );
+
   static TextStyle regular12 = TextStyle(
     fontFamily: fontFamily,
     fontSize: 12.sp,
@@ -74,6 +80,13 @@ class AppTextStyles {
   );
 
   /* Bold */
+  static TextStyle bold10 = TextStyle(
+    fontWeight: FontWeight.bold,
+    fontFamily: fontFamily,
+    fontSize: 10.sp,
+    color: defaultTextColor,
+  );
+
   static TextStyle bold12 = TextStyle(
     fontWeight: FontWeight.bold,
     fontFamily: fontFamily,

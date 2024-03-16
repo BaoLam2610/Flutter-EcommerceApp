@@ -5,20 +5,17 @@ import '../../../../configs/themes/themes.dart';
 import '../bloc/main_cubit.dart';
 
 class MenuBottomBar extends StatelessWidget {
-  final MainCubit _cubit;
-
-  const MenuBottomBar(this._cubit, {super.key});
+  const MenuBottomBar({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MainCubit, MainState>(
-      bloc: _cubit,
       buildWhen: (previous, current) =>
           previous.currentIndex != current.currentIndex,
       builder: (context, state) {
         return BottomNavigationBar(
           currentIndex: state.currentIndex,
-          items: _cubit.menuBottomBarItems,
+          items: ReadContext(context).read<MainCubit>().menuBottomBarItems,
           type: BottomNavigationBarType.fixed,
           selectedItemColor: AppColors.current.primary,
           unselectedItemColor: AppColors.current.secondary,
@@ -30,7 +27,7 @@ class MenuBottomBar extends StatelessWidget {
           unselectedLabelStyle: AppTextStyles.regular12.copyWith(
             color: AppColors.current.secondary,
           ),
-          onTap: _cubit.setCurrentIndex,
+          onTap: ReadContext(context).read<MainCubit>().setCurrentIndex,
         );
       },
     );

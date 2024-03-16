@@ -1,7 +1,7 @@
 class EndPoint {
   const EndPoint._();
 
-  static const String baseUrl = 'http://192.168.0.103:8080';
+  static const String baseUrl = 'http://192.168.0.104:8080';
 
 
   /* Authentication */
@@ -13,4 +13,7 @@ class EndPoint {
 
   /* Product */
   static const String product = '/product';
+
+  /* Category */
+  static const String category = '/product-category';
 }

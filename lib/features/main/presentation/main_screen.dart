@@ -16,9 +16,7 @@ class _MainScreenState extends BaseScreenState<MainScreen> {
   @override
   Widget buildScreen(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: MenuBottomBar(
-        ReadContext(context).read<MainCubit>(),
-      ),
+      bottomNavigationBar: const MenuBottomBar(),
       body: _buildBody,
     );
   }

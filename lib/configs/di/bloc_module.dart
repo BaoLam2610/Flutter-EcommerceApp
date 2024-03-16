@@ -12,7 +12,7 @@ import '../configs.dart';
 
 void provideBloc() {
   inject.registerLazySingleton(() => GlobalAppCubit());
-  inject.registerLazySingleton(() => MainCubit());
+  inject.registerFactory(() => MainCubit());
   inject.registerFactory(() => SplashCubit());
   inject.registerFactory(() => IntroCubit());
   inject.registerFactory(() => LoginCubit());
