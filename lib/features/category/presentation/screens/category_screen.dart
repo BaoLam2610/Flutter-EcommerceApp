@@ -17,7 +17,7 @@ class _CategoryScreenState extends BaseScreenState<CategoryScreen> {
   @override
   void initState() {
     super.initState();
-    ReadContext(context).read<CategoryCubit>().getCategories();
+    ReadContext(context).read<CategoryCubit>().init();
   }
 
   @override

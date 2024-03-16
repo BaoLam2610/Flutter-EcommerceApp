@@ -67,5 +67,6 @@
   "add_to_cart": "Add to cart",
   "reload_again": "Reload again",
   "hint_search_home": "Hello, what would you like to buy today?",
-  "all": "All"
+  "all": "All",
+  "empty_data": "Empty data"
 }

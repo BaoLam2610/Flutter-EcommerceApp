@@ -9,32 +9,55 @@ import '../../shared.dart';
 
 enum ProductTileType { grid, list }
 
+enum DisplayPriceDirection { horizontal, vertical }
+
 class ProductTile extends StatelessWidget {
   final ProductEntity _product;
   final ProductTileType _type;
+  final DisplayPriceDirection _displayPriceDirection;
+  final double _imageAspectRatio;
 
-  factory ProductTile.grid(ProductEntity product) => ProductTile(
+  factory ProductTile.grid(
+    ProductEntity product, {
+    DisplayPriceDirection? displayPriceDirection,
+        double? imageAspectRatio,
+  }) =>
+      ProductTile(
         type: ProductTileType.grid,
         product: product,
+        displayPriceDirection: displayPriceDirection,
+        imageAspectRatio: imageAspectRatio ?? 2,
       );
 
-  factory ProductTile.list(ProductEntity product) => ProductTile(
+  factory ProductTile.list(
+    ProductEntity product, {
+    DisplayPriceDirection? displayPriceDirection,
+        double? imageAspectRatio,
+  }) =>
+      ProductTile(
         type: ProductTileType.list,
         product: product,
+        displayPriceDirection: displayPriceDirection,
+        imageAspectRatio: imageAspectRatio ?? 1.8,
       );
 
   const ProductTile({
     super.key,
     ProductTileType? type,
     required ProductEntity product,
-  })  : _product = product,
+    DisplayPriceDirection? displayPriceDirection,
+    double? imageAspectRatio,
+  })  : _imageAspectRatio = imageAspectRatio ?? 1,
+        _displayPriceDirection =
+            displayPriceDirection ?? DisplayPriceDirection.horizontal,
+        _product = product,
         _type = type ?? ProductTileType.grid;
 
   double _getItemWidth(BuildContext context) {
     if (_type == ProductTileType.grid) {
-      return (context.width / 2) - 12.w;
+      return (context.width / _imageAspectRatio) - 12.w;
     }
-    return (context.width / 1.8) - 12.w;
+    return (context.width / _imageAspectRatio) - 12.w;
   }
 
   double _getImageHeight(BuildContext context) => _getItemWidth(context);
@@ -59,7 +82,7 @@ class ProductTile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              _buildImageArea(context),
+              Align(child: _buildImageArea(context)),
               _buildTitle,
               SizedBox(height: 4.h),
               _buildPriceArea,
@@ -93,17 +116,41 @@ class ProductTile extends StatelessWidget {
       );
 
   Widget get _buildPriceArea {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
+    if (_displayPriceDirection == DisplayPriceDirection.horizontal) {
+      return Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(width: _paddingHorizontal),
+          Text(
+            _product.textPrice,
+            style: AppTextStyles.bold14.copyWith(
+              color: AppColors.current.critical,
+            ),
+          ),
+          const Spacer(),
+          if (_product.discountPrice != 0) ...{
+            Text(
+              _product.textDiscountPrice,
+              style: AppTextStyles.regular14.copyWith(
+                color: AppColors.current.secondaryText,
+                decoration: TextDecoration.lineThrough,
+              ),
+            ),
+            SizedBox(width: _paddingHorizontal),
+          }
+        ],
+      );
+    }
+    return Column(
       children: [
-        SizedBox(width: _paddingHorizontal),
-        Text(
-          _product.textPrice,
-          style: AppTextStyles.bold14.copyWith(
-            color: AppColors.current.critical,
+        Align(
+          child: Text(
+            _product.textPrice,
+            style: AppTextStyles.bold14.copyWith(
+              color: AppColors.current.critical,
+            ),
           ),
         ),
-        const Spacer(),
         if (_product.discountPrice != 0) ...{
           Text(
             _product.textDiscountPrice,
@@ -112,7 +159,14 @@ class ProductTile extends StatelessWidget {
               decoration: TextDecoration.lineThrough,
             ),
           ),
-          SizedBox(width: _paddingHorizontal),
+        } else ...{
+          Text(
+            '',
+            style: AppTextStyles.regular14.copyWith(
+              color: AppColors.current.secondaryText,
+              decoration: TextDecoration.lineThrough,
+            ),
+          ),
         }
       ],
     );

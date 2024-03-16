@@ -38,12 +38,12 @@ class CategoryTile extends StatelessWidget {
   }
 
   Widget _titleArea(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(4.r),
-      child: MaterialEffect(
-        onTap: () => ReadContext(context)
-            .read<CategoryCubit>()
-            .updateCategoryCollapsed(_category.id),
+    return MaterialEffect(
+      onTap: () => ReadContext(context)
+          .read<CategoryCubit>()
+          .updateCategoryCollapsed(_category.id),
+      child: Padding(
+        padding: EdgeInsets.all(4.r),
         child: Row(
           children: [
             Expanded(

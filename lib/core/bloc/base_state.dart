@@ -10,7 +10,7 @@ class BaseState extends Equatable {
   const BaseState({required this.status});
 
   @override
-  List<Object> get props => [status];
+  List<Object?> get props => [status];
 }
 
 class Resource<T> extends Equatable {

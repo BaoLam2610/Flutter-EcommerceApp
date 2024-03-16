@@ -12,6 +12,7 @@ import '../../features/auth/domain/usecases/save_access_token.dart';
 import '../../features/auth/domain/usecases/save_logged.dart';
 import '../../features/auth/domain/usecases/save_remember_account.dart';
 import '../../features/category/domain/usecase/get_categories.dart';
+import '../../features/category/domain/usecase/get_products_by_category.dart';
 import '../../features/home/domain/usecases/get_home_data.dart';
 import '../../features/home/domain/usecases/get_selling_products.dart';
 import '../../features/intro/domain/usecases/save_first_open_app.dart';
@@ -46,6 +47,7 @@ void provideUseCase() {
   inject.registerLazySingleton(() => GetSellingProductsUseCase());
 
   inject.registerLazySingleton(() => GetCategoriesUseCase());
+  inject.registerLazySingleton(() => GetProductsByCategoryUseCase());
 
   inject.registerLazySingleton(() => AppStorage());
 }

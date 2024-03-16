@@ -14,7 +14,7 @@ class CategoryDto extends CategoryEntity {
           name: name ?? '',
           imageUrl: imageUrl ?? '',
           subCategories: subCategories == null || subCategories.isEmpty
-              ? [SubCategoryDto.all(id)]
+              ? []
               : subCategories
             ..insert(0, SubCategoryDto.all(id)),
         );

@@ -64,8 +64,9 @@
   "discount_code": "Mã giảm giá",
   "trademark": "Thương hiệu",
   "selling_products": "Sản phẩm bán chạy",
-  "add_to_cart": "Thêm vào giỏ hàng",
+  "add_to_cart": "Thêm vào giỏ",
   "reload_again": "Tải lại",
   "hint_search_home": "Xin chào, bạn muốn mua gì hôm nay?",
-  "all": "Tất cả"
+  "all": "Tất cả",
+  "empty_data": "Chưa có dữ liệu"
 }
