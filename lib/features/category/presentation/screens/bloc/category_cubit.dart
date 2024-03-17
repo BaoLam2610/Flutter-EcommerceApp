@@ -29,8 +29,7 @@ class CategoryCubit extends BaseCubit<CategoryState> {
     await postDelay(seconds: 2);
     final resource = await _getCategoriesUseCase.call();
     if (resource is Success) {
-      emit(state.copyWith(status: const Success(), categories: resource.data));
-      return;
+      emit(state.copyWith(categories: resource.data));
     }
     emit(state.copyWith(status: resource));
   }
@@ -85,7 +84,7 @@ class CategoryCubit extends BaseCubit<CategoryState> {
 
   Future<void> getProductsByCategory({bool isShowLoading = true}) async {
     int currentPage = state.currentPage + 1;
-    if(currentPage == 1 && isShowLoading) {
+    if (currentPage == 1 && isShowLoading) {
       emit(state.copyWith(productStatus: Loading()));
     }
     await postDelay(seconds: 1);

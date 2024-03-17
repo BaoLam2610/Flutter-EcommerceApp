@@ -19,6 +19,8 @@ class EmptyView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Assets.images.empty.image(
+            width: 150.r,
+            height: 150.r,
           ),
           Text(
             LocaleKeys.empty_data.tr(),

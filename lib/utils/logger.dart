@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+
+import '../core/core.dart';
 
 // Define an enum for the different log levels
 enum Level { debug, info, warning, error, alien }
@@ -68,13 +72,22 @@ class LoggerInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     Log.info(
-        "--> ${options.method.toUpperCase()} ${"${options.baseUrl}${options.path}"}");
-    Log.info('Headers:');
-    options.headers.forEach((k, v) => Log.info('$k: $v'));
-    Log.info('queryParameters:');
-    options.queryParameters.forEach((k, v) => Log.info('$k: $v'));
+      "--> ${options.method.toUpperCase()} ${"${options.baseUrl}${options.path}"}",
+    );
+
+    if (options.headers.isNotEmpty) {
+      Log.info('Header: ');
+      prettyPrintJson(options.headers);
+    }
+
+    if (options.queryParameters.isNotEmpty) {
+      Log.info('Query parameters: ');
+      prettyPrintJson(options.queryParameters);
+    }
+
     if (options.data != null) {
-      Log.info('Body: ${options.data}');
+      Log.info('Payload json: ');
+      prettyPrintJson(options.data);
     }
     Log.info('--> END ${options.method.toUpperCase()}');
 
@@ -85,29 +98,69 @@ class LoggerInterceptor extends Interceptor {
   void onError(DioException err, ErrorInterceptorHandler handler) {
     final options = err.requestOptions;
     final requestPath = '${options.baseUrl}${options.path}';
-    // Log the error request and error message
-    Log.error(
-      '<-- onError: ${options.method} request => $requestPath',
-    );
-    Log.error(
-      'onError: ${err.error}, Message: ${err.message}',
-    );
-    Log.error(
-      'onError: ${err.response}',
-    );
-    Log.error('<-- End error');
-    // Call the super class to continue handling the error
+    Log.error('<-- ERROR: ');
+    Log.error('<-- ${options.method} $requestPath');
+
+    if (err.response != null) {
+      Log.error('Status code: ${err.response?.statusCode}');
+      Log.error('Response: ');
+      prettyPrintJson(err.response!.data, level: Level.error);
+      Log.error('<-- END ${options.method}');
+      return super.onError(err, handler);
+    }
+
+    if (err.error != null) {
+      Log.error('Exception: ${err.error}');
+    }
+
+    if (!err.message.isNullOrEmpty) {
+      Log.error('Message: ${err.message}');
+    }
+
+    Log.error('<-- END ${options.method}');
     return super.onError(err, handler);
   }
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
-    Log.info('<-- ${response.statusCode} ${response.realUri}');
-    Log.info('Headers:');
-    response.headers.forEach((k, v) => Log.info('$k: $v'));
-    Log.info('Response: ${response.data}');
-    Log.info('<-- END HTTP');
-    // Call the super class to continue handling the response
+    Log.info('<-- ${response.requestOptions.method} ${response.realUri}');
+    Log.info('Status code: ${response.statusCode}');
+
+    if (response.requestOptions.headers.isNotEmpty) {
+      Log.info('Header: ');
+      prettyPrintJson(response.requestOptions.headers);
+    }
+
+    if (response.data != null) {
+      Log.info('Response: ');
+      prettyPrintJson(response.data);
+    }
+
+    Log.info('<-- END ${response.requestOptions.method}');
     return super.onResponse(response, handler);
+  }
+
+  void prettyPrintString(String input, {Level level = Level.info}) {
+    const JsonDecoder decoder = JsonDecoder();
+    const JsonEncoder encoder = JsonEncoder.withIndent('  ');
+    final dynamic object = decoder.convert(input);
+    final dynamic prettyString = encoder.convert(object);
+    prettyString.split('\n').forEach(
+          (element) => Log.log(
+            element,
+            level: level,
+          ),
+        );
+  }
+
+  void prettyPrintJson(Map<String, dynamic> map, {Level level = Level.info}) {
+    const JsonEncoder encoder = JsonEncoder.withIndent('  ');
+    dynamic prettyString = encoder.convert(map);
+    prettyString.split('\n').forEach(
+          (element) => Log.log(
+            element,
+            level: level,
+          ),
+        );
   }
 }

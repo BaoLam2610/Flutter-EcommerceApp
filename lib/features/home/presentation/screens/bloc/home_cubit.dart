@@ -37,7 +37,7 @@ class HomeCubit extends BaseCubit<HomeState> {
       final products = resource.data?.products ?? [];
       final totalSellingProducts = resource.data?.totalSellingProducts ?? 0;
       emit(state.copyWith(
-        status: Success(),
+        status: const Success(),
         events: resource.data?.events,
         products: resource.data?.products,
         canLoadMoreSellingProducts: products.isNotEmpty

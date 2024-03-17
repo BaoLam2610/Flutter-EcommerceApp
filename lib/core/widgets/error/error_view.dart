@@ -13,21 +13,23 @@ class ErrorView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          LocaleKeys.error_system.tr(),
-          style: AppTextStyles.regular18,
-        ),
-        SizedBox(height: 8.h),
-        AppButton.primary(
-          width: 80.w,
-          text: LocaleKeys.reload_again.tr(),
-          onTap: onTapReload,
-        ),
-      ],
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            LocaleKeys.error_system.tr(),
+            style: AppTextStyles.regular18,
+          ),
+          SizedBox(height: 8.h),
+          AppButton.primary(
+            width: 80.w,
+            text: LocaleKeys.reload_again.tr(),
+            onTap: onTapReload,
+          ),
+        ],
+      ),
     );
   }
 }

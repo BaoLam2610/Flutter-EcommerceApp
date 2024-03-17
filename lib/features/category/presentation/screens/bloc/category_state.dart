@@ -23,6 +23,7 @@ class CategoryState extends BaseState {
   @override
   List<Object?> get props =>
       [
+        status,
         productStatus,
         categories,
         products,
