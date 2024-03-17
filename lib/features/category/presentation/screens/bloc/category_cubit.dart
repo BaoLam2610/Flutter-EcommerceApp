@@ -111,7 +111,7 @@ class CategoryCubit extends BaseCubit<CategoryState> {
       ));
       return;
     }
-    if (resource is Error && state.currentPage == 1) {
+    if (resource is Error && currentPage == 1) {
       emit(state.copyWith(
         productStatus: const Error(),
         products: [],

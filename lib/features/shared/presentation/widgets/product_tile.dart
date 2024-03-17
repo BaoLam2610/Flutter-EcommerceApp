@@ -20,7 +20,7 @@ class ProductTile extends StatelessWidget {
   factory ProductTile.grid(
     ProductEntity product, {
     DisplayPriceDirection? displayPriceDirection,
-        double? imageAspectRatio,
+    double? imageAspectRatio,
   }) =>
       ProductTile(
         type: ProductTileType.grid,
@@ -32,7 +32,7 @@ class ProductTile extends StatelessWidget {
   factory ProductTile.list(
     ProductEntity product, {
     DisplayPriceDirection? displayPriceDirection,
-        double? imageAspectRatio,
+    double? imageAspectRatio,
   }) =>
       ProductTile(
         type: ProductTileType.list,
@@ -160,13 +160,16 @@ class ProductTile extends StatelessWidget {
             ),
           ),
         } else ...{
-          Text(
-            '',
-            style: AppTextStyles.regular14.copyWith(
-              color: AppColors.current.secondaryText,
-              decoration: TextDecoration.lineThrough,
+          Opacity(
+            opacity: 0,
+            child: Text(
+              '0',
+              style: AppTextStyles.regular14.copyWith(
+                color: AppColors.current.secondaryText,
+                decoration: TextDecoration.lineThrough,
+              ),
             ),
-          ),
+          )
         }
       ],
     );

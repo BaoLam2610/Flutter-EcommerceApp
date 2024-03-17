@@ -21,6 +21,7 @@ class ErrorView extends StatelessWidget {
           Text(
             LocaleKeys.error_system.tr(),
             style: AppTextStyles.regular18,
+            textAlign: TextAlign.center,
           ),
           SizedBox(height: 8.h),
           AppButton.primary(
