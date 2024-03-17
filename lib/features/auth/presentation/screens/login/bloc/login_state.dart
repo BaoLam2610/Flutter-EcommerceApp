@@ -20,7 +20,6 @@ class LoginState extends BaseState {
         emailError,
       ];
 
-  @override
   LoginState copyWith({
     Resource? status,
     bool? isRememberMe,

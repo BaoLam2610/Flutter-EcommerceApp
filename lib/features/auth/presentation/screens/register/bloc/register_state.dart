@@ -20,7 +20,6 @@ class RegisterState extends BaseState {
     passwordConfirmError,
   ];
 
-  @override
   RegisterState copyWith({
     Resource? status,
     String? emailError,

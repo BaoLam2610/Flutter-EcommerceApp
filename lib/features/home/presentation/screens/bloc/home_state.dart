@@ -29,7 +29,6 @@ class HomeState extends BaseState {
         canLoadMoreSellingProducts,
       ];
 
-  @override
   HomeState copyWith({
     Resource? status,
     int? cartBadgeCount,
